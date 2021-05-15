@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonaEquiposTable extends Migration
+class CreatePersonasEquiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePersonaEquiposTable extends Migration
      */
     public function up()
     {
-        Schema::create('persona_equipos', function (Blueprint $table) {
+        Schema::create('personas_equipos', function (Blueprint $table) {
             //$table->id();
-            $table->foreignId('id_persona')->references('id')->on('persona');
+            $table->foreignId('id_persona')->references('id')->on('personas');
             $table->foreignId('id_equipo')->references('id')->on('equipos');
             $table->datetime('fecha_inicio');
             $table->datetime('fecha_cierre');
@@ -30,6 +30,6 @@ class CreatePersonaEquiposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persona_equipos');
+        Schema::dropIfExists('personas_equipos');
     }
 }

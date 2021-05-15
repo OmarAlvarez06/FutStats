@@ -15,6 +15,12 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->integer('edad');
+            $table->char('sexo',1);
+            $table->enum('rol',['Jugador','Director','Auxiliar']);
+            $table->smallInteger('activo')->default(1);
+            //Imagen de la persona
             $table->timestamps();
         });
     }

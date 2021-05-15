@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEncuentroTable extends Migration
+class CreateEncuentrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEncuentroTable extends Migration
      */
     public function up()
     {
-        Schema::create('encuentro', function (Blueprint $table) {
+        Schema::create('encuentros', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_equipo_local')->references('id')->on('equipos');
             $table->foreignId('id_equipo_visitante')->references('id')->on('equipos');
@@ -32,6 +32,6 @@ class CreateEncuentroTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('encuentro');
+        Schema::dropIfExists('encuentros');
     }
 }

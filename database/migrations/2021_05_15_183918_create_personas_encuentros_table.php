@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonaEncuentroTable extends Migration
+class CreatePersonasEncuentrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePersonaEncuentroTable extends Migration
      */
     public function up()
     {
-        Schema::create('persona_encuentro', function (Blueprint $table) {
+        Schema::create('personas_encuentros', function (Blueprint $table) {
             //$table->id();
-            $table->foreignId('id_persona')->references('id')->on('persona');
-            $table->foreignId('id_encuentro')->references('id')->on('encuentro');
+            $table->foreignId('id_persona')->references('id')->on('personas');
+            $table->foreignId('id_encuentro')->references('id')->on('encuentros');
             $table->enum('tipo_observacion',['Gol','Amonestación','Expulsión','Lesión','Cambio Entrada','Cambio Salida','AutoGol']);
             $table->time('minuto');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreatePersonaEncuentroTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persona_encuentro');
+        Schema::dropIfExists('personas_encuentros');
     }
 }
