@@ -19,7 +19,6 @@ class CreatePersonasTable extends Migration
             $table->integer('edad');
             $table->char('sexo',1);
             $table->enum('rol',['Jugador','Director','Auxiliar']);
-            $table->smallInteger('activo')->default(1);
             //Imagen de la persona
             $table->timestamps();
         });
