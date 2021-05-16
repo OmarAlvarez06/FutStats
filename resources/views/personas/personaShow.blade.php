@@ -5,33 +5,34 @@
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
-	<div class="main">
+	<div class="main" align="center">
 		<h1 align="center">Persona</h1>
 
-		<label for="id">ID de la persona:</label>
-		<input type="text" name="id" value="{{$persona->id}}">
+		<label for="id">ID:</label>
+		<input type="text" class="opaco" name="id" value="{{$persona->id}}" readonly>
+		<br><br>
 
-		<table border="1" align="center">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>Edad</th>
-					<th>Sexo</th>
-					<th>Rol</th>
-					<th>Imagen</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>{{$persona->id}}</td>
-					<td>{{$persona->nombre}}</td>
-					<td>{{$persona->edad}}</td>
-					<td>{{$persona->sexo}}</td>
-					<td>{{$persona->rol}}</td>
-					<td><img src="{{$persona->Imagen}}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<label for="id">Nombre completo:</label>
+		<input type="text" class="opaco" name="nombre" value="{{$persona->nombre}}" readonly>
+		<br><br>
+
+		<label for="id">Edad:</label>
+		<input type="text" class="opaco" name="edad" value="{{$persona->edad}}" readonly>
+		<br><br>
+
+		<label for="id">Sexo:</label>
+		<input type="text" class="opaco" name="sexo" value="{{$persona->sexo}}" readonly>
+		<br><br>
+
+		<label for="id">Rol:</label>
+		<input type="text" class="opaco" name="rol" value="{{$persona->rol}}" readonly>
+		<br><br>
+
+		<label for="id">Imagen:</label>
+		<img src="{{$persona->Imagen}}">
+		<br><br>
+
+		<!-- Boton Enviar -->
+		<button class="buttonEditar">Editar</button>
 	</div>
 @endsection

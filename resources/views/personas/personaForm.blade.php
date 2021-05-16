@@ -11,27 +11,27 @@
 		<div class="main">
 			<!-- Sub-Title -->
 			<h1 align="center">Registrar Persona</h1>
-			<br>
+			<br><br>
 
 			<!-- Nombre Completo -->
 			<label for="nombre">Nombre Completo:</label>
 			<input type="text" name="nombre">
-			<br>
+			<br><br>
 
 			<!-- Edad -->
 			<label for="edad">Edad:</label>
 			<input type="number" name="edad" min="1" max="100">
-			<br>
+			<br><br>
 
 			<!-- Sexo -->
-			<label for="sexo">Sexo:</label><br>
+			<label for="sexo">Sexo:</label>
 			<input type="radio" name="sexo" value="M">
 			<label for="sexo">Hombre</label>
 			<input type="radio" name="sexo" value="F">
 			<label for="sexo">Mujer</label>
 			<input type="radio" name="sexo" value="O">
 			<label for="sexo">Otro</label>
-			<br>
+			<br><br>
 
 			<!-- Rol -->
 			<label for="rol">Rol:</label>
@@ -40,15 +40,15 @@
 				<option value="Entrenador">Entrenador</option>
 				<option value="Auxiliar">Auxiliar</option>
 			</select>
-			<br>
+			<br><br>
 
 			<!-- Rol -->
 			<label for="imagen">Imagen de la persona:</label>
 			<input type="file" name="imagen">
-			<br>
+			<br><br>
 
 			<!-- Boton Enviar -->
-			<input type="submit" value="Enviar" name="Enviar">
+			<button class="buttonEnviar">Enviar</button>
 		</div>
 	</form>
 @endsection

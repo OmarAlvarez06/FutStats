@@ -55,6 +55,13 @@ body{
   box-sizing: border-box;
 }
 
+.opaco {
+	background-color: #7bb062;
+	color: #ffffff;
+	border: none;
+}
+
+/*MENU*/
 .menu {
   float: left;
   width: 20%;
@@ -112,15 +119,53 @@ li a{
 	display: block;
 	color: white;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 10px 14px;
 	text-decoration: none;
+	align-items:center;
 }
 
 li a:hover{
 	background-color: #111;
-	font-size: 120%;
+	font-size: 105%;
 }
 
 li.resultados{
-	color: black;
+	color: red;
 }
+
+/* BOTONES */
+.buttonEnviar {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.buttonEditar{
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 19px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color:red;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 9px #999;
+}
+
+.buttonEnviar:hover {background-color: #3e8e41}
+.buttonEditar:hover {background-color: #b30000}
+
+.buttonEnviar:active{background-color: #3e8e41;box-shadow: 0 5px #666;transform: translateY(4px);}
+.buttonEditar:active{background-color: #b30000;box-shadow: 0 5px #666;transform: translateY(4px);}
