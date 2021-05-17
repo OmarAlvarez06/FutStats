@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\EquipoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //Route::get('persona/create', [PersonaController::class, 'create']);
 
 Route::resource('persona', PersonaController::class);
+Route::resource('equipo', EquipoController::class);

@@ -1,4 +1,4 @@
-@extends('layouts.personaLayout')
+@extends('layouts.Layout')
 
 @section('title', 'Mostrar Personas')
 
@@ -12,23 +12,23 @@
 		<input type="text" class="opaco" name="id" value="{{$persona->id}}" readonly>
 		<br><br>
 
-		<label for="id">Nombre completo:</label>
+		<label for="nombre">Nombre completo:</label>
 		<input type="text" class="opaco" name="nombre" value="{{$persona->nombre}}" readonly>
 		<br><br>
 
-		<label for="id">Edad:</label>
+		<label for="edad">Edad:</label>
 		<input type="text" class="opaco" name="edad" value="{{$persona->edad}}" readonly>
 		<br><br>
 
-		<label for="id">Sexo:</label>
+		<label for="sexo">Sexo:</label>
 		<input type="text" class="opaco" name="sexo" value="{{$persona->sexo}}" readonly>
 		<br><br>
 
-		<label for="id">Rol:</label>
+		<label for="rol">Rol:</label>
 		<input type="text" class="opaco" name="rol" value="{{$persona->rol}}" readonly>
 		<br><br>
 
-		<label for="id">Imagen:</label>
+		<label>Imagen:</label>
 		<img src="{{$persona->Imagen}}">
 		<br><br>
 

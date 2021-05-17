@@ -1,4 +1,4 @@
-@extends('layouts.personaLayout')
+@extends('layouts.Layout')
 
 @section('title', 'Personas')
 

@@ -16,10 +16,8 @@
 		<li><a class="active" href="#">Inicio</a></li>
 		<li><a href="/persona">Mostrar Personas</a></li>
 		<li><a href="{{route('persona.create')}}">Registrar Persona</a></li>
-		<li><a href="#">Registrar Director</a></li>
-		<li><a href="#">Mostrar Jugadores</a></li>
-		<li><a href="#">Mostrar Equipos</a></li>
-		<li><a href="#">Encuentros</a></li>
+		<li><a href="/equipo">Mostrar Equipos</a></li>
+		<li><a href="{{route('equipo.create')}}">Registrar Equipo</a></li>
 		<li><a href="#">Resultados</a></li>
 	</ul>	
 
