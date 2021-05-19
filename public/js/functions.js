@@ -1,5 +1,4 @@
 
-
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -10,6 +9,8 @@ function readURL(input) {
                 .width(150)
                 .height(200);
         };
+
+        
 
         reader.readAsDataURL(input.files[0]);
     }

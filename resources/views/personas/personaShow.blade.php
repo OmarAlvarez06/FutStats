@@ -6,33 +6,28 @@
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
 	<div class="main" align="center">
-		<h1 align="center">Persona</h1>
+		<h1 align="center" class="display-4">Persona</h1>
 
-		
-		<label for="id">ID:</label>
-			<input type="text" class="opaco" name="id" value="{{$persona->id}}" readonly>
-		<br><br>
+		<div class="container mt-5 d-flex justify-content-center">
+			<div class="card p-3">
+				<div class="d-flex align-items-center">
+					<div class="image"> 
+						<img src="store_persona/fetch_image/{{$persona->id}}"  class="img-thumbnail" width="75px" alt="No Disponible">
+					</div>
+					<div class="ml-3 w-100">
+						<h4 class="mb-0 mt-0">{{$persona->nombre}}</h4> 
+						<span>{{$persona->rol}}</span>
+						<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+							<div class="d-flex flex-column"> <span>ID</span> <span >{{$persona->id}}</span> </div>
+							<div class="d-flex flex-column"> <span>Edad</span> <span>{{$persona->edad}}</span> </div>
+							<div class="d-flex flex-column"> <span>Sexo</span> <span>{{$persona->sexo}}</span> </div>
 
-		<label for="nombre">Nombre completo:</label>
-			<input type="text" class="opaco" name="nombre" value="{{$persona->nombre}}" readonly>
-		<br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		<label for="edad">Edad:</label>
-			<input type="text" class="opaco" name="edad" value="{{$persona->edad}}" readonly>
-		<br><br>
-
-		<label for="sexo">Sexo:</label>
-			<input type="text" class="opaco" name="sexo" value="{{$persona->sexo}}" readonly>
-		<br><br>
-
-		<label for="rol">Rol:</label>
-			<input type="text" class="opaco" name="rol" value="{{$persona->rol}}" readonly>
-		<br><br>
-
-		<label>Imagen:</label>
-			<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode( $persona->Imagen ).'"';?>
-        	data-imagezoom="true" class="img-responsive" alt="No Disponible"> 
-			<!-- <img src="{{$persona->Imagen}}" alt="No Disponible"> -->
 		<br><br>
 
 		<!-- Boton Enviar -->

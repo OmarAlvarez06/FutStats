@@ -5,7 +5,7 @@
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
-	<form action="{{ route('persona.store')}}" method="POST">
+	<form action="{{ route('persona.store')}}" method="POST" enctype="multipart/form-data">
 		@csrf
 
 		<div class="main">
@@ -75,7 +75,7 @@
 				<!-- Image De La Persona -->
 				<label for="imagen" class="col-sm-2 col-form-label">Foto De Perfil</label>
 				<div class="col-sm-10">
-					<input class="form-control-file" type="file" name="imagen" onchange="readURL(this);">
+					<input  id="uploadInput" class="form-control-file" type="file" name="imagen" onchange="readURL(this);">
 				</div>
 			</div>
 
@@ -83,8 +83,11 @@
 				<img  id="openedImage" class="rounded mx-auto d-block" src="#">
 				<br>
 			</div>
+
 			<!-- Boton Enviar -->
 			<button class=" btn btn-success btn-lg btn-block">Enviar</button>
+
+
 		</div>
 	</form>
 @endsection

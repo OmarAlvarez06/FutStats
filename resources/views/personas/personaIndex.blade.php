@@ -6,16 +6,16 @@
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
 	<div class="main">
-		<h1 align="center">Personas</h1>
-		<table border="1" align="center">
+		<h1 align="center" class="display-4">Personas</h1>
+		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>Edad</th>
-					<th>Sexo</th>
-					<th>Rol</th>
-					<th>Imagen</th>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Edad</th>
+					<th scope="col">Sexo</th>
+					<th scope="col">Rol</th>
+					<th scope="col">Imagen</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +26,9 @@
 						<td>{{$persona->edad}}</td>
 						<td>{{$persona->sexo}}</td>
 						<td>{{$persona->rol}}</td>
-						<td>{{$persona->imagen}}</td>
+						<td>
+							<img src="store_persona/fetch_image/{{$persona->id}}"  class="img-thumbnail" width="75px" alt="No Disponible">
+						</td>
 					</tr>
 				@endforeach
 			</tbody>

@@ -19,7 +19,6 @@ h2.hola{
 
 /*Nav*/
 nav{
-	
 	background: -webkit-linear-gradient(to right, white,#7bb062, #7bb062); 
 	background: linear-gradient(to right, white, #7bb062, #7bb062); 
 }
@@ -87,7 +86,7 @@ body{
 
 
 /*MENU*/
-.menu {
+.menu{
   float: left;
   width: 20%;
   text-align: center;
@@ -96,7 +95,7 @@ body{
 }
 
 .menu a {
-  background-image: linear-gradient(to left,#7bb062,white);
+  background-image: linear-gradient(to right,#7bb062,white);
   padding: 8px;
   margin-top: 7px;
   display: block;
@@ -118,6 +117,8 @@ body{
   margin-top: 7px;
   text-align: center;
   color: #7bb062;
+  border-style: groove;
+  border-color: #7bb062;
 }
 
 /*Features for mobiles*/

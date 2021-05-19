@@ -21,12 +21,7 @@
 </head>
 <body id="page-top">
 
-	<!--
-	<nav class="a">
-	  <img class="img-fluid" src="http://localhost/fut-Stats/public/images/logo_icon.png" alt="FutStats Logo Icon">
-	</nav>
-	-->
-	<!-- Navigation-->
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
 		<div class="container">
 			<img class="img-fluid" src="{{asset('images/logo_icon.png')}}" alt="FutStats Logo Icon">
@@ -44,7 +39,7 @@
 		</div>
 	</nav>
 	<!-- Main Section -->
-	<section class="page-section bg-primary mainSection">
+	<section class="page-section mainSection">
 		
 		<div class="menu">
 			<a href="#">Jugador</a>

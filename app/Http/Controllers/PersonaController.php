@@ -1,11 +1,15 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
 
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Response;
+// import the Intervention Image Manager Class
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PersonaController extends Controller
 {
@@ -39,8 +43,38 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        $persona = Persona::create($request->all());
+
+       
+        $image_file = $request->imagen;
+        $image = Image::make($request->file('imagen')->getRealPath());
+        Response::make($image->encode('jpeg'));
+        
+        $form_data = array(
+            'nombre' => $request->nombre,
+            'edad' => $request->edad,
+            'sexo' => $request->sexo,
+            'rol' => $request->rol,
+            'imagen' => $image
+            
+        );
+    
+        $persona = Persona::create($form_data);
+
         return redirect()->route('persona.show',$persona);
+
+    }
+
+    public function fetch_image($image_id)
+    {
+        $persona = Persona::findOrFail($image_id);
+
+        $image_file = Image::make($persona->imagen);
+
+        $response = Response::make($image_file->encode('jpeg'));
+
+        $response->header('Content-Type', 'image/jpeg');
+
+        return $response;
     }
 
     /**
