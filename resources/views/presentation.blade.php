@@ -16,7 +16,7 @@
         <!-- Third party plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/presentation.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstraping.css')}}" >
     </head>
     <body id="page-top">
         <!-- Navigation-->

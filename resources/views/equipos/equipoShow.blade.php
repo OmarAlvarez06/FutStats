@@ -9,23 +9,23 @@
 		<h1 align="center">Equipo</h1>
 
 		<label for="id">ID:</label>
-		<input type="text" class="opaco" name="id" value="{{$equipo->id}}" readonly>
+			<input type="text" class="opaco" name="id" value="{{$equipo->id}}" readonly>
 		<br><br>
 
 		<label for="nombre">Nombre:</label>
-		<input type="text" class="opaco" name="nombre" value="{{$equipo->nombre}}" readonly>
+			<input type="text" class="opaco" name="nombre" value="{{$equipo->nombre}}" readonly>
 		<br><br>
 
 		<label for="fecha_registro">Fecha de Registro:</label>
-		<input type="text" class="opaco" name="nombre" value="{{$equipo->fecha_registro}}" readonly>
+			<input type="text" class="opaco" name="nombre" value="{{$equipo->fecha_registro}}" readonly>
 		<br><br>
 
 		<label for="id">Imagen:</label>
-		<img src="{{$equipo->Imagen}}">
+			<img src="{{$equipo->Imagen}}" alt="No Disponible">
 		<br><br>
 
 		<label for="activo">Activo:</label>
-		<input type="text" class="opaco" name="activo" value="{{$equipo->activo}}" readonly>
+			<input type="text" class="opaco" name="activo" value="{{$equipo->activo}}" readonly>
 		<br><br>
 
 		<!-- Boton Enviar -->
