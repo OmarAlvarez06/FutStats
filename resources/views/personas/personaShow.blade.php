@@ -12,7 +12,7 @@
 			<div class="card p-3">
 				<div class="d-flex align-items-center">
 					<div class="image"> 
-						<img src="store_persona/fetch_image/{{$persona->id}}"  class="img-thumbnail" width="75px" alt="No Disponible">
+						<img src="/uploads/personas/{{$persona->imagen}}"  class="img-thumbnail" width="400px" alt="No Disponible">
 					</div>
 					<div class="ml-3 w-100">
 						<h4 class="mb-0 mt-0">{{$persona->nombre}}</h4> 

@@ -8,27 +8,29 @@
 	<div class="main" align="center">
 		<h1 align="center">Equipo</h1>
 
-		<label for="id">ID:</label>
-			<input type="text" class="opaco" name="id" value="{{$equipo->id}}" readonly>
-		<br><br>
+		<div class="container mt-5 d-flex justify-content-center">
+			<div class="card p-3">
+				<div class="d-flex align-items-center">
+					<div class="image"> 
+					<img src="/uploads/equipos/{{$equipo->imagen}}"  class="img-thumbnail" width="400px" alt="No Disponible">
+					</div>
+					<div class="ml-3 w-100">
+						<h4 class="mb-0 mt-0">{{$equipo->nombre}}</h4> 
+						<span>{{$equipo->fecha_registro}}</span>
+						<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+							<div class="d-flex flex-column"> <span>ID</span> <span >{{$equipo->id}}</span> </div>
+							<div class="d-flex flex-column"> <span>Activo</span> <span>{{$equipo->activo}}</span> </div>
 
-		<label for="nombre">Nombre:</label>
-			<input type="text" class="opaco" name="nombre" value="{{$equipo->nombre}}" readonly>
-		<br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		<label for="fecha_registro">Fecha de Registro:</label>
-			<input type="text" class="opaco" name="nombre" value="{{$equipo->fecha_registro}}" readonly>
-		<br><br>
-
-		<label for="id">Imagen:</label>
-			<img src="{{$equipo->Imagen}}" alt="No Disponible">
-		<br><br>
-
-		<label for="activo">Activo:</label>
-			<input type="text" class="opaco" name="activo" value="{{$equipo->activo}}" readonly>
 		<br><br>
 
 		<!-- Boton Enviar -->
 		<button class="buttonEditar">Editar</button>
+
 	</div>
 @endsection

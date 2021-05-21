@@ -36,7 +36,26 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        $equipo = Equipo::create($request->all());
+       
+        $equipo = new Equipo();
+        $equipo->nombre = $request->input('nombre');
+        $equipo->fecha_registro = $request->input('fecha_registro');
+        $equipo->activo = 1;
+
+        if($request->hasfile('imagen')){
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/equipos/',$filename);
+            $equipo->imagen = $filename;
+
+        }else{
+            return $request;
+            $equipo->imagen = '';
+        }
+
+        $equipo->save();
+    
         return redirect()->route('equipo.show',$equipo);
     }
 

@@ -16,7 +16,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
 	<!-- Core themes CSS (includes Bootstrap)-->
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstraping.css')}}" >
-	<link rel="stylesheet" type="text/css" href="{{asset('css/persona.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/myStyle.css')}}">
 
 </head>
 <body id="page-top">
@@ -59,25 +59,6 @@
 				<li class="elementoLista"><a href="#">Todos</a></li>
 			</ul>
 			<br>
-			<h2>Resultados</h2>
-			<br>
-				<div>
-					<a href="#">Equipo Local</a>
-					<label> vs </label>
-					<a href="#">Equipo Visitante</a><br><hr>
-					
-					<a href="#">Equipo Local</a>
-					<label> vs </label>
-					<a href="#">Equipo Visitante</a><br><hr>
-
-					<a href="#">Equipo Local</a>
-					<label> vs </label>
-					<a href="#">Equipo Visitante</a><br><hr>
-
-					<a href="#">Equipo Local</a>
-					<label> vs </label>
-					<a href="#">Equipo Visitante</a><br><hr>
-				</div>
 			<h2>Encuentros</h2>
 			<br>
 				<div>

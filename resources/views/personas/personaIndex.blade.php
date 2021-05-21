@@ -22,12 +22,14 @@
 				@foreach ($personas as $persona)
 					<tr>
 						<td>{{$persona->id}}</td>
-						<td><a href="{{ route('persona.show', $persona)}}">{{$persona->nombre}}</a></td>
+						<td>
+							<a href="{{ route('persona.show', $persona)}}">{{$persona->nombre}}</a>
+						</td>
 						<td>{{$persona->edad}}</td>
 						<td>{{$persona->sexo}}</td>
 						<td>{{$persona->rol}}</td>
 						<td>
-							<img src="store_persona/fetch_image/{{$persona->id}}"  class="img-thumbnail" width="75px" alt="No Disponible">
+							<img src="/uploads/personas/{{$persona->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="150px" alt="No Disponible">
 						</td>
 					</tr>
 				@endforeach

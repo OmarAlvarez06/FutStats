@@ -6,15 +6,15 @@
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
 	<div class="main">
-		<h1 align="center">Equipos</h1>
-		<table border="1" align="center">
+		<h1 align="center" class="display-4">Equipos</h1>
+		<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>Fecha de Registro</th>
-					<th>Imagen</th>
-					<th>Activo</th>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Fecha de Registro</th>
+					<th scope="col">Imagen</th>
+					<th scope="col">Activo</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,7 +23,9 @@
 						<td>{{$equipo->id}}</td>
 						<td><a href="{{ route('equipo.show', $equipo)}}">{{$equipo->nombre}}</a></td>
 						<td>{{$equipo->fecha_registro}}</td>
-						<td>{{$equipo->imagen}}</td>
+						<td>
+							<img src="/uploads/equipos/{{$equipo->imagen}}"  class="img-thumbnail" width="150px" alt="No Disponible">
+						</td>
 						<td>{{$equipo->activo}}</td>
 					</tr>
 				@endforeach

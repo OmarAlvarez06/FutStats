@@ -17,7 +17,7 @@ class CreateEquiposTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->datetime('fecha_registro');
-            $table->binary('imagen');
+            $table->mediumText('imagen');
             $table->smallInteger('activo')->default(1);
             $table->timestamps();
         });

@@ -43,38 +43,28 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
+        $persona = new Persona();
+        $persona->nombre = $request->input('nombre');
+        $persona->edad = $request->input('edad');
+        $persona->sexo = $request->input('sexo');
+        $persona->rol = $request->input('rol');
 
-       
-        $image_file = $request->imagen;
-        $image = Image::make($request->file('imagen')->getRealPath());
-        Response::make($image->encode('jpeg'));
-        
-        $form_data = array(
-            'nombre' => $request->nombre,
-            'edad' => $request->edad,
-            'sexo' => $request->sexo,
-            'rol' => $request->rol,
-            'imagen' => $image
-            
-        );
+        if($request->hasfile('imagen')){
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/personas/',$filename);
+            $persona->imagen = $filename;
+
+        }else{
+            return $request;
+            $persona->imagen = '';
+        }
+
+        $persona->save();
     
-        $persona = Persona::create($form_data);
-
         return redirect()->route('persona.show',$persona);
 
-    }
-
-    public function fetch_image($image_id)
-    {
-        $persona = Persona::findOrFail($image_id);
-
-        $image_file = Image::make($persona->imagen);
-
-        $response = Response::make($image_file->encode('jpeg'));
-
-        $response->header('Content-Type', 'image/jpeg');
-
-        return $response;
     }
 
     /**
