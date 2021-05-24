@@ -5,6 +5,15 @@
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
+	
+	<div class="menu">
+		<a href="/persona/create">Registrar</a>
+		<a href="/persona">Mostrar</a>
+		<a href="#">Editar</a>
+		<a href="#">Observaciones</a>
+	</div>
+
+
 	<form action="{{ route('persona.store')}}" method="POST" enctype="multipart/form-data">
 		@csrf
 

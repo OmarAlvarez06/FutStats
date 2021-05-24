@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\SedeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
-
-Route::get('store_persona/fetch_image/{id}', 'PersonaController@fetch_image');
+Route::resource('sede', SedeController::class);

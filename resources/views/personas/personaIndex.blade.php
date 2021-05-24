@@ -5,6 +5,14 @@
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
+
+	<div class="menu">
+		<a href="/persona/create">Registrar</a>
+		<a href="/persona">Mostrar</a>
+		<a href="#">Editar</a>
+		<a href="#">Observaciones</a>
+	</div>
+
 	<div class="main">
 		<h1 align="center" class="display-4">Personas</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">

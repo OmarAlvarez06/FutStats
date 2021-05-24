@@ -5,7 +5,15 @@
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
-	<div class="main" align="center">
+
+	<div class="menu">
+		<a href="/equipo/create">Registrar</a>
+		<a href="/equipo">Mostrar</a>
+		<a href="#">Editar</a>
+		<a href="#">Observaciones</a>
+	</div>
+
+	<div class="main">
 		<h1 align="center">Equipo</h1>
 
 		<div class="container mt-5 d-flex justify-content-center">
@@ -28,9 +36,6 @@
 		</div>
 
 		<br><br>
-
-		<!-- Boton Enviar -->
-		<button class="buttonEditar">Editar</button>
 
 	</div>
 @endsection

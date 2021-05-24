@@ -74,7 +74,7 @@ body{
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
-	overflow:auto;
+	display: flex;
 }
 
 /* Inputs Form*/
@@ -105,20 +105,24 @@ body{
 
 .main{
   float: left;
-  width: 60%;
+  max-width: 60%;
   padding: 0 20px;
 }
 
-.right {
+.right{
   background-color: #ffffff;
-  float: left;
-  width: 20%;
+  float: right;
+  max-width: 40%;
   padding: 5px;
   margin-top: 7px;
   text-align: center;
   color: #7bb062;
   border-style: groove;
   border-color: #7bb062;
+}
+
+.restaurador{
+	clear: both;
 }
 
 /*Features for mobiles*/

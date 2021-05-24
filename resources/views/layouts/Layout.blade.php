@@ -29,10 +29,10 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto my-2 my-lg-0"> <!-- class="active" -->
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/persona">Mostrar Personas</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{route('persona.create')}}">Registrar Persona</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/equipo">Mostrar Equipos</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{route('equipo.create')}}">Registrar Equipo</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/persona">Personas</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/equipo">Equipos</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/sede">Sedes</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Encuentros</a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Resultados</a></li>
 				</ul>
 			</div>
@@ -40,13 +40,6 @@
 	</nav>
 	<!-- Main Section -->
 	<section class="page-section mainSection">
-		
-		<div class="menu">
-			<a href="#">Jugador</a>
-			<a href="#">Equipo</a>
-			<a href="#">Encuentro</a>
-			<a href="#">Observaciones</a>
-		</div>
 
 		@section('main')
 		@show
@@ -70,12 +63,13 @@
 				</div>
 		</div>
 		
+	<div class="restaurador"></div>
 
 	</section>	
 
-	<div class="footer">
+	<footer class="footer">
 		Fut-Stats developed by Omar and Brian.
-	</div>
+	</footer>
 
 	<!-- Bootstrap core JS-->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -87,6 +81,7 @@
 	<script src="{{asset('js/scripts.js')}}"></script>
 	<!-- Our JS Functions -->
 	<script src="{{asset('js/functions.js')}}"></script>
+
 		
 </body>
 

@@ -1,11 +1,19 @@
 @extends('layouts.Layout')
 
-@section('title', 'Mostrar Personas')
+@section('title', 'Mostrar Persona')
 
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
-	<div class="main" align="center">
+
+	<div class="menu">
+		<a href="/persona/create">Registrar</a>
+		<a href="/persona">Mostrar</a>
+		<a href="#">Editar</a>
+		<a href="#">Observaciones</a>
+	</div>
+		
+	<div class="main">
 		<h1 align="center" class="display-4">Persona</h1>
 
 		<div class="container mt-5 d-flex justify-content-center">
@@ -30,7 +38,5 @@
 
 		<br><br>
 
-		<!-- Boton Enviar -->
-		<button class="buttonEditar">Editar</button>
 	</div>
 @endsection
