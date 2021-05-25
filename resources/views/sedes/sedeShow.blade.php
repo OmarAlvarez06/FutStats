@@ -8,7 +8,7 @@
 
     
 	<div class="menu">
-		<a href="/sede">Mostrar</a>
+		<a class="link" href="/sede">Mostrar</a>
 	</div>
     
 	<div class="main">
@@ -18,7 +18,7 @@
 			<div class="card p-3">
 				<div class="d-flex align-items-center">
 					<div class="image"> 
-						<img src="/uploads/sedes/{{$sede->imagen}}"  class="img-thumbnail" width="600px" height="600px" alt="No Disponible">
+						<img src="{{$sede->imagen}}"  class="img-thumbnail" width="600px" height="600px" alt="No Disponible">
 					</div>
 					<div class="ml-3 w-100">
 						<h4 class="mb-0 mt-0">{{$sede->nombre}}</h4> 

@@ -7,10 +7,10 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a href="/equipo/create">Registrar</a>
-		<a href="/equipo">Mostrar</a>
-		<a href="#">Editar</a>
-		<a href="#">Observaciones</a>
+		<a class="link" href="/equipo/create">Registrar</a>
+		<a class="link" href="/equipo">Mostrar</a>
+		<a class="link" href="#">Editar</a>
+		<a class="link" href="#">Observaciones</a>
 	</div>
 
 	<form action="{{ route('equipo.store')}}" method="POST" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
 				<!-- Fecha Creación -->
 				<label class="col-sm-2 col-form-label" for="fecha_registro">Fecha De Creación</label>
 				<div class="col-sm-10">
-					<input type="date" name="fecha_registro" value='<?php echo date('Y-m-d');?>' readonly>
+					<input type="date" name="fecha_registro" >
 				</div>
 			</div>
 

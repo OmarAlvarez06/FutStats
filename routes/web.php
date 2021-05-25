@@ -23,9 +23,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-//Route::get('persona', [PersonaController::class, 'index']);
-//Route::get('persona/create', [PersonaController::class, 'create']);
 
 Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
+Route::get('/persona-pdf',[PersonaController::class,'downloadPDF']);
+Route::get('/equipo-pdf',[EquipoController::class,'downloadPDF']);
+Route::get('/sede-pdf',[SedeController::class,'downloadPDF']);

@@ -69,12 +69,7 @@ body{
 /*Main Section*/
 
 .mainSection{
-	background: white;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	display: flex;
+	background: linear-gradient(to top, #7bb062,rgb(209, 206, 206),white);
 }
 
 /* Inputs Form*/
@@ -88,13 +83,18 @@ body{
 /*MENU*/
 .menu{
   float: left;
-  width: 20%;
+  width: 15%;
   text-align: center;
-  max-height: 100%;
+  height: 100%;
   
 }
 
-.menu a {
+.table-image td, th {
+	vertical-align: middle;
+}
+
+
+.link{
   background-image: linear-gradient(to right,#7bb062,white);
   padding: 8px;
   margin-top: 7px;
@@ -105,14 +105,15 @@ body{
 
 .main{
   float: left;
-  max-width: 60%;
+  width: 60%;
+  height: 100%;
   padding: 0 20px;
 }
 
 .right{
   background-color: #ffffff;
   float: right;
-  max-width: 40%;
+  width: 25%;
   padding: 5px;
   margin-top: 7px;
   text-align: center;

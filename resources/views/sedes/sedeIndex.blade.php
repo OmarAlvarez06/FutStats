@@ -8,7 +8,7 @@
 
     
 	<div class="menu">
-		<a href="/sede">Mostrar</a>
+		<a class="link" href="/sede">Mostrar</a>
 	</div>
     
 
@@ -32,11 +32,13 @@
 						</td>
 						<td>{{$sede->ubicacion}}</td>
 						<td>
-							<img src="/uploads/sedes/{{$sede->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="400px" height="400px" alt="No Disponible">
+							<img src="{{$sede->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="400px" height="400px" alt="No Disponible">
 						</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
+		<button class=" btn btn-success"><a href="{{URL::to('/sede-pdf')}}">Descargar PDF</a></button>
 	</div>
+	
 @endsection  

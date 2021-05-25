@@ -7,10 +7,10 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a href="/persona/create">Registrar</a>
-		<a href="/persona">Mostrar</a>
-		<a href="#">Editar</a>
-		<a href="#">Observaciones</a>
+		<a class="link" href="/persona/create">Registrar</a>
+		<a class="link" href="/persona">Mostrar</a>
+		<a class="link" href="#">Editar</a>
+		<a class="link" href="#">Observaciones</a>
 	</div>
 
 	<div class="main">
@@ -31,17 +31,20 @@
 					<tr>
 						<td>{{$persona->id}}</td>
 						<td>
-							<a href="{{ route('persona.show', $persona)}}">{{$persona->nombre}}</a>
+							<a href="{{route('persona.show', $persona)}}">{{$persona->nombre}}</a>
 						</td>
 						<td>{{$persona->edad}}</td>
 						<td>{{$persona->sexo}}</td>
 						<td>{{$persona->rol}}</td>
 						<td>
-							<img src="/uploads/personas/{{$persona->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="150px" alt="No Disponible">
+							<img src="{{$persona->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="150px" alt="No Disponible">
 						</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
+
+		<button class=" btn btn-primary"><a href="{{URL::to('/persona-pdf')}}">Descargar PDF</a></button>
+
 	</div>
 @endsection  

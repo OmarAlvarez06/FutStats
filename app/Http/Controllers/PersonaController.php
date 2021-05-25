@@ -8,8 +8,8 @@ use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
-// import the Intervention Image Manager Class
-use Intervention\Image\ImageManagerStatic as Image;
+use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\PDF;
 
 class PersonaController extends Controller
 {
@@ -54,7 +54,8 @@ class PersonaController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/personas/',$filename);
-            $persona->imagen = $filename;
+            $route = '/uploads/personas/' . $filename;
+            $persona->imagen = $route;
 
         }else{
             return $request;
@@ -111,4 +112,20 @@ class PersonaController extends Controller
     {
         //
     }
+
+    /**
+     * 
+     * Creates and download a pdf file of all people
+     * 
+     */
+    public function downloadPDF(){
+
+        $data = Persona::all();
+        $pdf = app('dompdf.wrapper');
+        view()->share('personas',$data);
+        $pdf->loadView('pdfs.personaPDF', $data);
+        $name = time() . '_personas.pdf';
+        return $pdf->download($name);
+    }
+
 }

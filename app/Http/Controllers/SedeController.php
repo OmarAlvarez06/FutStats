@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Sede;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\PDF;
 
 class SedeController extends Controller
 {
@@ -28,6 +30,22 @@ class SedeController extends Controller
     public function show(Sede $sede)
     {
         return view('sedes.sedeShow', compact('sede'));
+    }
+
+    /**
+     * 
+     * Creates and download a pdf file of all people
+     * 
+     */
+    public function downloadPDF(){
+
+        $data = Sede::all();
+        $pdf = app('dompdf.wrapper');
+        view()->share('sedes',$data);
+        $pdf->loadView('pdfs.sedePDF', $data);
+        $pdf->setPaper('a4', 'landscape');
+        $name = time() . '_sedes.pdf';
+        return $pdf->download($name);
     }
 
 }

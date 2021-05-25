@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\PDF;
 
 class EquipoController extends Controller
 {
@@ -47,7 +49,8 @@ class EquipoController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/equipos/',$filename);
-            $equipo->imagen = $filename;
+            $route = '/uploads/equipos/' . $filename;
+            $equipo->imagen = $route;
 
         }else{
             return $request;
@@ -102,5 +105,20 @@ class EquipoController extends Controller
     public function destroy(Equipo $equipo)
     {
         //
+    }
+
+    /**
+     * 
+     * Creates and download a pdf file of all people
+     * 
+     */
+    public function downloadPDF(){
+
+        $data = Equipo::all();
+        $pdf = app('dompdf.wrapper');
+        view()->share('equipos',$data);
+        $pdf->loadView('pdfs.equipoPDF', $data);
+        $name = time() . '_equipos.pdf';
+        return $pdf->download($name);
     }
 }
