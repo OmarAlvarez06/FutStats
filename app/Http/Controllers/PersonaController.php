@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\PersonaEquipo;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,7 @@ class PersonaController extends Controller
             return $request;
             $persona->imagen = '';
         }
+
 
         $persona->save();
     
