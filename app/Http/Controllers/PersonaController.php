@@ -13,6 +13,9 @@ use Barryvdh\DomPDF\PDF;
 
 class PersonaController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +90,7 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
-        //
+        return view('personas.personaForm', compact('persona'));
     }
 
     /**
@@ -99,7 +102,8 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
-        //
+        Persona::where('id', $persona->id)->update($request->except('_token','_method'));
+        return redirect()->route('persona.show', $persona);
     }
 
     /**
@@ -110,7 +114,8 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-        //
+        $persona->delete();
+        return redirect()->route('persona.index');
     }
 
     /**

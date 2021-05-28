@@ -9,7 +9,6 @@
 	<div class="menu">
 		<a class="link" href="/equipo/create">Registrar</a>
 		<a class="link" href="/equipo">Mostrar</a>
-		<a class="link" href="#">Editar</a>
 		<a class="link" href="#">Observaciones</a>
 	</div>
 

@@ -30,8 +30,22 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portafolio</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contacto</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/persona">Admin</a></li>
                     </ul>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Cerrar Sesion') }}
+                                </x-jet-dropdown-link>
+                            </form>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

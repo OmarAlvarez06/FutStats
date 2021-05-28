@@ -1,18 +1,17 @@
 @extends('layouts.Layout')
 
-@section('title', 'Personas')
+@section('title', 'Encuentros')
 
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
+	MOSTRAR Encuentros REGISTRADAS -->
 	<div class="menu">
-		<a class="link" href="/persona/create">Registrar</a>
-		<a class="link" href="/persona">Mostrar</a>
-		<a class="link" href="#">Observaciones</a>
+		<a class="link" href="/encuentro/create">Registrar</a>
+		<a class="link" href="/encuentro">Mostrar</a>
 	</div>
 
 	<div class="main">
-		<h1 align="center" class="display-4">Personas</h1>
+		<h1 align="center" class="display-4">Encuentros</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>

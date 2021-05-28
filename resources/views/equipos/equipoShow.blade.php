@@ -7,9 +7,13 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a class="link" href="/equipo/create">Registrar</a>
 		<a class="link" href="/equipo">Mostrar</a>
-		<a class="link" href="#">Editar</a>
+		<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar</a>
+		<form action="{{ route('equipo.destroy', $equipo) }}" method="POST">
+			@csrf
+			@method('DELETE')
+			<input type="submit" class="link" value="Eliminar" style="border:none;">
+		</form>
 		<a class="link" href="#">Observaciones</a>
 	</div>
 
@@ -33,7 +37,6 @@
 									$activo = 'Si';
 							?>
 							<div class="d-flex flex-column"> <span>Activo</span> <span>{{$activo}}</span> </div>
-
 						</div>
 					</div>
 				</div>

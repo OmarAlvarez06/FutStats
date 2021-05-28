@@ -9,6 +9,9 @@ use Barryvdh\DomPDF\PDF;
 
 class EquipoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,7 +84,7 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
-        //
+        return view('equipos.equipoForm', compact('equipo'));
     }
 
     /**
@@ -93,7 +96,8 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
-        //
+        Equipo::where('id', $equipo->id)->update($request->except('_token','_method'));
+        return redirect()->route('equipo.show', $equipo);
     }
 
     /**
@@ -104,7 +108,8 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
-        //
+        $equipo->delete();
+        return redirect()->route('equipo.index');    
     }
 
     /**

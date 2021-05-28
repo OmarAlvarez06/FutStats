@@ -7,9 +7,13 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a class="link" href="/persona/create">Registrar</a>
 		<a class="link" href="/persona">Mostrar</a>
-		<a class="link" href="#">Editar</a>
+		<a class="link" href="{{ route('persona.edit', $persona) }}">Editar</a>
+		<form action="{{ route('persona.destroy', $persona) }}" method="POST">
+			@csrf
+			@method('DELETE')
+			<input type="submit" class="link" value="Eliminar" style="border:none;">
+		</form>
 		<a class="link" href="#">Observaciones</a>
 	</div>
 		
@@ -29,8 +33,8 @@
 							<div class="d-flex flex-column"> <span>ID</span> <span >{{$persona->id}}</span> </div>
 							<div class="d-flex flex-column"> <span>Edad</span> <span>{{$persona->edad}}</span> </div>
 							<div class="d-flex flex-column"> <span>Sexo</span> <span>{{$persona->sexo}}</span> </div>
-
 						</div>
+						<br>
 					</div>
 				</div>
 			</div>
