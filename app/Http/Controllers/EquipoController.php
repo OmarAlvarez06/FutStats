@@ -56,7 +56,6 @@ class EquipoController extends Controller
             $equipo->imagen = $route;
 
         }else{
-            return $request;
             $equipo->imagen = '';
         }
 
@@ -96,7 +95,35 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
-        Equipo::where('id', $equipo->id)->update($request->except('_token','_method'));
+
+        $equipo->nombre = $request->input('nombre');
+        $equipo->fecha_registro = $request->input('fecha_registro');
+        $equipo->activo = 1;
+        $cadena = substr($equipo->imagen,1);
+        unlink($cadena);
+
+        if($request->hasfile('imagen')){
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/equipos/',$filename);
+            $route = '/uploads/equipos/' . $filename;
+            $equipo->imagen = $route;
+
+        }else{
+            $equipo->imagen = '';
+        }
+
+        $array = [
+
+            'nombre' => $equipo->nombre,
+            'fecha_registro' => $equipo->fecha_registro,
+            'imagen' => $equipo->imagen,
+            'activo' => $equipo->activo,
+        ];
+
+        Equipo::where('id', $equipo->id)->update($array);
+
         return redirect()->route('equipo.show', $equipo);
     }
 

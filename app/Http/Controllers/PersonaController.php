@@ -62,7 +62,6 @@ class PersonaController extends Controller
             $persona->imagen = $route;
 
         }else{
-            return $request;
             $persona->imagen = '';
         }
 
@@ -92,6 +91,8 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
+
+        
         return view('personas.personaForm', compact('persona'));
     }
 
@@ -104,7 +105,37 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
-        Persona::where('id', $persona->id)->update($request->except('_token','_method'));
+
+        $persona->nombre = $request->input('nombre');
+        $persona->edad = $request->input('edad');
+        $persona->sexo = $request->input('sexo');
+        $persona->rol = $request->input('rol');
+        $cadena = substr($persona->imagen,1);
+        unlink($cadena);
+
+        if($request->hasfile('imagen')){
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/personas/',$filename);
+            $route = '/uploads/personas/' . $filename;
+            $persona->imagen = $route;
+
+        }else{
+            $persona->imagen = '';
+        }
+
+        $array = [
+
+            'nombre' => $persona->nombre,
+            'edad' => $persona->edad,
+            'sexo' => $persona->sexo,
+            'rol' => $persona->rol,
+            'imagen' => $persona->imagen,
+        ];
+
+        Persona::where('id', $persona->id)->update($array);
+
         return redirect()->route('persona.show', $persona);
     }
 
