@@ -96,6 +96,54 @@
 					<br>
 				</div>
 
+
+				<h1 align="center" class="display-4">Equipos</h1>
+				<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Imagen</th>
+							<th scpoe="col">Seleccionar</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach ($equipos as $equipo)
+							<tr>
+								<td>{{$equipo->id}}</td>
+								<td><a href="{{ route('equipo.show', $equipo)}}">{{$equipo->nombre}}</a></td>
+								<td>
+									<img src="{{$equipo->imagen}}"  class="img-thumbnail" width="150px" alt="No Disponible">
+								</td>
+								<td>
+									<input type="radio" name="equipo" value="{{$equipo->id}}">
+								</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+
+				<?php
+					date_default_timezone_set('America/Mexico_City');
+					$date = date('y-m-d h:i:s');
+				?>
+
+				<div class="form-group row inputing">
+					<!-- Fecha De Inicio  -->
+					<label class="col-sm-2 col-form-label" for="fecha_inicio">Fecha De Inicio</label>
+					<div class="col-sm-10">
+						<input type="datetime-local" name="fecha_inicio" value='{{$date}}'>
+					</div>
+				</div>
+
+				<div class="form-group row inputing">
+					<!-- Fecha De Cierre -->
+					<label class="col-sm-2 col-form-label" for="fecha_cierre">Fecha De Cierre</label>
+					<div class="col-sm-10">
+						<input type="datetime-local" name="fecha_cierre" value='{{$date}}'>
+					</div>
+				</div>
+
 				<!-- Boton Enviar -->
 				<button class=" btn btn-success btn-lg btn-block">Enviar</button>
 

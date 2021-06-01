@@ -30,20 +30,18 @@
 						<h4 class="mb-0 mt-0">{{$equipo->nombre}}</h4> 
 						<span>{{$equipo->fecha_registro}}</span>
 						<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-							<div class="d-flex flex-column"> <span>ID</span> <span >{{$equipo->id}}</span> </div>
+							<div class="d-flex flex-column"> <span><b>ID</b></span> <span >{{$equipo->id}}</span> </div>
 							<?php
 								$activo = 'No';
 								if($equipo->activo == 1)
 									$activo = 'Si';
 							?>
-							<div class="d-flex flex-column"> <span>Activo</span> <span>{{$activo}}</span> </div>
+							<div class="d-flex flex-column"> <span><b>Activo</b></span> <span>{{$activo}}</span> </div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<br><br>
-
 	</div>
 @endsection

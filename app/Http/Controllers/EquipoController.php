@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\PersonaEquipo;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
@@ -72,7 +74,29 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        return view('equipos.equipoShow', compact('equipo'));
+        $personas = array();
+        $persona_equipo = PersonaEquipo::where('id_equipo', $equipo->id)->get();
+
+        foreach ($persona_equipo as $dato) {
+
+            $persona = Persona::findOrFail($dato->id_persona);
+            if($persona != null){
+
+                $datosPersona = array(
+                    'fecha_inicio' => $dato->fecha_inicio,
+                    'fecha_cierre' => $dato->fecha_cierre,
+                    'persona' => $persona,
+                );
+
+                array_push($personas,$datosPersona);
+            }
+        }
+
+        
+        if(!empty($personas))
+            return view('equipos.equipo_personaShow', compact('equipo','personas'));
+        else
+            return view('equipos.equipoShow', compact('equipo'));
     }
 
     /**

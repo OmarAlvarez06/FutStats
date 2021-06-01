@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonaEquipo;
 use App\Models\Persona;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -36,7 +37,8 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        return view('personas.personaForm');
+        $equipos = Equipo::all();
+        return view('personas.personaForm',compact('equipos'));
     }
 
     /**
@@ -65,9 +67,17 @@ class PersonaController extends Controller
             $persona->imagen = '';
         }
 
-
         $persona->save();
-    
+
+        //registrar ahora en persona_equipo:
+
+        $persona_equipo = new PersonaEquipo();
+        $persona_equipo->id_persona = $persona->id;
+        $persona_equipo->id_equipo = $request->input('equipo');
+        $persona_equipo->fecha_inicio = $request->input('fecha_inicio');
+        $persona_equipo->fecha_cierre = $request->input('fecha_cierre');
+        $persona_equipo->save();
+
         return redirect()->route('persona.show',$persona);
 
     }
@@ -80,7 +90,29 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-        return view('personas.personaShow', compact('persona'));
+        $equipos = array();
+        $persona_equipo = PersonaEquipo::where('id_persona', $persona->id)->get();
+
+        foreach ($persona_equipo as $dato) {
+
+            $equipo = Equipo::findOrFail($dato->id_equipo);
+            if($equipo != null){
+
+                $datosEquipo = array(
+                    'fecha_inicio' => $dato->fecha_inicio,
+                    'fecha_cierre' => $dato->fecha_cierre,
+                    'equipo' => $equipo,
+                );
+
+                array_push($equipos,$datosEquipo);
+            }
+        }
+
+        
+        if(!empty($equipos))
+            return view('personas.persona_equipoShow', compact('persona','equipos'));
+        else
+            return view('personas.personaShow', compact('persona'));
     }
 
     /**
@@ -92,7 +124,6 @@ class PersonaController extends Controller
     public function edit(Persona $persona)
     {
 
-        
         return view('personas.personaForm', compact('persona'));
     }
 
@@ -164,6 +195,10 @@ class PersonaController extends Controller
         $pdf->loadView('pdfs.personaPDF', $data);
         $name = time() . '_personas.pdf';
         return $pdf->download($name);
+    }
+
+    private function validateValues(Request $request){
+        
     }
 
 }
