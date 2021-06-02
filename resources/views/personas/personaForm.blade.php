@@ -1,13 +1,13 @@
 @extends('layouts.Layout')
 
-@section('title', 'Registro Personas')
+@section('title', 'Registro/Edición De Personas')
 
 @section('main')
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
 	
 	<div class="menu">
-		<a class="link" href="/persona">Mostrar</a>
+		<a class="link" href="/persona">Mostrar Personas</a>
 	</div>
 
 	@if(isset($persona))
@@ -21,7 +21,7 @@
 			<div class="main">
 
 				<!-- Sub-Title -->
-				<h1 class="display-4" align="center">Registrar Persona</h1>
+				<h1 class="display-4" align="center">Registrar/Editar Persona</h1>
 				<br><br>
 
 				<div class="form-group row inputing">
@@ -74,7 +74,6 @@
 					<label for="rol" class="col-sm-2 col-form-label">Rol</label>
 					<div class="col-sm-10">
 						<select name="rol">
-							<option value="{{ $persona->rol ?? ''}}" selected>{{ $persona->rol ?? '' }}</option>
 							<option value="Jugador">Jugador</option>
 							<option value="Entrenador">Entrenador</option>
 							<option value="Auxiliar">Auxiliar</option>
@@ -97,14 +96,14 @@
 				</div>
 
 
-				<h1 align="center" class="display-4">Equipos</h1>
+				<h1 align="center" class="display-4">Equipo</h1>
 				<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th scope="col">Id</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Imagen</th>
-							<th scpoe="col">Seleccionar</th>
+							<th scpoe="col">Seleccionar?</th>
 						</tr>
 					</thead>
 					<tbody>

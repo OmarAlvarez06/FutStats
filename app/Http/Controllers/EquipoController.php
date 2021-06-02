@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
-use App\Models\PersonaEquipo;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
@@ -44,9 +43,19 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
        
+        #region Validar datos
+        $nombre_request = $request->input('nombre');
+        $fecha_registro_request = $request->input('fecha_registro');
+
+        $nombre = (empty($nombre_request)) ? $this->faker->name() : $nombre_request;
+        $fecha_registro = (empty($fecha_registro_request)) ? $this->faker->$this->faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_registro_request;
+        
+
+        #endregion
+
         $equipo = new Equipo();
-        $equipo->nombre = $request->input('nombre');
-        $equipo->fecha_registro = $request->input('fecha_registro');
+        $equipo->nombre = $nombre;
+        $equipo->fecha_registro = $fecha_registro;
         $equipo->activo = 1;
 
         if($request->hasfile('imagen')){
@@ -58,7 +67,12 @@ class EquipoController extends Controller
             $equipo->imagen = $route;
 
         }else{
-            $equipo->imagen = '';
+            $tiempo = time();
+            $url = 'https://loremflickr.com/400/400/animal';
+            $img = 'public/uploads/equipos/'.$tiempo.'.jpg';
+            $route = '/uploads/equipos/'.$tiempo.'.jpg';
+            file_put_contents($img, file_get_contents($url));
+            $equipo->imagen = $route;
         }
 
         $equipo->save();
@@ -75,20 +89,13 @@ class EquipoController extends Controller
     public function show(Equipo $equipo)
     {
         $personas = array();
-        $persona_equipo = PersonaEquipo::where('id_equipo', $equipo->id)->get();
+        $persona_equipo = Persona::all();
 
         foreach ($persona_equipo as $dato) {
 
-            $persona = Persona::findOrFail($dato->id_persona);
-            if($persona != null){
+            if($dato->id_equipo == $equipo->id){
 
-                $datosPersona = array(
-                    'fecha_inicio' => $dato->fecha_inicio,
-                    'fecha_cierre' => $dato->fecha_cierre,
-                    'persona' => $persona,
-                );
-
-                array_push($personas,$datosPersona);
+                array_push($personas,$dato);
             }
         }
 
@@ -120,22 +127,30 @@ class EquipoController extends Controller
     public function update(Request $request, Equipo $equipo)
     {
 
-        $equipo->nombre = $request->input('nombre');
-        $equipo->fecha_registro = $request->input('fecha_registro');
-        $equipo->activo = 1;
-        $cadena = substr($equipo->imagen,1);
-        unlink($cadena);
+        #region Validar Datos
+        $nombre_request = $request->input('nombre');
+        $fecha_registro_request = $request->input('fecha_registro');
+
+        $nombre = ($equipo->nombre != $nombre_request) ? $nombre_request: $equipo->nombre;
+        $fecha_registro = ($equipo->fecha_registro != $fecha_registro_request) ? $fecha_registro_request : $equipo->fecha_registro;
+        $activo = $equipo->activo;
+        $imagen = $equipo->imagen;
+
+        #endregion
+
+        $equipo->nombre = $nombre;
+        $equipo->fecha_registro = $fecha_registro;
+        $equipo->activo = $activo;
 
         if($request->hasfile('imagen')){
+            $cadena = substr($equipo->imagen,1);
+            unlink($cadena);
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/equipos/',$filename);
             $route = '/uploads/equipos/' . $filename;
             $equipo->imagen = $route;
-
-        }else{
-            $equipo->imagen = '';
         }
 
         $array = [

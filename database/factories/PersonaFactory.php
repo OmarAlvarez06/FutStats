@@ -43,13 +43,13 @@ class PersonaFactory extends Factory
         }
 
         $helperSex =$this->faker->numberBetween(1,2);
-        $sex = 'Jugador';
+        $sex = 'F';
         switch($helperSex){
             case 1:
-                $sex = 'H';
+                $sex = 'M';
             break;
             case 2:
-                $sex = 'M';
+                $sex = 'F';
             break;
         }
 
@@ -59,6 +59,7 @@ class PersonaFactory extends Factory
             'sexo' => $sex,
             'rol' => $rol,
             'imagen' => $route,
+            'id_equipo' => $this->faker->numberBetween(1,22),
         ];
     }
 }

@@ -3,8 +3,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\PersonaEquipo;
 use App\Models\Persona;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
@@ -49,11 +47,29 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
+
+         #region Validar datos
+         $nombre_request = $request->input('nombre');
+         $edad_request = $request->input('edad');
+         $sexo_request = $request->input('sexo');
+         $rol_request = $request->input('rol');
+         $equipo_request = $request->input('equipo');
+
+         $nombre = (empty($nombre_request)) ? $this->faker->name() : $nombre_request;
+         $edad = (empty($edad_request)) ? $this->faker->numberBetwee(18,70) :  $edad_request;
+         $sexo = (empty($sexo_request)) ? 'F' : $sexo_request;
+         $rol = (empty($rol_request)) ? 'Jugador' : $rol_request;
+         $equipo = (empty($equipo_request)) ? $this->faker->numberBetween(1,22) : $equipo_request;
+         
+
+         #endregion
+
         $persona = new Persona();
-        $persona->nombre = $request->input('nombre');
-        $persona->edad = $request->input('edad');
-        $persona->sexo = $request->input('sexo');
-        $persona->rol = $request->input('rol');
+        $persona->nombre = $nombre;
+        $persona->edad = $edad;
+        $persona->sexo = $sexo;
+        $persona->rol = $rol;
+        $persona->id_equipo = $equipo;
 
         if($request->hasfile('imagen')){
             $file = $request->file('imagen');
@@ -64,19 +80,16 @@ class PersonaController extends Controller
             $persona->imagen = $route;
 
         }else{
-            $persona->imagen = '';
+            $tiempo = time();
+            $url = 'https://loremflickr.com/400/400/people';
+            $img = 'public/uploads/personas/'.$tiempo.'.jpg';
+            $route = '/uploads/personas/'.$tiempo.'.jpg';
+            file_put_contents($img, file_get_contents($url));
+            $persona->imagen = $route;
         }
 
         $persona->save();
 
-        //registrar ahora en persona_equipo:
-
-        $persona_equipo = new PersonaEquipo();
-        $persona_equipo->id_persona = $persona->id;
-        $persona_equipo->id_equipo = $request->input('equipo');
-        $persona_equipo->fecha_inicio = $request->input('fecha_inicio');
-        $persona_equipo->fecha_cierre = $request->input('fecha_cierre');
-        $persona_equipo->save();
 
         return redirect()->route('persona.show',$persona);
 
@@ -90,29 +103,9 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-        $equipos = array();
-        $persona_equipo = PersonaEquipo::where('id_persona', $persona->id)->get();
+        $equipo = Equipo::find($persona->id_equipo);
 
-        foreach ($persona_equipo as $dato) {
-
-            $equipo = Equipo::findOrFail($dato->id_equipo);
-            if($equipo != null){
-
-                $datosEquipo = array(
-                    'fecha_inicio' => $dato->fecha_inicio,
-                    'fecha_cierre' => $dato->fecha_cierre,
-                    'equipo' => $equipo,
-                );
-
-                array_push($equipos,$datosEquipo);
-            }
-        }
-
-        
-        if(!empty($equipos))
-            return view('personas.persona_equipoShow', compact('persona','equipos'));
-        else
-            return view('personas.personaShow', compact('persona'));
+        return view('personas.personaShow', compact('persona','equipo'));
     }
 
     /**
@@ -123,8 +116,8 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
-
-        return view('personas.personaForm', compact('persona'));
+        $equipos = Equipo::all();
+        return view('personas.personaForm', compact('persona','equipos'));
     }
 
     /**
@@ -137,35 +130,43 @@ class PersonaController extends Controller
     public function update(Request $request, Persona $persona)
     {
 
-        $persona->nombre = $request->input('nombre');
-        $persona->edad = $request->input('edad');
-        $persona->sexo = $request->input('sexo');
-        $persona->rol = $request->input('rol');
-        $cadena = substr($persona->imagen,1);
-        unlink($cadena);
+        #region Validar Datos
+        $nombre_request = $request->input('nombre');
+        $edad_request = $request->input('edad');
+        $sexo_request = $request->input('sexo');
+        $rol_request = $request->input('rol');
+        $equipo_request = $request->input('equipo');
+
+        $nombre = ($persona->nombre != $nombre_request) ? $nombre_request: $persona->nombre;
+        $edad = ($persona->edad != $edad_request) ? $edad_request : $persona->edad;
+        $sexo = ($persona->sexo != $sexo_request) ? $sexo_request : $persona->sexo;
+        $rol = ($persona->rol != $rol_request) ? $rol_request : $persona->rol;
+        $equipo = ($persona->id_equipo != $equipo_request) ? $equipo_request : $persona->id_equipo;
+        $imagen = $persona->imagen;
+
+        #endregion
 
         if($request->hasfile('imagen')){
+            $cadena = substr($imagen,1);
+            unlink($cadena);
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/personas/',$filename);
-            $route = '/uploads/personas/' . $filename;
-            $persona->imagen = $route;
-
-        }else{
-            $persona->imagen = '';
+            $imagen = '/uploads/personas/' . $filename;
         }
 
         $array = [
-
-            'nombre' => $persona->nombre,
-            'edad' => $persona->edad,
-            'sexo' => $persona->sexo,
-            'rol' => $persona->rol,
-            'imagen' => $persona->imagen,
+            'nombre' => $nombre,
+            'edad' => $edad,
+            'sexo' => $sexo,
+            'rol' => $rol,
+            'imagen' => $imagen,
+            'id_equipo' => $equipo,
         ];
 
         Persona::where('id', $persona->id)->update($array);
+      
 
         return redirect()->route('persona.show', $persona);
     }
@@ -197,8 +198,5 @@ class PersonaController extends Controller
         return $pdf->download($name);
     }
 
-    private function validateValues(Request $request){
-        
-    }
-
+    
 }

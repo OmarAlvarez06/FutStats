@@ -7,8 +7,7 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 	<div class="menu">
 		<a class="link" href="/persona/create">Registrar</a>
-		<a class="link" href="/persona">Mostrar</a>
-		<a class="link" href="#">Observaciones</a>
+		<a class="link" href="/persona">Mostrar Personas</a>
 	</div>
 
 	<div class="main">
