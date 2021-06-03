@@ -7,14 +7,16 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a class="link" href="/equipo">Mostrar</a>
-		<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar</a>
+		<a class="link" href="/equipo/create">Registrar Equipo</a>
+		<a class="link" href="/equipo">Mostrar Equipos</a>
+		<a class="link" href="/equipo-search">Buscar Equipo</a>
+		<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar Equipo</a>
+		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 		<form action="{{ route('equipo.destroy', $equipo) }}" method="POST">
 			@csrf
 			@method('DELETE')
 			<input type="submit" class="link" value="Eliminar" style="border:none;">
 		</form>
-		<a class="link" href="#">Observaciones</a>
 	</div>
 
 	<div class="main">

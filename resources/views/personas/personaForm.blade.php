@@ -3,11 +3,11 @@
 @section('title', 'Registro/Edición De Personas')
 
 @section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
 	
 	<div class="menu">
+		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
+		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
 	</div>
 
 	@if(isset($persona))
@@ -81,12 +81,13 @@
 					</div>
 				</div>
 
-				<div class="form-group row inputing">
-					<!-- Image De La Persona -->
-					<label for="imagen" class="col-sm-2 col-form-label" id="imagen">Foto De Perfil</label>
-					<img src="{{ $persona->imagen ??''}}" id="imagen">
-					<div class="col-sm-10">
-						<input  id="uploadInput" class="form-control-file" type="file" name="imagen" onchange="readURL(this);" value="imagen">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Imagen</span>
+					</div>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="uploadInput" name="imagen" onchange="readURL(this);" value="imagen">
+						<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 					</div>
 				</div>
 
@@ -121,28 +122,7 @@
 						@endforeach
 					</tbody>
 				</table>
-
-				<?php
-					date_default_timezone_set('America/Mexico_City');
-					$date = date('y-m-d h:i:s');
-				?>
-
-				<div class="form-group row inputing">
-					<!-- Fecha De Inicio  -->
-					<label class="col-sm-2 col-form-label" for="fecha_inicio">Fecha De Inicio</label>
-					<div class="col-sm-10">
-						<input type="datetime-local" name="fecha_inicio" value='{{$date}}'>
-					</div>
-				</div>
-
-				<div class="form-group row inputing">
-					<!-- Fecha De Cierre -->
-					<label class="col-sm-2 col-form-label" for="fecha_cierre">Fecha De Cierre</label>
-					<div class="col-sm-10">
-						<input type="datetime-local" name="fecha_cierre" value='{{$date}}'>
-					</div>
-				</div>
-
+				
 				<!-- Boton Enviar -->
 				<button class=" btn btn-success btn-lg btn-block">Enviar</button>
 

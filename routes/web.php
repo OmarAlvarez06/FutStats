@@ -28,6 +28,15 @@ Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
 
+Route::get ('/persona-search',[PersonaController::class,'search']);
+Route::get ('/equipo-search',[EquipoController::class,'search']);
+Route::get ('/sede-search',[SedeController::class,'search']);
+
+Route::get ('/persona-get',[PersonaController::class,'gets']);
+Route::get ('/equipo-get',[EquipoController::class,'gets']);
+Route::get ('/sede-get',[SedeController::class,'gets']);
+
 Route::get('/persona-pdf',[PersonaController::class,'downloadPDF']);
 Route::get('/equipo-pdf',[EquipoController::class,'downloadPDF']);
 Route::get('/sede-pdf',[SedeController::class,'downloadPDF']);
+

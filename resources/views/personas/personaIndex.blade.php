@@ -6,8 +6,10 @@
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR PERSONAS REGISTRADAS -->
 	<div class="menu">
-		<a class="link" href="/persona/create">Registrar</a>
+		<a class="link" href="/persona/create">Registrar Persona</a>
+		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
+		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
 	</div>
 
 	<div class="main">
@@ -40,7 +42,5 @@
 				@endforeach
 			</tbody>
 		</table>
-
-		<button class=" btn btn-primary"><a href="{{URL::to('/persona-pdf')}}">Descargar PDF</a></button>
 	</div>
 @endsection  

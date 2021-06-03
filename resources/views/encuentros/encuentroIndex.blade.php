@@ -24,13 +24,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach ($personas as $persona)
+				@foreach ($encuentros as $encuentro)
 					<tr>
-						<td>{{$persona->id}}</td>
+						<td>{{$encuentro->id}}</td>
 						<td>
 							<a href="{{route('persona.show', $persona)}}">{{$persona->nombre}}</a>
 						</td>
-						<td>{{$persona->edad}}</td>
+						<td>{{$encuentro->edad}}</td>
 						<td>{{$persona->sexo}}</td>
 						<td>{{$persona->rol}}</td>
 						<td>

@@ -3,12 +3,12 @@
 @section('title', 'Mostrar Sede')
 
 @section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
 
-    
 	<div class="menu">
-		<a class="link" href="/sede">Mostrar</a>
+		<a class="link" href="/sede/create">Registrar Sede</a>
+		<a class="link" href="/sede-search">Buscar Sedes</a>
+		<a class="link" href="/sede">Mostrar Sedes</a>
+		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
 	</div>
     
 	<div class="main">

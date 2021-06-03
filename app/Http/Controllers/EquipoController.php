@@ -7,6 +7,7 @@ use App\Models\Persona;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
+use Faker\Factory as Faker;
 
 class EquipoController extends Controller
 {
@@ -43,12 +44,14 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
        
+        $faker = Faker::create('en_US');
+
         #region Validar datos
         $nombre_request = $request->input('nombre');
         $fecha_registro_request = $request->input('fecha_registro');
 
-        $nombre = (empty($nombre_request)) ? $this->faker->name() : $nombre_request;
-        $fecha_registro = (empty($fecha_registro_request)) ? $this->faker->$this->faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_registro_request;
+        $nombre = (empty($nombre_request)) ? $faker->city() : $nombre_request;
+        $fecha_registro = (empty($fecha_registro_request)) ? $faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_registro_request;
         
 
         #endregion
@@ -69,7 +72,7 @@ class EquipoController extends Controller
         }else{
             $tiempo = time();
             $url = 'https://loremflickr.com/400/400/animal';
-            $img = 'public/uploads/equipos/'.$tiempo.'.jpg';
+            $img = 'uploads/equipos/'.$tiempo.'.jpg';
             $route = '/uploads/equipos/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
             $equipo->imagen = $route;
@@ -192,4 +195,30 @@ class EquipoController extends Controller
         $name = time() . '_equipos.pdf';
         return $pdf->download($name);
     }
+
+    /**
+     * Display a view to find a Equipo.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('equipos.equipoSearch');
+    }
+
+    /**
+     * Gets a created Equipo in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function gets(Request $request)
+    {
+        $identifier = $request->input('identifier');
+
+        $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
+        $coincidencias = Equipo::where('nombre', 'regexp', $regex)->get();
+        return view('equipos.equipoCoincidences',compact('coincidencias'));
+    }
+
 }

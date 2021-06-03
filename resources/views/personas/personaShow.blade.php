@@ -3,12 +3,13 @@
 @section('title', 'Mostrar Persona')
 
 @section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
+		<a class="link" href="/persona/create">Registrar Persona</a>
+		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
-		<a class="link" href="{{ route('persona.edit', $persona) }}">Editar</a>
+		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+		<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
 		<form action="{{ route('persona.destroy', $persona) }}" method="POST">
 			@csrf
 			@method('DELETE')

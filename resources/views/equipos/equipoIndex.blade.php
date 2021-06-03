@@ -7,9 +7,10 @@
 	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a class="link" href="/equipo/create">Registrar</a>
-		<a class="link" href="/equipo">Mostrar</a>
-		<a class="link" href="#">Observaciones</a>
+		<a class="link" href="/equipo/create">Registrar Equipo</a>
+		<a class="link" href="/equipo-search">Buscar Equipo</a>
+		<a class="link" href="/equipo">Mostrar Equipos</a>
+		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 	</div>
 
 	<div class="main">
@@ -43,7 +44,6 @@
 				@endforeach
 			</tbody>
 		</table>
-		<button class=" btn btn-success"><a href="{{URL::to('/equipo-pdf')}}">Descargar PDF</a></button>
 	</div>
 
 	

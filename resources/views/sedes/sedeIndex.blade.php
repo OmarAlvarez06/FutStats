@@ -8,7 +8,10 @@
 
     
 	<div class="menu">
-		<a class="link" href="/sede">Mostrar</a>
+		<a class="link" href="/sede/create">Registrar Sede</a>
+		<a class="link" href="/sede-search">Buscar Sedes</a>
+		<a class="link" href="/sede">Mostrar Sedes</a>
+		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
 	</div>
     
 
@@ -38,7 +41,6 @@
 				@endforeach
 			</tbody>
 		</table>
-		<button class=" btn btn-success"><a href="{{URL::to('/sede-pdf')}}">Descargar PDF</a></button>
 	</div>
 	
 @endsection  

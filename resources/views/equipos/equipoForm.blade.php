@@ -3,11 +3,11 @@
 @section('title', 'Registro Equipos')
 
 @section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
 
 	<div class="menu">
-		<a class="link" href="/equipo">Mostrar</a>
+		<a class="link" href="/equipo">Mostrar Equipos</a>
+		<a class="link" href="/equipo-search">Buscar Equipo</a>
+		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 	</div>
 
 	@if(isset($equipo))
@@ -41,14 +41,15 @@
 			</div>
 
 
-			<div class="form-group row inputing">
-				<!-- Logo Del Equipo -->
-				<label for="imagen" class="col-sm-2 col-form-label">Logo</label>
-				<img src="{{ $equipo->imagen ??''}}" id="imagen">
-				<div class="col-sm-10">
-					<input  id="uploadInput" class="form-control form-control-lg" type="file" name="imagen" onchange="readURL(this);" value="imagen">
-				</div>
-			</div>
+			<div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Logo</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="uploadInput" name="imagen" onchange="readURL(this);" value="imagen">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
 
 			<div class="text-center">
 				<img  id="openedImage" class="rounded mx-auto d-block" src="#">

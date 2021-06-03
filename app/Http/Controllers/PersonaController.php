@@ -6,16 +6,19 @@ namespace App\Http\Controllers;
 use App\Models\Persona;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
+use Faker\Factory as Faker;
 
 class PersonaController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +27,6 @@ class PersonaController extends Controller
     public function index()
     {
         $personas = Persona::get();
-        //$personas = DB::table('personas')->where('rol','Jugador')->get();
         return view('personas.personaIndex', compact('personas'));
     }
 
@@ -48,6 +50,8 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
 
+        $faker = Faker::create('en_PE');
+
          #region Validar datos
          $nombre_request = $request->input('nombre');
          $edad_request = $request->input('edad');
@@ -55,11 +59,12 @@ class PersonaController extends Controller
          $rol_request = $request->input('rol');
          $equipo_request = $request->input('equipo');
 
-         $nombre = (empty($nombre_request)) ? $this->faker->name() : $nombre_request;
-         $edad = (empty($edad_request)) ? $this->faker->numberBetwee(18,70) :  $edad_request;
+         $nombre = (empty($nombre_request)) ? $faker->name() : $nombre_request;
+         $edad = (empty($edad_request)) ? $faker->numberBetween(18,70) :  $edad_request;
          $sexo = (empty($sexo_request)) ? 'F' : $sexo_request;
          $rol = (empty($rol_request)) ? 'Jugador' : $rol_request;
-         $equipo = (empty($equipo_request)) ? $this->faker->numberBetween(1,22) : $equipo_request;
+         $equiposCount = count(Equipo::all());
+         $equipo = (empty($equipo_request)) ? $faker->numberBetween(1,$equiposCount) : $equipo_request;
          
 
          #endregion
@@ -82,7 +87,7 @@ class PersonaController extends Controller
         }else{
             $tiempo = time();
             $url = 'https://loremflickr.com/400/400/people';
-            $img = 'public/uploads/personas/'.$tiempo.'.jpg';
+            $img = 'uploads/personas/'.$tiempo.'.jpg';
             $route = '/uploads/personas/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
             $persona->imagen = $route;
@@ -196,6 +201,31 @@ class PersonaController extends Controller
         $pdf->loadView('pdfs.personaPDF', $data);
         $name = time() . '_personas.pdf';
         return $pdf->download($name);
+    }
+
+    /**
+     * Display a view to find a Persona.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('personas.personaSearch');
+    }
+
+    /**
+     * Gets a created Persona in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function gets(Request $request)
+    {
+        $identifier = $request->input('identifier');
+        $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
+        $coincidencias = Persona::where('nombre', 'regexp', $regex)->get();
+        return view('personas.personaCoincidences',compact('coincidencias'));
+        
     }
 
     
