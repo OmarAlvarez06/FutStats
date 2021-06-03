@@ -7,7 +7,7 @@
 	<table border="1" align="center" class=" table-dark table table-image">
 		<thead>
 			<tr>
-				<th scope="col">Id</th>
+				<th scope="col">ID</th>
 				<th scope="col">Nombre</th>
 				<th scope="col">Edad</th>
 				<th scope="col">Sexo</th>

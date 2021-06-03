@@ -6,8 +6,9 @@
 	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
 	MOSTRAR Encuentros REGISTRADAS -->
 	<div class="menu">
-		<a class="link" href="/encuentro/create">Registrar</a>
-		<a class="link" href="/encuentro">Mostrar</a>
+		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
+		<a class="link" href="/encuentro">Mostrar Encuentros</a>
+		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
 	</div>
 
 	<div class="main">
@@ -15,32 +16,29 @@
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Edad</th>
-					<th scope="col">Sexo</th>
-					<th scope="col">Rol</th>
-					<th scope="col">Imagen</th>
+					<th scope="col">Equipo Local</th>
+					<th scope="col">Equipo Visitante</th>
+					<th scope="col">Sede</th>
+					<th scope="col">Observaciones</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Resultado</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach ($encuentros as $encuentro)
 					<tr>
 						<td>{{$encuentro->id}}</td>
-						<td>
-							<a href="{{route('persona.show', $persona)}}">{{$persona->nombre}}</a>
-						</td>
-						<td>{{$encuentro->edad}}</td>
-						<td>{{$persona->sexo}}</td>
-						<td>{{$persona->rol}}</td>
-						<td>
-							<img src="{{$persona->imagen}}"  class="img-thumbnail rounded mx-auto d-block" width="150px" alt="No Disponible">
-						</td>
+						<td>{{$encuentro->id}}</td>
+						<td>{{$encuentro->id}}</td>
+						<td>{{$encuentro->id}}</td>
+						<td>{{$encuentro->id}}</td>
+						<td>{{$encuentro->id}}</td>
+						
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
 
-		<button class=" btn btn-primary"><a href="{{URL::to('/persona-pdf')}}">Descargar PDF</a></button>
+		
 	</div>
 @endsection  

@@ -20,7 +20,7 @@ class CreatePersonasTable extends Migration
             $table->char('sexo',1);
             $table->enum('rol',['Jugador','Director','Auxiliar']);
             $table->mediumText('imagen');
-            $table->foreignId('id_equipo')->references('id')->on('equipos');
+            $table->foreignId('equipo_id')->references('id')->on('equipos');
             $table->timestamps();
         });
     }

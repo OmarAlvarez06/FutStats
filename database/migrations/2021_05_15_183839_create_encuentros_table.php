@@ -15,9 +15,9 @@ class CreateEncuentrosTable extends Migration
     {
         Schema::create('encuentros', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_equipo_local')->references('id')->on('equipos');
-            $table->foreignId('id_equipo_visitante')->references('id')->on('equipos');
-            $table->foreignId('id_sede')->references('id')->on('sedes');
+            $table->foreignId('equipo_local_id')->references('id')->on('equipos');
+            $table->foreignId('equipo_visitante_id')->references('id')->on('equipos');
+            $table->foreignId('sede_id')->references('id')->on('sedes');
             $table->longText('observaciones');
             $table->datetime('fecha_hora');
             $table->string('resultado');

@@ -20,7 +20,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        $sedes = Sede::get();
+        $sedes = Sede::all();
         return view('sedes.sedeIndex', compact('sedes'));
     }
 

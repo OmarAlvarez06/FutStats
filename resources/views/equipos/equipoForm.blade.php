@@ -34,9 +34,9 @@
 
 			<div class="form-group row inputing">
 				<!-- Fecha Creación -->
-				<label class="col-sm-2 col-form-label" for="fecha_registro">Fecha De Creación</label>
+				<label class="col-sm-2 col-form-label" for="fecha_creacion">Fecha De Creación</label>
 				<div class="col-sm-10">
-					<input type="datetime-local" name="fecha_registro" >
+					<input type="datetime-local" name="fecha_creacion" >
 				</div>
 			</div>
 

@@ -74,7 +74,7 @@ class PersonaController extends Controller
         $persona->edad = $edad;
         $persona->sexo = $sexo;
         $persona->rol = $rol;
-        $persona->id_equipo = $equipo;
+        $persona->equipo_id = $equipo;
 
         if($request->hasfile('imagen')){
             $file = $request->file('imagen');
@@ -108,8 +108,7 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-        $equipo = Equipo::find($persona->id_equipo);
-
+        $equipo = Equipo::find($persona->equipo_id);
         return view('personas.personaShow', compact('persona','equipo'));
     }
 
@@ -146,7 +145,7 @@ class PersonaController extends Controller
         $edad = ($persona->edad != $edad_request) ? $edad_request : $persona->edad;
         $sexo = ($persona->sexo != $sexo_request) ? $sexo_request : $persona->sexo;
         $rol = ($persona->rol != $rol_request) ? $rol_request : $persona->rol;
-        $equipo = ($persona->id_equipo != $equipo_request) ? $equipo_request : $persona->id_equipo;
+        $equipo = ($persona->equipo_id != $equipo_request) ? $equipo_request : $persona->equipo_id;
         $imagen = $persona->imagen;
 
         #endregion
@@ -167,7 +166,7 @@ class PersonaController extends Controller
             'sexo' => $sexo,
             'rol' => $rol,
             'imagen' => $imagen,
-            'id_equipo' => $equipo,
+            'equipo_id' => $equipo,
         ];
 
         Persona::where('id', $persona->id)->update($array);

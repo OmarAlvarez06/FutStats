@@ -101,7 +101,7 @@
 				<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th scope="col">Id</th>
+							<th scope="col">ID</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Imagen</th>
 							<th scpoe="col">Seleccionar?</th>

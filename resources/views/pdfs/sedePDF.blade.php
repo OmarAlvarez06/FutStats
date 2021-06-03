@@ -8,7 +8,7 @@
         <table border="1"class="table table-dark table-image">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Ubicacion</th>
                     <th scope="col">Imagen</th>

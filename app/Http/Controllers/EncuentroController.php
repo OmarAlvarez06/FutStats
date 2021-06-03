@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Encuentro;
 use Illuminate\Http\Request;
 
 class EncuentroController extends Controller
@@ -13,7 +14,8 @@ class EncuentroController extends Controller
      */
     public function index()
     {
-        //
+        $encuentros = Encuentro::all();
+        return view ('encuentros.encuentroIndex')->with('encuentros',$encuentros);
     }
 
     /**

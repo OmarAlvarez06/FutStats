@@ -48,18 +48,17 @@ class EquipoController extends Controller
 
         #region Validar datos
         $nombre_request = $request->input('nombre');
-        $fecha_registro_request = $request->input('fecha_registro');
+        $fecha_creacion_request = $request->input('fecha_creacion');
 
         $nombre = (empty($nombre_request)) ? $faker->city() : $nombre_request;
-        $fecha_registro = (empty($fecha_registro_request)) ? $faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_registro_request;
+        $fecha_creacion = (empty($fecha_creacion_request)) ? $faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_creacion_request;
         
 
         #endregion
 
         $equipo = new Equipo();
         $equipo->nombre = $nombre;
-        $equipo->fecha_registro = $fecha_registro;
-        $equipo->activo = 1;
+        $equipo->fecha_creacion = $fecha_creacion;
 
         if($request->hasfile('imagen')){
             $file = $request->file('imagen');
@@ -91,18 +90,9 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        $personas = array();
-        $persona_equipo = Persona::all();
-
-        foreach ($persona_equipo as $dato) {
-
-            if($dato->id_equipo == $equipo->id){
-
-                array_push($personas,$dato);
-            }
-        }
-
         
+        $personas = Equipo::find($equipo->id)->people;
+
         if(!empty($personas))
             return view('equipos.equipo_personaShow', compact('equipo','personas'));
         else
@@ -132,18 +122,17 @@ class EquipoController extends Controller
 
         #region Validar Datos
         $nombre_request = $request->input('nombre');
-        $fecha_registro_request = $request->input('fecha_registro');
+        $fecha_creacion_request = $request->input('fecha_creacion');
 
         $nombre = ($equipo->nombre != $nombre_request) ? $nombre_request: $equipo->nombre;
-        $fecha_registro = ($equipo->fecha_registro != $fecha_registro_request) ? $fecha_registro_request : $equipo->fecha_registro;
+        $fecha_creacion = ($equipo->fecha_creacion != $fecha_creacion_request) ? $fecha_creacion_request : $equipo->fecha_creacion;
         $activo = $equipo->activo;
         $imagen = $equipo->imagen;
 
         #endregion
 
         $equipo->nombre = $nombre;
-        $equipo->fecha_registro = $fecha_registro;
-        $equipo->activo = $activo;
+        $equipo->fecha_creacion = $fecha_creacion;
 
         if($request->hasfile('imagen')){
             $cadena = substr($equipo->imagen,1);
@@ -159,9 +148,8 @@ class EquipoController extends Controller
         $array = [
 
             'nombre' => $equipo->nombre,
-            'fecha_registro' => $equipo->fecha_registro,
+            'fecha_creacion' => $equipo->fecha_creacion,
             'imagen' => $equipo->imagen,
-            'activo' => $equipo->activo,
         ];
 
         Equipo::where('id', $equipo->id)->update($array);

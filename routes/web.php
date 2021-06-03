@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
@@ -27,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function () {
 Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
+Route::resource('encuentro', EncuentroController::class);
 
 Route::get ('/persona-search',[PersonaController::class,'search']);
 Route::get ('/equipo-search',[EquipoController::class,'search']);

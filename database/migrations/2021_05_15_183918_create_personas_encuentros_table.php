@@ -14,10 +14,9 @@ class CreatePersonasEncuentrosTable extends Migration
     public function up()
     {
         Schema::create('personas_encuentros', function (Blueprint $table) {
-            //$table->id();
-            $table->foreignId('id_persona')->references('id')->on('personas');
-            $table->foreignId('id_encuentro')->references('id')->on('encuentros');
-            $table->enum('tipo_observacion',['Gol','Amonestación','Expulsión','Lesión','Cambio Entrada','Cambio Salida','AutoGol']);
+            $table->foreignId('persona_id')->references('id')->on('personas');
+            $table->foreignId('encuentro_id')->references('id')->on('encuentros');
+            $table->enum('observacion_tipo',['Gol','Amonestación','Expulsión','Lesión','Cambio Entrada','Cambio Salida','AutoGol']);
             $table->time('minuto');
             $table->timestamps();
         });

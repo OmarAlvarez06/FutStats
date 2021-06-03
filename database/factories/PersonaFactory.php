@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Factory as Faker;
 
 class PersonaFactory extends Factory
 {
@@ -21,14 +22,49 @@ class PersonaFactory extends Factory
      */
     public function definition()
     {
-        
+        $faker = Faker::create('es_PE');
         $tiempo = time();
+
         $url = 'https://loremflickr.com/400/400/people';
+        $url_aux = $faker->numberBetween(1,9);
+        switch($url_aux){
+            case 1:
+                $url = 'https://loremflickr.com/400/400/people';
+            break;
+            case 2:
+                $url = 'https://loremflickr.com/400/400/gente';
+            break;
+            case 3:
+                $url = 'https://loremflickr.com/400/400/persona';
+            break;
+            case 4:
+                $url = 'https://loremflickr.com/400/400/teenager';
+            break;
+            case 5:
+                $url = 'https://loremflickr.com/400/400/man';
+            break;
+            case 6:
+                $url = 'https://loremflickr.com/400/400/hombre';
+            break;
+            case 7:
+                $url = 'https://loremflickr.com/400/400/woman';
+            break;
+            case 8:
+                $url = 'https://loremflickr.com/400/400/mujer';
+            break;
+            case 9:
+                $url = 'https://loremflickr.com/400/400/adolescente';
+            break;
+
+        }
+
+
+
         $img = 'public/uploads/personas/'.$tiempo.'.jpg';
         $route = '/uploads/personas/'.$tiempo.'.jpg';
         file_put_contents($img, file_get_contents($url));
         
-        $helperRol = $this->faker->numberBetween(1,3);
+        $helperRol = $faker->numberBetween(1,3);
         $rol = 'Jugador';
         switch($helperRol){
             case 1:
@@ -42,7 +78,7 @@ class PersonaFactory extends Factory
             break;
         }
 
-        $helperSex =$this->faker->numberBetween(1,2);
+        $helperSex =$faker->numberBetween(1,2);
         $sex = 'F';
         switch($helperSex){
             case 1:
@@ -54,12 +90,12 @@ class PersonaFactory extends Factory
         }
 
         return [
-            'nombre' => $this->faker->name(),
-            'edad' => $this->faker->randomNumber(2,true),
+            'nombre' => $faker->name(),
+            'edad' => $faker->randomNumber(2,true),
             'sexo' => $sex,
             'rol' => $rol,
             'imagen' => $route,
-            'id_equipo' => $this->faker->numberBetween(1,22),
+            'equipo_id' => $faker->numberBetween(1,20),
         ];
     }
 }
