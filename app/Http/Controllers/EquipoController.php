@@ -177,7 +177,7 @@ class EquipoController extends Controller
     public function downloadPDF(){
 
         $data = Equipo::all();
-        $pdf = app('dompdf.wrapper');
+        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
         view()->share('equipos',$data);
         $pdf->loadView('pdfs.equipoPDF', $data);
         $name = time() . '_equipos.pdf';

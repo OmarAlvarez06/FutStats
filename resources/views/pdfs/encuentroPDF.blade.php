@@ -1,18 +1,9 @@
-@extends('layouts.Layout')
+@extends('layouts.pdfLayout')
 
-@section('title', 'Encuentros')
+@section('title', 'Encuentros PDF')
 
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR Encuentros REGISTRADAS -->
-	<div class="menu">
-		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
-		<a class="link" href="/encuentro">Mostrar Encuentros</a>
-		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
-	</div>
-
-	<div class="main">
-		<h1 align="center" class="display-4">Encuentros</h1>
+@section('principal')
+        <h1 align="center" class="display-4">Encuentros</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -28,18 +19,18 @@
 				@foreach ($encuentros as $encuentro)
 					<tr>
 						<td>
-							<img src="{{$encuentro['equipo_local']->imagen}}" class="card-img-top" alt="No Disponible">
+							<img src="{{public_path($encuentro['equipo_local']->imagen)}}" alt="No Disponible" width="50px">
 							<h5 style="text-align: center;"><a href="{{ route('equipo.show', $encuentro['equipo_local'])}}">{{$encuentro['equipo_local']->nombre}}</a></h5>
 						</td>
 						<td>
 							<span style="text-align: center; font-size: larger;"><b>{{$encuentro['encuentro']->resultado}}</b></span>
 						</td>
 						<td>
-							<img src="{{$encuentro['equipo_visitante']->imagen}}" class="card-img-top" alt="No Disponible">
+							<img src="{{public_path($encuentro['equipo_visitante']->imagen)}}" alt="No Disponible" width="50px">
 							<h5 style="text-align: center;"><a href="{{ route('equipo.show', $encuentro['equipo_visitante'])}}">{{$encuentro['equipo_visitante']->nombre}}</a></h5>
 						</td>
 						<td>
-							<img src="{{$encuentro['sede']->imagen}}" class="card-img-top" alt="No Disponible">
+							<img src="{{public_path($encuentro['sede']->imagen)}}" alt="No Disponible" width="50px">
 							<h5 style="text-align: center;"><a href="{{ route('sede.show', $encuentro['sede'])}}">{{$encuentro['sede']->nombre}}</a></h5>
 						</td>
 						<td>{{$encuentro['encuentro']->observaciones}}</td>
@@ -49,7 +40,4 @@
 				@endforeach
 			</tbody>
 		</table>
-
-		
-	</div>
-@endsection  
+@endsection

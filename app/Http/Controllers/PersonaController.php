@@ -195,7 +195,7 @@ class PersonaController extends Controller
     public function downloadPDF(){
 
         $data = Persona::all();
-        $pdf = app('dompdf.wrapper');
+        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
         view()->share('personas',$data);
         $pdf->loadView('pdfs.personaPDF', $data);
         $name = time() . '_personas.pdf';

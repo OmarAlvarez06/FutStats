@@ -101,7 +101,7 @@ class SedeController extends Controller
     public function downloadPDF(){
 
         $data = Sede::all();
-        $pdf = app('dompdf.wrapper');
+        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
         view()->share('sedes',$data);
         $pdf->loadView('pdfs.sedePDF', $data);
         $pdf->setPaper('a4', 'landscape');

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipo;
+use App\Models\Sede;
 use App\Models\Encuentro;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\PDF;
 
 class EncuentroController extends Controller
 {
@@ -14,7 +18,28 @@ class EncuentroController extends Controller
      */
     public function index()
     {
-        $encuentros = Encuentro::all();
+        $matchs = Encuentro::all();
+
+        $encuentros = array();
+
+        foreach($matchs as $encuentro){
+
+            $equipo_local = Equipo::find($encuentro->equipo_local_id);
+            $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
+            $sede = Sede::find($encuentro->sede_id);
+
+
+            $dato = [
+                'encuentro' => $encuentro,
+                'equipo_local' => $equipo_local,
+                'equipo_visitante' => $equipo_visitante,
+                'sede' => $sede,
+            ];
+
+            array_push($encuentros,$dato);
+
+        }
+
         return view ('encuentros.encuentroIndex')->with('encuentros',$encuentros);
     }
 
@@ -83,4 +108,41 @@ class EncuentroController extends Controller
     {
         //
     }
+
+    /**
+     * 
+     * Creates and download a pdf file of all people
+     * 
+     */
+    public function downloadPDF(){
+
+        $matchs = Encuentro::all();
+
+        $data = array();
+
+        foreach($matchs as $encuentro){
+
+            $equipo_local = Equipo::find($encuentro->equipo_local_id);
+            $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
+            $sede = Sede::find($encuentro->sede_id);
+
+
+            $dato = [
+                'encuentro' => $encuentro,
+                'equipo_local' => $equipo_local,
+                'equipo_visitante' => $equipo_visitante,
+                'sede' => $sede,
+            ];
+
+            array_push($data,$dato);
+
+        }
+        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
+        ;
+        view()->share('encuentros',$data);
+        $pdf->loadView('pdfs.encuentroPDF', $data);
+        $name = time() . '_encuentros.pdf';
+        return $pdf->download($name);
+    }
+
 }

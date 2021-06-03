@@ -11,4 +11,5 @@ class Sede extends Model
 
     protected $fillable = ['nombre','ubicacion','imagen'];
     public $timestamps = false;
+
 }

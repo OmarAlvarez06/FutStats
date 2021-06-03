@@ -42,4 +42,5 @@ Route::get ('/sede-get',[SedeController::class,'gets']);
 Route::get('/persona-pdf',[PersonaController::class,'downloadPDF']);
 Route::get('/equipo-pdf',[EquipoController::class,'downloadPDF']);
 Route::get('/sede-pdf',[SedeController::class,'downloadPDF']);
+Route::get('/encuentro-pdf',[EncuentroController::class,'downloadPDF']);
 
