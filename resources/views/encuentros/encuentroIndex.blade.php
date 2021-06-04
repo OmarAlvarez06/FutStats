@@ -8,6 +8,8 @@
 	<div class="menu">
 		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
+        <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
+        <a class="link" href="/encuentro-search-team">Buscar Encuentros Por Equipo</a>
 		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
 	</div>
 
@@ -16,6 +18,7 @@
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
+					<th scope="col">ID</th>
 					<th scope="col">Equipo Local</th>
 					<th scope="col">Resultado</th>
 					<th scope="col">Equipo Visitante</th>
@@ -27,6 +30,9 @@
 			<tbody>
 				@foreach ($encuentros as $encuentro)
 					<tr>
+						<td>
+							<a href="{{route('encuentro.show',$encuentro['encuentro'])}}">{{$encuentro['encuentro']->id}}</a>
+						</td>
 						<td>
 							<img src="{{$encuentro['equipo_local']->imagen}}" class="card-img-top" alt="No Disponible">
 							<h5 style="text-align: center;"><a href="{{ route('equipo.show', $encuentro['equipo_local'])}}">{{$encuentro['equipo_local']->nombre}}</a></h5>

@@ -12,7 +12,7 @@
 		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
 	</div>
 
-	<div class="main">
+	<div class="main table-index">
 		<h1 align="center" class="display-4">Personas</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>

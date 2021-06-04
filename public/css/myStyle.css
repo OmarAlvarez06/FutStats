@@ -104,22 +104,16 @@ body{
 }
 
 .main{
-  float: left;
-  width: 60%;
+  float: right;
+  width: 85%;
   height: 100%;
   padding: 0 20px;
+  text-align: center;
 }
 
-.right{
-  background-color: #ffffff;
-  float: right;
-  width: 25%;
-  padding: 5px;
-  margin-top: 7px;
-  text-align: center;
-  color: #7bb062;
-  border-style: groove;
-  border-color: #7bb062;
+
+.table-index{
+	font-size: 1.2em;
 }
 
 .restaurador{

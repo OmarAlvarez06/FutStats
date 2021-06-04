@@ -34,10 +34,14 @@ Route::resource('encuentro', EncuentroController::class);
 Route::get ('/persona-search',[PersonaController::class,'search']);
 Route::get ('/equipo-search',[EquipoController::class,'search']);
 Route::get ('/sede-search',[SedeController::class,'search']);
+Route::get ('/encuentro-search-id',[EncuentroController::class,'search_id']);
+Route::get ('/encuentro-search-team',[EncuentroController::class,'search_team']);
 
 Route::get ('/persona-get',[PersonaController::class,'gets']);
 Route::get ('/equipo-get',[EquipoController::class,'gets']);
 Route::get ('/sede-get',[SedeController::class,'gets']);
+Route::get ('/encuentro-get-id',[EncuentroController::class,'gets_id']);
+Route::get ('/encuentro-get-team',[EncuentroController::class,'gets_team']);
 
 Route::get('/persona-pdf',[PersonaController::class,'downloadPDF']);
 Route::get('/equipo-pdf',[EquipoController::class,'downloadPDF']);

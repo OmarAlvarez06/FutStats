@@ -13,7 +13,7 @@
 		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 	</div>
 
-	<div class="main">
+	<div class="main table-index">
 		<h1 align="center" class="display-4">Equipos</h1>
 		<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 			<thead>
