@@ -4,6 +4,7 @@ use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
+use App\Http\Controllers\PersonaEncuentroController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Inertia;
 
@@ -30,6 +31,7 @@ Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
 Route::resource('encuentro', EncuentroController::class);
+Route::resource('personaencuentro', PersonaEncuentroController::class);
 
 Route::get ('/persona-search',[PersonaController::class,'search']);
 Route::get ('/equipo-search',[EquipoController::class,'search']);

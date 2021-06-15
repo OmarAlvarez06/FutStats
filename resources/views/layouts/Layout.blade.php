@@ -32,7 +32,7 @@
 						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/equipo">Equipos</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/sede">Sedes</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/encuentro">Encuentros</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Resultados</a></li>
+						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/personaencuentro">Observaciones</a></li>
 					</ul>
 				</div>
 			</div>

@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use App\Models\Sede;
 use App\Models\Encuentro;
+use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
 use Faker\Factory as Faker;
+use DB;
+use App\Quotation;
 
 class EncuentroController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -106,8 +112,8 @@ class EncuentroController extends Controller
         $encuentro->observaciones = $observaciones;         
 
         $encuentro->save();
-        return redirect()->route('encuentro.show',$encuentro);
 
+        return redirect()->route('encuentro.show',$encuentro);
     }
 
     /**
