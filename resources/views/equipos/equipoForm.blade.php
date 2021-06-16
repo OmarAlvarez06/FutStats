@@ -1,9 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Registro Equipos')
-
-@section('main')
-
+<x-app-layout>
+    <h1 class="display-4 text-center">Registrar/Editar Equipo</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/equipo">Mostrar Equipos</a>
 		<a class="link" href="/equipo-search">Buscar Equipo</a>
@@ -19,10 +16,6 @@
 		@csrf
 
 		<div class="main">
-			<!-- Sub-Title -->
-			<h1 class="display-4" align="center">Registrar Equipo</h1>
-			<br><br>
-
 			<div class="form-group row inputing">
 				<!-- Nombre -->
 				<label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
@@ -61,4 +54,6 @@
 
 		</div>
 	</form>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

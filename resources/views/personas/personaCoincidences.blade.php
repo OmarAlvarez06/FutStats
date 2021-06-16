@@ -1,9 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Coincidencias De Persona Encontradas')
-
-@section('main')
-
+<x-app-layout>
+    <h1 class="display-4 text-center">Persona(s) Encontrada(s)</h1>
+    <br>
 	<div class="menu">
 		<a class="link" href="/persona/create">Registrar Persona</a>
 		<a class="link" href="/persona-search">Buscar Persona</a>
@@ -12,8 +9,6 @@
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Persona(s) Encontradas</h1>
-
         @foreach ($coincidencias as $persona)
 
             <div class="container mt-5 d-flex justify-content-center">
@@ -40,4 +35,6 @@
 		@endforeach
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+</x-app-layout>

@@ -1,9 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Registro De Encuentros')
-
-@section('main')
-	
+<x-app-layout>
+    <h1 class="display-4 text-center">Registrar Encuentro</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
@@ -16,13 +13,6 @@
 		@csrf
 
 		<div class="main table-index">
-
-			<!-- Sub-Title -->
-			<h1 class="display-4" align="center">Registrar Encuentro</h1>
-			<br><br>
-
-			
-
 			<h3 align="center">Equipo Local</h3>
 			<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 				<thead>
@@ -139,4 +129,6 @@
 
 		</div>
 	</form>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

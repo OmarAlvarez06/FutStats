@@ -1,8 +1,7 @@
-@extends('layouts.Layout')
+<x-app-layout>
 
-@section('title', 'Buscar Persona(s)')
-
-@section('main')
+    <h1 class="display-4 text-center">Buscar Persona(s)</h1>
+    <br>
 
 	<div class="menu">
         <a class="link" href="/persona/create">Registrar Persona</a>
@@ -11,8 +10,7 @@
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Buscar Persona(s)</h1>
-
+        
         <form action="/persona-get" method="GET" enctype="multipart/form-data">
             @csrf
 
@@ -26,8 +24,11 @@
 
             <!-- Boton Enviar -->
             <button class=" btn btn-success btn-lg btn-block">Enviar</button>
-
+            <br><br>
         </form>
 
 	</div>
-@endsection
+
+    
+    <div class="restaurador"></div>
+</x-app-layout>

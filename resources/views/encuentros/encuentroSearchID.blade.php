@@ -1,10 +1,7 @@
-@extends('layouts.Layout')
-
-@section('title', 'Buscar Encuentro(s) Por ID')
-
-@section('main')
-
-	<div class="menu">
+<x-app-layout>
+    <h1 class="display-4 text-center">Buscar Encuentro(s) Por ID</h1>
+    <br>
+    <div class="menu">
         <a class="link" href="/encuentro/create">Registrar Encuentro</a>
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-team">Buscar Encuentros Por Equipo</a>
@@ -12,8 +9,6 @@
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Buscar Encuentro(s) Por ID</h1>
-
         <form action="/encuentro-get-id" method="GET" enctype="multipart/form-data">
             @csrf
 
@@ -31,4 +26,6 @@
         </form>
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+</x-app-layout>

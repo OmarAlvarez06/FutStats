@@ -1,11 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Equipo')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-
+<x-app-layout>
+    <h1 class="display-4 text-center">Mostrar Equipo</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/equipo/create">Registrar Equipo</a>
 		<a class="link" href="/equipo">Mostrar Equipos</a>
@@ -20,8 +15,6 @@
 	</div>
 
 	<div class="main">
-		<h1 align="center">Equipo</h1>
-
 		<div class="container mt-5 d-flex justify-content-center">
 			<div class="card p-3">
 				<div class="d-flex align-items-center">
@@ -42,4 +35,6 @@
 		<br><br>
 
 	</div>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

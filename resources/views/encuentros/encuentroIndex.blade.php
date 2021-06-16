@@ -1,10 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Encuentros')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR Encuentros REGISTRADAS -->
+<x-app-layout>
+    <h1 class="display-4 text-center">Encuentros</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
@@ -14,7 +10,6 @@
 	</div>
 
 	<div class="main">
-		<h1 align="center" class="display-4">Encuentros</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -58,4 +53,6 @@
 
 		
 	</div>
-@endsection  
+
+	<div class="restaurador"></div>
+</x-app-layout>

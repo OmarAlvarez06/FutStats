@@ -1,10 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
+    <h1 class="display-4 text-center">Perfil</h1>
+    <br>
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())

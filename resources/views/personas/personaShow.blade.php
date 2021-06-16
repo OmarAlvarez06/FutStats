@@ -1,9 +1,8 @@
-@extends('layouts.Layout')
+<x-app-layout>
 
-@section('title', 'Mostrar Persona')
-
-@section('main')
-
+	<h1 class="display-4 text-center">Mostrar Persona</h1>
+    <br>
+	
 	<div class="menu">
 		<a class="link" href="/persona/create">Registrar Persona</a>
 		<a class="link" href="/persona-search">Buscar Persona</a>
@@ -18,8 +17,7 @@
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Persona</h1>
-
+		
 		<div class="container mt-5 d-flex justify-content-center">
 			<div class="card p-3">
 				<div class="d-flex align-items-center">
@@ -59,7 +57,9 @@
 				</div>
 			</div>
 		</div>
-
-
+		<br><br>	
 	</div>
-@endsection
+
+	<div class="restaurador"></div>
+	
+</x-app-layout>

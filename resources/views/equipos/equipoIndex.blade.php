@@ -1,11 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Equipos')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-
+<x-app-layout>
+    <h1 class="display-4 text-center">Equipos</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/equipo/create">Registrar Equipo</a>
 		<a class="link" href="/equipo-search">Buscar Equipo</a>
@@ -14,7 +9,6 @@
 	</div>
 
 	<div class="main table-index">
-		<h1 align="center" class="display-4">Equipos</h1>
 		<table border="1" align="center"  class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -39,5 +33,5 @@
 		</table>
 	</div>
 
-	
-@endsection  
+	<div class="restaurador"></div>
+</x-app-layout>

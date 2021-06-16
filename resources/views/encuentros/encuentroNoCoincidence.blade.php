@@ -1,9 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Encuentro Encontrado')
-
-@section('main')
-
+<x-app-layout>
+    <h1 class="display-4 text-center">Encuentro(s) Encontrados</h1>
+	<br>
 	<div class="menu">
         <a class="link" href="/encuentro/create">Registrar Encuentro</a>
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
@@ -13,10 +10,10 @@
 	</div>
 
 	<div class="main">
-		<h1 align="center">Encuentro Encontrado</h1>
-
-        <h4 align="center">Encuentro No Encontrado</span></h4>
+        <h4 class="text-center">Encuentro No Encontrado</span></h4>
 
 
 	</div>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

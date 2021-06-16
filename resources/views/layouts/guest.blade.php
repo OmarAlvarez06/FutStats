@@ -13,6 +13,14 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- Third party plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+        <!-- Core themes CSS (includes Bootstrap)-->
+        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstraping.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('css/myStyle.css')}}">
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>

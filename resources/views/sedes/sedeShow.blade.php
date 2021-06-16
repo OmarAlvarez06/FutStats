@@ -1,9 +1,6 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Sede')
-
-@section('main')
-
+<x-app-layout>
+	<h1 class="display-4 text-center">Mostrar Sede</h1>
+    <br>
 	<div class="menu">
 		<a class="link" href="/sede/create">Registrar Sede</a>
 		<a class="link" href="/sede-search">Buscar Sedes</a>
@@ -12,7 +9,6 @@
 	</div>
     
 	<div class="main">
-		<h1 align="center" class="display-4">Sede</h1>
 
 		<div class="container mt-5 d-flex justify-content-center">
 			<div class="card p-3">
@@ -31,4 +27,6 @@
 		<br><br>
 
 	</div>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

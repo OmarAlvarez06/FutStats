@@ -1,12 +1,7 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Encuentro')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-
-	<div class="menu">
+<x-app-layout>
+    <h1 class="display-4 text-center">Mostrar Encuentro</h1>
+    <br>
+    <div class="menu">
 		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
         <a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
@@ -16,7 +11,7 @@
 	</div>
 
 	<div class="main">
-		<h1 align="center">Encuentro #<span>{{$encuentro->id}}</span></h1>
+		<h2 class="text-center display-5">Encuentro #<span>{{$encuentro->id}}</span></h2>
 
         <div class="card-group">
             <div class="card">
@@ -43,4 +38,6 @@
         </div>
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+</x-app-layout>

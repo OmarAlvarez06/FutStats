@@ -1,12 +1,8 @@
-@extends('layouts.Layout')
+<x-app-layout>
+    <h1 class="display-4 text-center">Sede(s) Encontrada(s)</h1>
+    <br>
 
-@section('title', 'Mostrar Sede(s) Encontradas')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-
-	<div class="menu">
+    <div class="menu">
         <a class="link" href="/sede/create">Registrar Sede</a>
         <a class="link" href="/sede-search">Buscar Sede</a>
 		<a class="link" href="/sede">Mostrar Sedes</a>
@@ -14,7 +10,6 @@
 	</div>
 
 	<div class="main">
-		<h1 align="center">Sede(s) Encontrados</h1>
 
         @foreach ($coincidencias as $sede)
 
@@ -36,4 +31,7 @@
         @endforeach
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+
+</x-app-layout>

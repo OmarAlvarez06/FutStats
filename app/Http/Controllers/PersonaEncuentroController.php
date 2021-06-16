@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Quotation;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class PersonaEncuentroController extends Controller
 {
@@ -18,8 +18,7 @@ class PersonaEncuentroController extends Controller
      */
     public function index()
     {
-        $personas_encuentros = DB::table('vs_personas_encuentros')->get();
-
+        $personas_encuentros = FacadesDB::table('vs_personas_encuentros')->get();
         return view('personas_encuentros.personas_encuentrosIndex')->with('personas_encuentros', $personas_encuentros);
     }
 
@@ -31,9 +30,9 @@ class PersonaEncuentroController extends Controller
     public function create()
     {
         //Leer Encuentros
-        $encuentros = DB::table('vs_encuentros')->get();
+        $encuentros = FacadesDB::table('vs_encuentros')->get();
         //Leer Personas
-        $personas = DB::table('personas')->get();
+        $personas = FacadesDB::table('personas')->get();
 
         return view('personas_encuentros.personas_encuentrosForm')
                 ->with('encuentros', $encuentros)
@@ -48,10 +47,9 @@ class PersonaEncuentroController extends Controller
      */
     public function store(Request $request)
     {
-        $insertar = DB::insert('INSERT INTO personas_encuentros (persona_id, encuentro_id, observacion_tipo, minuto) VALUES (?,?,?,?)',[$request->persona, $request->encuentro, $request->observacion_tipo, $request->minuto]);
+        $insertar = FacadesDB::insert('INSERT INTO personas_encuentros (persona_id, encuentro_id, observacion_tipo, minuto) VALUES (?,?,?,?)',[$request->persona, $request->encuentro, $request->observacion_tipo, $request->minuto]);
 
-
-        $personas_encuentros = DB::table('vs_personas_encuentros')->get();
+        $personas_encuentros = FacadesDB::table('vs_personas_encuentros')->get();
         return view('personas_encuentros.personas_encuentrosIndex')->with('personas_encuentros', $personas_encuentros);
     }
 

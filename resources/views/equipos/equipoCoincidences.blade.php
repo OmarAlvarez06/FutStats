@@ -1,12 +1,7 @@
-@extends('layouts.Layout')
-
-@section('title', 'Mostrar Equipo(s) Encontrados')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-
-	<div class="menu">
+<x-app-layout>
+    <h1 class="display-4 text-center">Equipo(s) Encontrado(s)</h1>
+    <br>
+    <div class="menu">
         <a class="link" href="/equipo/create">Registrar Equipo</a>
         <a class="link" href="/equipo-search">Buscar Equipo</a>
 		<a class="link" href="/equipo">Mostrar Equipos</a>
@@ -39,4 +34,7 @@
         @endforeach
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+</x-app-layout>
+

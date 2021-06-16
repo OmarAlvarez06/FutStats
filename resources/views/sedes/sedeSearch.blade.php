@@ -1,17 +1,13 @@
-@extends('layouts.Layout')
-
-@section('title', 'Buscar Sede(s)')
-
-@section('main')
-
-	<div class="menu">
+<x-app-layout>
+    <h1 class="display-4 text-center">Buscar Sede(s)</h1>
+    <br>
+    <div class="menu">
         <a class="link" href="/sede/create">Registrar Sede</a>
 		<a class="link" href="/sede">Mostrar Sedes</a>
         <a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Buscar Sedes(s)</h1>
 
         <form action="/sede-get" method="GET" enctype="multipart/form-data">
             @csrf
@@ -30,4 +26,7 @@
         </form>
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+
+</x-app-layout>

@@ -1,20 +1,16 @@
-@extends('layouts.Layout')
-
-@section('title', 'Observacion')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR Encuentros REGISTRADAS -->
+<x-app-layout>
+    <h1 class="display-4 text-center">>Registrar Observación</h1>
+	<br>
 	<div class="menu">
 		<a class="link" href="/personaencuentro">Mostrar Observaciones</a>
 	</div>
 
 	<div class="main">
-		<h1 align="center" class="display-4">Registrar Observacion</h1>
+		
 		<form method="POST" action="{{ route('personaencuentro.store')}}">
 			@csrf
 
-			<label for="persona">Selecciona la persona</label>
+			<label for="persona">Seleccione La Persona: </label>
 			<select name="persona">
 				@foreach ($personas as $persona)
 					<option value="{{ $persona->id }}">{{ $persona->nombre }}</option>
@@ -23,7 +19,7 @@
 
 			<br><br>
 			
-			<label for="encuentro">Seleccione el encuentro</label>
+			<label for="encuentro">Seleccione El Encuentro: </label>
 			<select name="encuentro">
 				@foreach ($encuentros as $encuentro)
 					<option value="{{ $encuentro->id }}">Equipo Local:{{ $encuentro->local }} | Equipo Visitante:{{ $encuentro->visitante}} | Sede:{{ $encuentro->sede}} | Fecha:{{ $encuentro->fecha_hora}}</option>
@@ -32,7 +28,7 @@
 			
 			<br><br>
 			
-			<label for="observacion_tipo">Seleccione la observacion</label>
+			<label for="observacion_tipo">Seleccione El Tipo De Oservación: </label>
 			<select name="observacion_tipo">
 				<option value="Gol">Gol</option>
 				<option value="Amonestación">Amonestación</option>
@@ -45,7 +41,7 @@
 			
 			<br><br>
 			
-			<label for="minuto">Seleccione la hora de la observacion</label>
+			<label for="minuto">Seleccione La Hora De Observación: </label>
 			<input type="time" name="minuto">
 
 			<br><br>
@@ -54,4 +50,6 @@
 			<button class=" btn btn-success btn-lg btn-block">Enviar</button>
 		</form>
 	</div>
-@endsection
+
+	<div class="restaurador"></div>
+</x-app-layout>

@@ -1,11 +1,7 @@
-@extends('layouts.Layout')
-
-@section('title', 'Personas')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR PERSONAS REGISTRADAS -->
-	<div class="menu">
+<x-app-layout>
+	<h1 class="display-4 text-center">Personas</h1>
+	<br>
+    <div class="menu">
 		<a class="link" href="/persona/create">Registrar Persona</a>
 		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
@@ -13,7 +9,6 @@
 	</div>
 
 	<div class="main table-index">
-		<h1 align="center" class="display-4">Personas</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -42,5 +37,8 @@
 				@endforeach
 			</tbody>
 		</table>
+		
 	</div>
-@endsection  
+	<div class="restaurador"></div>
+
+</x-app-layout>

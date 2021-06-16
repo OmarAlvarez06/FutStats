@@ -1,10 +1,8 @@
-@extends('layouts.Layout')
+<x-app-layout>
+    <h1 class="display-4 text-center">Registrar Sede</h1>
+    <br>
 
-@section('title', 'Registro Sedes')
-
-@section('main')
-
-	<div class="menu">
+    <div class="menu">
 		<a class="link" href="/sede">Mostrar Sedes</a>
 		<a class="link" href="/sede-search">Buscar Sedes</a>
 		<a class="link" href="/sede-pdf">Descargar PDF Sede</a>
@@ -14,10 +12,6 @@
         @csrf
 
         <div class="main">
-            <!-- Sub-Title -->
-            <h1 class="display-4" align="center">Registrar Sede</h1>
-            <br><br>
-
             <div class="form-group row inputing">
                 <!-- Nombre -->
                 <label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
@@ -55,4 +49,8 @@
 
         </div>
     </form>
-@endsection
+
+    <div class="restaurador"></div>
+
+
+</x-app-layout>

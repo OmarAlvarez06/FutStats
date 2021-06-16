@@ -1,18 +1,13 @@
-@extends('layouts.Layout')
-
-@section('title', 'Buscar Equipo(s)')
-
-@section('main')
-
-	<div class="menu">
+<x-app-layout>
+    <h1 class="display-4 text-center">Buscar Equipo(s)</h1>
+    <br>
+    <div class="menu">
         <a class="link" href="/equipo/create">Registrar Equipo</a>
 		<a class="link" href="/equipo">Mostrar Equipos</a>
         <a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 	</div>
 		
 	<div class="main">
-		<h1 align="center" class="display-4">Buscar Equipo(s)</h1>
-
         <form action="/equipo-get" method="GET" enctype="multipart/form-data">
             @csrf
 
@@ -30,4 +25,6 @@
         </form>
 
 	</div>
-@endsection
+
+    <div class="restaurador"></div>
+</x-app-layout>

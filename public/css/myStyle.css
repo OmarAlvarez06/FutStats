@@ -23,6 +23,7 @@ nav{
 	background: linear-gradient(to right, white, #7bb062, #7bb062); 
 }
 
+
 nav a{
 	text-align: left;
 	font-size: 2em;
@@ -47,11 +48,9 @@ body{
 	overflow: hidden;
 }
 
-.footer{
-	background-color:#e5e5e5;
-	text-align:center;
-	padding:10px;
-	margin-top:7px;
+.heading{
+	background-color: linear-gradient(to right, white, #b2ff8e, #7bb062); 
+	color: black;
 }
 
 /*Otras*/
@@ -68,8 +67,8 @@ body{
 
 /*Main Section*/
 
-.mainSection{
-	background: linear-gradient(to top, #7bb062,rgb(209, 206, 206),white);
+.fondo{
+	background: linear-gradient(to top, #7bb062,#b5ff92,white);
 }
 
 /* Inputs Form*/

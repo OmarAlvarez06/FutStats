@@ -1,12 +1,8 @@
-@extends('layouts.Layout')
 
-@section('title', 'Sedes')
-
-@section('main')
-	<!-- DIV MAIN (Registros, formularios y mostrar la informacion)
-	MOSTRAR Sedes REGISTRADAS -->
-
-    
+<x-app-layout>
+    <h1 class="display-4 text-center">Sedes</h1>
+	<br>
+	    
 	<div class="menu">
 		<a class="link" href="/sede/create">Registrar Sede</a>
 		<a class="link" href="/sede-search">Buscar Sedes</a>
@@ -16,7 +12,6 @@
     
 
 	<div class="main table-index">
-		<h1 align="center" class="display-4">Sedes</h1>
 		<table border="1" align="center" class="table table-dark table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -42,5 +37,7 @@
 			</tbody>
 		</table>
 	</div>
-	
-@endsection  
+
+	<div class="restaurador"></div>
+
+</x-app-layout>
