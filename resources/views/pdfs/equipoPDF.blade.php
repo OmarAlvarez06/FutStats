@@ -9,7 +9,7 @@
 			<tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Creación</th>
+                <th scope="col">Fundación</th>
                 <th scope="col">Imagen</th>
 			</tr>
 		</thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$equipo->id}}</td>
                     <td><a href="{{ route('equipo.show', $equipo)}}">{{$equipo->nombre}}</a></td>
-                    <td>{{$equipo->fecha_creacion}}</td>
+                    <td>{{$equipo->fundacion}}</td>
                     <td class="w-25">
                         <img src="{{public_path($equipo->imagen)}}"  width="300px" height="300px" alt="No Disponible">
                     </td>

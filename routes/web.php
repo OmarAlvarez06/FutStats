@@ -4,7 +4,6 @@ use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
-use App\Http\Controllers\PersonaEncuentroController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Inertia;
 
@@ -27,17 +26,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function () {
     return view('dashboard');
 })->name('inicio');
 
-
 #endregion
-
-
 
 #region entities routes
 Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
 Route::resource('encuentro', EncuentroController::class);
-Route::resource('personaencuentro', PersonaEncuentroController::class);
 #endregion
 
 #region search routes

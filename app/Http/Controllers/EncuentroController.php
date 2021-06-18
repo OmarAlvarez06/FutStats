@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use App\Models\Sede;
 use App\Models\Encuentro;
+use App\Models\Persona;
 use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
@@ -33,7 +34,7 @@ class EncuentroController extends Controller
 
             $equipo_local = Equipo::find($encuentro->equipo_local_id);
             $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
-            $sede = Sede::find($encuentro->sede_id);
+            $sede = Sede::find($equipo_local->sede_id);
 
             $dato = [
                 'encuentro' => $encuentro,
@@ -126,42 +127,25 @@ class EncuentroController extends Controller
     {
         $equipo_local = Equipo::find($encuentro->equipo_local_id);
         $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
-        $sede = Sede::find($encuentro->sede_id);
-        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede'));
-    }
+        $sede = Sede::find($equipo_local->sede_id);
+        $matchs = PersonaEncuentro::where('encuentro_id',$encuentro->id)->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $persona_encuentros = array();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        foreach($matchs as $persona_encuentro){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $persona = Persona::find($persona_encuentro->persona_id);
+
+            $dato = [
+                'persona' => $persona,
+                'persona_encuentro' => $persona_encuentro,
+            ];
+
+            array_push($persona_encuentros,$dato);
+
+        }
+
+        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','persona_encuentros'));
     }
 
     /**
@@ -179,14 +163,11 @@ class EncuentroController extends Controller
 
             $equipo_local = Equipo::find($encuentro->equipo_local_id);
             $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
-            $sede = Sede::find($encuentro->sede_id);
-
 
             $dato = [
                 'encuentro' => $encuentro,
                 'equipo_local' => $equipo_local,
                 'equipo_visitante' => $equipo_visitante,
-                'sede' => $sede,
             ];
 
             array_push($data,$dato);

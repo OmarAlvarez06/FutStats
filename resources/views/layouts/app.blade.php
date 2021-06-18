@@ -9,6 +9,7 @@
         <link type="image/png" rel="icon" href="{{asset('images/icon.png')}}">
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
@@ -18,8 +19,8 @@
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
         <!-- Third party plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Core themes CSS (includes Bootstrap)-->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstraping.css')}}" >
         <link rel="stylesheet" type="text/css" href="{{asset('css/myStyle.css')}}">
 
 

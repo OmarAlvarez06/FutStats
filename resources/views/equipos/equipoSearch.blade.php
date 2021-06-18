@@ -1,5 +1,4 @@
 <x-app-layout>
-    <h1 class="display-4 text-center">Buscar Equipo(s)</h1>
     <br>
     <div class="menu">
         <a class="link" href="/equipo/create">Registrar Equipo</a>
@@ -8,21 +7,43 @@
 	</div>
 		
 	<div class="main">
+        <h1 class="display-4 text-center">Buscar Equipo(s)</h1>
+        <br>
         <form action="/equipo-get" method="GET" enctype="multipart/form-data">
             @csrf
 
-            <div class="form-group row inputing">
-                <!-- Nombre -->
-                <label class="col-sm-2 col-form-label" for="nombre">Nombre A Buscar</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="text" name="identifier" placeholder="Ingresa Aquí El Valor A Buscar" value="">
-                </div>
+            <div class="shadow flex">
+                <input name="identifier" class="w-full rounded p-2" type="text" placeholder="Buscar Equipo Por Nombre..." required>
+                <button class="bg-white w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400">
+                    <i class="material-icons">search</i>
+                </button>
             </div>
-
-            <!-- Boton Enviar -->
-            <button class=" btn btn-success btn-lg btn-block">Enviar</button>
-
         </form>
+
+        @if (!empty($equipos))
+            <br><br>
+            <h2 class="text-center text-4xl">Equipo(s) Encontrado(s)</h2>
+            <br><br>
+            @foreach ($equipos as $equipo)
+                <div class="flex justify-center items-center">
+                    <div class="flex flex-col bg-white shadow-lg border-t-8 border-green-700 rounded-tl-full overflow-hidden">
+                        <img src="{{$equipo->imagen}}" alt="Logo Del Equipo" class="w-96 h-96 mx-auto" />
+                        <div class="px-6 py-4">
+                            <div class="flex items-center pt-3">
+                                <img class="w-12 h-12 rounded-full"src="{{$equipo->imagen}}" alt="Foto Del Equipo"/>
+                                <div class="ml-4">
+                                    <a class="font-bold text-black hover:text-red-500 whitespace-no-wrap" href="{{route('equipo.show',$equipo)}}">{{$equipo->nombre}}</p>
+                                    <p class="text-sm text-gray-700 mt-1">{{$equipo->fundacion}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                
+            @endforeach
+
+        @endif
 
 	</div>
 

@@ -10,4 +10,7 @@ class Persona extends Model
     use HasFactory;
     protected $fillable = ['nombre','edad','sexo','rol','imagen','equipo_id'];
 
+    public function equipo(){
+        return $this->belongsTo(Equipo::class);
+    }
 }

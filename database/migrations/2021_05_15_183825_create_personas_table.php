@@ -15,7 +15,7 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre',100);
             $table->integer('edad');
             $table->char('sexo',1);
             $table->enum('rol',['Jugador','Director','Auxiliar']);

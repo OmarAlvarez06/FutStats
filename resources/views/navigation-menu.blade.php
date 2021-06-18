@@ -8,23 +8,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
+                    <x-jet-nav-link href="{{ route('inicio') }}" style="color:black;" :active="request()->routeIs('inicio')">
                         {{ __('Inicio') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="/persona">
+                    <x-jet-nav-link href="/persona" style="color:black;">
                         {{ __('Personas') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="/equipo">
+                    <x-jet-nav-link href="/equipo" style="color:black;">
                         {{ __('Equipos') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="/sede">
+                    <x-jet-nav-link href="/sede" style="color:black;">
                         {{ __('Sedes') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="/encuentro">
+                    <x-jet-nav-link href="/encuentro" style="color:black;">
                         {{ __('Encuentros') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="/personaencuentro">
-                        {{ __('Obervaciones') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -152,6 +149,18 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
                 {{ __('Inicio') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="/persona" style="color:black;">
+                {{ __('Personas') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="/equipo" style="color:black;">
+                {{ __('Equipos') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="/sede" style="color:black;">
+                {{ __('Sedes') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="/encuentro" style="color:black;">
+                {{ __('Encuentros') }}
             </x-jet-responsive-nav-link>
         </div>
 

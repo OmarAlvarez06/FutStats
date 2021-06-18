@@ -15,8 +15,21 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="username" value="{{ __('Nombre De Usuario') }}" />
+                <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Correo Electrónico') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="rol" value="{{ __('Rol') }}" />
+                <select name="rol">
+					<option value="Administrador">Administrador</option>
+					<option value="Usuario General">Usuario General</option>
+				</select>
             </div>
 
             <div class="mt-4">

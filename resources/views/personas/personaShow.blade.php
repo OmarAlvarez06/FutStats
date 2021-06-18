@@ -1,8 +1,5 @@
 <x-app-layout>
-
-	<h1 class="display-4 text-center">Mostrar Persona</h1>
-    <br>
-	
+	<br>
 	<div class="menu">
 		<a class="link" href="/persona/create">Registrar Persona</a>
 		<a class="link" href="/persona-search">Buscar Persona</a>
@@ -15,51 +12,82 @@
 			<input type="submit" class="link" value="Eliminar" style="border:none;">
 		</form>
 	</div>
-		
 	<div class="main">
-		
-		<div class="container mt-5 d-flex justify-content-center">
-			<div class="card p-3">
-				<div class="d-flex align-items-center">
-					<div class="image"> 
-						<img src="{{$persona->imagen}}"  class="img-thumbnail" width="400px" alt="No Disponible">
-					</div>
-					<div class="ml-3 w-100">
-						<h4 class="mb-0 mt-0">{{$persona->nombre}}</h4> 
-						<span>{{$persona->rol}}</span>
-						<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-							<div class="d-flex flex-column"> <span><b>ID</b></span> <span >{{$persona->id}}</span> </div>
-							<div class="d-flex flex-column"> <span><b>Edad</b></span> <span>{{$persona->edad}}</span> </div>
-							<div class="d-flex flex-column"> <span><b>Sexo</b></span> <span>{{$persona->sexo}}</span> </div>
+		<h1 class="display-4 text-center">Persona</h1>
+		<div class="grid mt-8 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
+			<div class="flex flex-col">
+				<div class="bg-white shadow-md  rounded-3xl p-4">
+					<div class="flex-none lg:flex">
+						<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
+							<img src="{{$persona->imagen}}" alt="Logo Del Equipo"  class=" w-96 h-96 object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
 						</div>
-						<br>
+						<div class="flex-auto ml-3 justify-evenly py-2">
+							<div class="flex flex-wrap ">
+								<div class="w-full flex-none text-xs text-blue-700 font-medium ">
+									<span>{{$persona->id}}</span><span> - Persona</span>
+								</div>
+								<h2 class="flex-auto text-lg font-medium">{{$persona->nombre}}</h2>
+							</div>
+							<p class="mt-3"></p>
+							<div class="flex py-4  text-sm text-gray-600">
+								<div class="flex-1 items-center">
+									<p><b>Rol: </b></p>
+									<p>{{$persona->rol}}</p>
+								</div>
+								<br>
+								<div class="flex-1 items-center">
+									<p><b>Registrado: </b></p>
+									<p>{{$persona->created_at}}</p>
+								</div>
+							</div>
+							<p class="mt-3"></p>
+							<div class="flex py-4  text-sm text-gray-600">
+								<div class="flex-1 items-center">
+									<p><b>Edad: </b></p>
+									<p>{{$persona->edad}}</p>
+								</div>
+								<br>
+								<div class="flex-1 items-center">
+									<p><b>Sexo: </b></p>
+									<p>{{$persona->sexo}}</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<br><br>
-
-		<h2 align="center">Equipo</h2>
-
-		<div class="container mt-5 d-flex justify-content-center">
-			<div class="card p-3">
-				<div class="d-flex align-items-center">
-					<div class="image"> 
-					<img src="{{$equipo->imagen}}"  class="img-thumbnail" width="400px" alt="No Disponible">
-					</div>
-					<div class="ml-3 w-100">
-						<h4 class="mb-0 mt-0"><a href="{{ route('equipo.show', $equipo)}}">{{$equipo->nombre}}</a></h4> 
-						<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-							<div class="d-flex flex-column"> <span><b>ID</b></span> <span >{{$equipo->id}}</span> </div>
-							<div class="d-flex flex-column"> <span><b>Creación</b></span> <span>{{$equipo->fecha_creacion}}</span> </div>
+			
+			<div class="flex flex-col ">
+				<div class="bg-white shadow-md  rounded-3xl p-4">
+					<div class="flex-none lg:flex">
+						<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
+							<img src="{{$equipo->imagen}}" alt="Foto Del Equipo" class=" w-96 h-96  object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+						</div>
+						<div class="flex-auto ml-3 justify-evenly py-2">
+							<div class="flex flex-wrap ">
+								<div class="w-full flex-none text-xs text-blue-700 font-medium ">
+									<span>{{$equipo->id}}</span><span> - Equipo</span>
+								</div>
+								<a href="{{route('equipo.show',$equipo)}}" class="flex-auto text-lg font-medium text-black hover:text-red-500 whitespace-no-wrap">{{$equipo->nombre}}</a>
+							</div>
+							<p class="mt-3"></p>
+							<div class="flex py-4  text-sm text-gray-600">
+								<div class="flex-1 items-center">
+									<p><b>Fundación: </b></p>
+									<p>{{$equipo->fundacion}}</p>
+								</div>
+								<br>
+								<div class="flex-1 items-center">
+									<p><b>Registrado: </b></p>
+									<p>{{$equipo->created_at}}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<br><br>	
+		</div>	
 	</div>
-
 	<div class="restaurador"></div>
 	
 </x-app-layout>

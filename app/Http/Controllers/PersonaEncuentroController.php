@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
-use App\Quotation;
-use Illuminate\Support\Facades\DB as FacadesDB;
 
 class PersonaEncuentroController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +14,7 @@ class PersonaEncuentroController extends Controller
      */
     public function index()
     {
-        $personas_encuentros = FacadesDB::table('vs_personas_encuentros')->get();
-        return view('personas_encuentros.personas_encuentrosIndex')->with('personas_encuentros', $personas_encuentros);
+        //
     }
 
     /**
@@ -29,14 +24,7 @@ class PersonaEncuentroController extends Controller
      */
     public function create()
     {
-        //Leer Encuentros
-        $encuentros = FacadesDB::table('vs_encuentros')->get();
-        //Leer Personas
-        $personas = FacadesDB::table('personas')->get();
-
-        return view('personas_encuentros.personas_encuentrosForm')
-                ->with('encuentros', $encuentros)
-                ->with('personas', $personas);
+        //
     }
 
     /**
@@ -47,19 +35,16 @@ class PersonaEncuentroController extends Controller
      */
     public function store(Request $request)
     {
-        $insertar = FacadesDB::insert('INSERT INTO personas_encuentros (persona_id, encuentro_id, observacion_tipo, minuto) VALUES (?,?,?,?)',[$request->persona, $request->encuentro, $request->observacion_tipo, $request->minuto]);
-
-        $personas_encuentros = FacadesDB::table('vs_personas_encuentros')->get();
-        return view('personas_encuentros.personas_encuentrosIndex')->with('personas_encuentros', $personas_encuentros);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonaEncuentro  $personaEncuentro
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PersonaEncuentro $personaEncuentro)
     {
         //
     }
@@ -67,10 +52,10 @@ class PersonaEncuentroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonaEncuentro  $personaEncuentro
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PersonaEncuentro $personaEncuentro)
     {
         //
     }
@@ -79,10 +64,10 @@ class PersonaEncuentroController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\PersonaEncuentro  $personaEncuentro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PersonaEncuentro $personaEncuentro)
     {
         //
     }
@@ -90,10 +75,10 @@ class PersonaEncuentroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\PersonaEncuentro  $personaEncuentro
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PersonaEncuentro $personaEncuentro)
     {
         //
     }

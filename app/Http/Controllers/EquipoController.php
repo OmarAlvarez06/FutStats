@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use App\Models\Persona;
+use App\Models\Sede;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
@@ -21,8 +22,20 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $equipos = Equipo::get();
-        return view('equipos.equipoIndex', compact('equipos'));
+        $teams = Equipo::get();
+        $valores = array();
+
+        foreach ($teams as $team){
+            
+            $value = [
+                'equipo' => $team,
+                'sede' => Sede::find($team->sede_id),
+            ];
+
+            array_push($valores,$value);
+
+        }
+        return view('equipos.equipoIndex', compact('valores'));
     }
 
     /**
@@ -32,7 +45,8 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        return view('equipos.equipoForm');
+        $sedes = Sede::all();
+        return view('equipos.equipoForm',compact('sedes'));
     }
 
     /**
@@ -43,22 +57,21 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-       
-        $faker = Faker::create('en_US');
+        $request->validate([
+            'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
+            'fundacion' => ['required'],
+            'sede_id' => ['required'],
+        ]);
 
-        #region Validar datos
-        $nombre_request = $request->input('nombre');
-        $fecha_creacion_request = $request->input('fecha_creacion');
-
-        $nombre = (empty($nombre_request)) ? $faker->city() : $nombre_request;
-        $fecha_creacion = (empty($fecha_creacion_request)) ? $faker->dateTimeBetween('-10 week', '+10 week') :  $fecha_creacion_request;
-        
-
-        #endregion
+        $nombre = $request->input('nombre');
+        $fundacion = $request->input('fundacion');
+        $nombre = $request->input('nombre');
+        $sede_id = $request->input('sede_id');
 
         $equipo = new Equipo();
         $equipo->nombre = $nombre;
-        $equipo->fecha_creacion = $fecha_creacion;
+        $equipo->fundacion = $fundacion;
+        $equipo->sede_id = $sede_id;
 
         if($request->hasfile('imagen')){
             $file = $request->file('imagen');
@@ -78,7 +91,6 @@ class EquipoController extends Controller
         }
 
         $equipo->save();
-    
         return redirect()->route('equipo.show',$equipo);
     }
 
@@ -90,13 +102,9 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        
-        $personas = Equipo::find($equipo->id)->people;
-
-        if(!empty($personas))
-            return view('equipos.equipo_personaShow', compact('equipo','personas'));
-        else
-            return view('equipos.equipoShow', compact('equipo'));
+        $personas = $equipo->persona;
+        $sede = Sede::find($equipo->sede_id);
+        return view('equipos.equipoShow', compact('equipo','personas','sede'));
     }
 
     /**
@@ -107,7 +115,8 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
-        return view('equipos.equipoForm', compact('equipo'));
+        $sedes = Sede::all();
+        return view('equipos.equipoForm', compact('equipo','sedes'));
     }
 
     /**
@@ -119,37 +128,40 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
+        $request->validate([
+            'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
+            'fundacion' => ['required'],
+            'sede_id' => ['required'],
+        ]);
 
-        #region Validar Datos
         $nombre_request = $request->input('nombre');
-        $fecha_creacion_request = $request->input('fecha_creacion');
+        $fundacion_request = $request->input('fundacion');
+        $sede_id_request = $request->input('sede_id');
+        $imagen_request = $request->input('imagen');
 
         $nombre = ($equipo->nombre != $nombre_request) ? $nombre_request: $equipo->nombre;
-        $fecha_creacion = ($equipo->fecha_creacion != $fecha_creacion_request) ? $fecha_creacion_request : $equipo->fecha_creacion;
-        $activo = $equipo->activo;
-        $imagen = $equipo->imagen;
+        $fundacion = ($equipo->fundacion != $fundacion_request) ? $fundacion_request : $equipo->fundacion;
+        $sede_id = ($equipo->sede_id != $sede_id_request) ? $sede_id_request : $equipo->sede_id;
 
-        #endregion
-
-        $equipo->nombre = $nombre;
-        $equipo->fecha_creacion = $fecha_creacion;
-
-        if($request->hasfile('imagen')){
+        if($request->hasfile('imagen') && $imagen_request != $equipo->imagen){
             $cadena = substr($equipo->imagen,1);
-            unlink($cadena);
+            if(file_exists($cadena))
+                unlink($cadena);
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/equipos/',$filename);
             $route = '/uploads/equipos/' . $filename;
-            $equipo->imagen = $route;
+            $imagen = $route;
+        }else{
+            $imagen = $equipo->imagen;
         }
 
         $array = [
-
-            'nombre' => $equipo->nombre,
-            'fecha_creacion' => $equipo->fecha_creacion,
-            'imagen' => $equipo->imagen,
+            'nombre' => $nombre,
+            'fundacion' => $fundacion,
+            'imagen' => $imagen,
+            'sede_id' => $sede_id,
         ];
 
         Equipo::where('id', $equipo->id)->update($array);
@@ -165,21 +177,24 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
+        $cadena = substr($equipo->imagen,1);
+        if(file_exists($cadena))
+            unlink($cadena);
         $equipo->delete();
         return redirect()->route('equipo.index');    
     }
 
     /**
      * 
-     * Creates and download a pdf file of all people
+     * Creates and download a pdf file of all teams
      * 
      */
     public function downloadPDF(){
 
-        $data = Equipo::all();
+        $equipos = Equipo::all();
         $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
-        view()->share('equipos',$data);
-        $pdf->loadView('pdfs.equipoPDF', $data);
+        view()->share('equipos',$equipos);
+        $pdf->loadView('pdfs.equipoPDF', $equipos);
         $name = time() . '_equipos.pdf';
         return $pdf->download($name);
     }
@@ -191,7 +206,8 @@ class EquipoController extends Controller
      */
     public function search()
     {
-        return view('equipos.equipoSearch');
+        $equipos = array();
+        return view('equipos.equipoSearch',compact('equipos'));
     }
 
     /**
@@ -205,8 +221,8 @@ class EquipoController extends Controller
         $identifier = $request->input('identifier');
 
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
-        $coincidencias = Equipo::where('nombre', 'regexp', $regex)->get();
-        return view('equipos.equipoCoincidences',compact('coincidencias'));
+        $equipos = Equipo::where('nombre', 'regexp', $regex)->get();
+        return view('equipos.equipoSearch',compact('equipos'));
     }
 
 }

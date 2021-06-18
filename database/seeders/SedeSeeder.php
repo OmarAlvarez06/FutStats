@@ -30,5 +30,7 @@ class SedeSeeder extends Seeder
         Sede::create(['nombre' => 'Bosque Escondido', 'ubicacion' => 'Anillo Perif. Nte. Manuel Gómez Morín 1467, Cantera Morada, La Palmita, 45150 Zapopan, Jal.','imagen' => '/uploads/sedes/Bosque_Escondido.jpg']);
         Sede::create(['nombre' => 'Valle Imperial', 'ubicacion' => 'Antiguo Camino a Copalita, Marcelino García Barragán, 45053 Nuevo México, Jal.','imagen' => '/uploads/sedes/Valle_Imperial.jpg']);
         Sede::create(['nombre' => 'Ejidal', 'ubicacion' => 'Calle Piedrera 13, Las Juntitas, 45590 San Pedro Tlaquepaque, Jal.','imagen' => '/uploads/sedes/Ejidal.jpg']);
+
+        \App\Models\Sede::factory(10)->create();
     }
 }

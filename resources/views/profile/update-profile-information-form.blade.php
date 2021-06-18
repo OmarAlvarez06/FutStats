@@ -24,7 +24,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-jet-label for="photo" value="{{ __('Photo') }}" />
+                <x-jet-label for="photo" value="{{ __('Foto') }}" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -59,12 +59,29 @@
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
+        <!-- UserName -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="username" value="{{ __('Nombre De Usuario') }}" />
+            <x-jet-input id="username" type="text" class="mt-1 block w-full" wire:model.defer="state.username" autocomplete="username" />
+            <x-jet-input-error for="username" class="mt-2" />
+        </div>
+
+        <!-- Rol -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="rol" value="{{ __('Rol') }}" />
+            <x-jet-input id="rol" type="text" class="mt-1 block w-full" wire:model.defer="state.rol" autocomplete="rol"  disabled/>
+            <x-jet-input-error for="rol" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Correo Electrónico') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        
+
     </x-slot>
 
     <x-slot name="actions">

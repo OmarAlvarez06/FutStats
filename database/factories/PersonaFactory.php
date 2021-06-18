@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Persona;
+use App\Models\Equipo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 
@@ -22,7 +23,7 @@ class PersonaFactory extends Factory
      */
     public function definition()
     {
-        $faker = Faker::create('es_PE');
+        $faker = Faker::create('es_ES');
         $tiempo = time();
 
         $url = 'https://loremflickr.com/400/400/people';
@@ -58,8 +59,6 @@ class PersonaFactory extends Factory
 
         }
 
-
-
         $img = 'public/uploads/personas/'.$tiempo.'.jpg';
         $route = '/uploads/personas/'.$tiempo.'.jpg';
         file_put_contents($img, file_get_contents($url));
@@ -78,7 +77,7 @@ class PersonaFactory extends Factory
             break;
         }
 
-        $helperSex =$faker->numberBetween(1,2);
+        $helperSex =$faker->numberBetween(1,3);
         $sex = 'F';
         switch($helperSex){
             case 1:
@@ -87,15 +86,19 @@ class PersonaFactory extends Factory
             case 2:
                 $sex = 'F';
             break;
+            case 3:
+                $sex = 'O';
+            break;
         }
 
+        $genero = ($sex == 'M') ? 'male' : 'female';
         return [
-            'nombre' => $faker->name(),
+            'nombre' => $faker->name($genero),
             'edad' => $faker->randomNumber(2,true),
             'sexo' => $sex,
             'rol' => $rol,
             'imagen' => $route,
-            'equipo_id' => $faker->numberBetween(1,20),
+            'equipo_id' => $faker->numberBetween(1,Equipo::count()),
         ];
     }
 }

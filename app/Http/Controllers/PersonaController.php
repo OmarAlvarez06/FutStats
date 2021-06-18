@@ -26,8 +26,20 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::get();
-        return view('personas.personaIndex', compact('personas'));
+        $people = Persona::get();
+        $valores = array();
+
+        foreach ($people as $person){
+            
+            $value = [
+                'persona' => $person,
+                'equipo' => Equipo::find($person->equipo_id),
+            ];
+
+            array_push($valores,$value);
+
+        }
+        return view('personas.personaIndex', compact('valores'));
     }
 
     /**
@@ -50,31 +62,26 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
 
-        $faker = Faker::create('en_PE');
+        $request->validate([
+            'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
+            'edad' => ['required','integer','min:18','max:100'],
+            'sexo' => ['required'],
+            'rol' => ['required'],
+            'equipo_id' => ['required'],
+        ]);
 
-         #region Validar datos
-         $nombre_request = $request->input('nombre');
-         $edad_request = $request->input('edad');
-         $sexo_request = $request->input('sexo');
-         $rol_request = $request->input('rol');
-         $equipo_request = $request->input('equipo');
-
-         $nombre = (empty($nombre_request)) ? $faker->name() : $nombre_request;
-         $edad = (empty($edad_request)) ? $faker->numberBetween(18,70) :  $edad_request;
-         $sexo = (empty($sexo_request)) ? 'F' : $sexo_request;
-         $rol = (empty($rol_request)) ? 'Jugador' : $rol_request;
-         $equiposCount = count(Equipo::all());
-         $equipo = (empty($equipo_request)) ? $faker->numberBetween(1,$equiposCount) : $equipo_request;
-         
-
-         #endregion
+         $nombre = $request->input('nombre');
+         $edad = $request->input('edad');
+         $sexo = $request->input('sexo');
+         $rol = $request->input('rol');
+         $equipo_id = $request->input('equipo_id');
 
         $persona = new Persona();
         $persona->nombre = $nombre;
         $persona->edad = $edad;
         $persona->sexo = $sexo;
         $persona->rol = $rol;
-        $persona->equipo_id = $equipo;
+        $persona->equipo_id = $equipo_id;
 
         if($request->hasfile('imagen')){
             $file = $request->file('imagen');
@@ -94,8 +101,6 @@ class PersonaController extends Controller
         }
 
         $persona->save();
-
-
         return redirect()->route('persona.show',$persona);
 
     }
@@ -133,31 +138,39 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
+        $request->validate([
+            'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
+            'edad' => ['required','integer','min:18','max:100'],
+            'sexo' => ['required'],
+            'rol' => ['required'],
+            'equipo_id' => ['required'],
+        ]);
 
-        #region Validar Datos
         $nombre_request = $request->input('nombre');
         $edad_request = $request->input('edad');
         $sexo_request = $request->input('sexo');
         $rol_request = $request->input('rol');
-        $equipo_request = $request->input('equipo');
+        $equipo_id_request = $request->input('equipo_id');
+        $imagen_request = $request->input('imagen');
 
         $nombre = ($persona->nombre != $nombre_request) ? $nombre_request: $persona->nombre;
         $edad = ($persona->edad != $edad_request) ? $edad_request : $persona->edad;
         $sexo = ($persona->sexo != $sexo_request) ? $sexo_request : $persona->sexo;
         $rol = ($persona->rol != $rol_request) ? $rol_request : $persona->rol;
-        $equipo = ($persona->equipo_id != $equipo_request) ? $equipo_request : $persona->equipo_id;
+        $equipo_id = ($persona->equipo_id != $equipo_id_request) ? $equipo_id_request : $persona->equipo_id;
         $imagen = $persona->imagen;
 
-        #endregion
-
-        if($request->hasfile('imagen')){
+        if($request->hasfile('imagen') && $imagen_request != $persona->imagen){
             $cadena = substr($imagen,1);
-            unlink($cadena);
+            if(file_exists($cadena))
+                unlink($cadena);
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('uploads/personas/',$filename);
             $imagen = '/uploads/personas/' . $filename;
+        }else{
+            $imagen = $persona->imagen;
         }
 
         $array = [
@@ -166,7 +179,7 @@ class PersonaController extends Controller
             'sexo' => $sexo,
             'rol' => $rol,
             'imagen' => $imagen,
-            'equipo_id' => $equipo,
+            'equipo_id' => $equipo_id,
         ];
 
         Persona::where('id', $persona->id)->update($array);
@@ -183,6 +196,9 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
+        $cadena = substr($persona->imagen,1);
+        if(file_exists($cadena))
+            unlink($cadena);
         $persona->delete();
         return redirect()->route('persona.index');
     }
@@ -209,6 +225,7 @@ class PersonaController extends Controller
      */
     public function search()
     {
+        $personas = array();
         return view('personas.personaSearch');
     }
 
@@ -222,8 +239,8 @@ class PersonaController extends Controller
     {
         $identifier = $request->input('identifier');
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
-        $coincidencias = Persona::where('nombre', 'regexp', $regex)->get();
-        return view('personas.personaCoincidences',compact('coincidencias'));
+        $personas = Persona::where('nombre', 'regexp', $regex)->get();
+        return view('personas.personaSearch',compact('personas'));
         
     }
 

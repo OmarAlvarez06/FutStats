@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sede;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
@@ -43,19 +44,14 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        // use the factory to create a Faker\Generator instance
-        $faker = Faker::create('en_US');
+        $request->validate([
+            'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100','unique:sedes,nombre'],
+            'ubicacion' => ['required','string','min:5','max:255'],
+        ]);
 
-        #region Validar datos
-        $nombre_request = $request->input('nombre');
-        $ubicacion_request = $request->input('ubicacion');
-
-        $nombre = (empty($nombre_request)) ? $faker->streetName() : $nombre_request;
-        $ubicacion = (empty($ubicacion_request)) ? ($faker->address()) :  $ubicacion_request;
+        $nombre = $request->input('nombre');
+        $ubicacion = $request->input('ubicacion');
         
-
-        #endregion
-
         $sede = new Sede();
         $sede->nombre = $nombre;
         $sede->ubicacion = $ubicacion;
@@ -90,7 +86,8 @@ class SedeController extends Controller
      */
     public function show(Sede $sede)
     {
-        return view('sedes.sedeShow', compact('sede'));
+        $equipos = $sede->equipo;
+        return view('sedes.sedeShow', compact('sede','equipos'));
     }
 
     /**
@@ -116,7 +113,8 @@ class SedeController extends Controller
      */
     public function search()
     {
-        return view('sedes.sedeSearch');
+        $sedes = array();
+        return view('sedes.sedeSearch',compact('sedes'));
     }
 
     /**
@@ -128,10 +126,9 @@ class SedeController extends Controller
     public function gets(Request $request)
     {
         $identifier = $request->input('identifier');
-
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
-        $coincidencias = Sede::where('nombre', 'regexp', $regex)->get();
-        return view('sedes.sedeCoincidences',compact('coincidencias'));
+        $sedes = Sede::where('nombre', 'regexp', $regex)->get();
+        return view('sedes.sedeSearch',compact('sedes'));
     }
 
 }

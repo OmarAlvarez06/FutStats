@@ -89,4 +89,15 @@
     'normal' => $fontDir . '/merriweather_normal_b45f57f6c113a1566ea138bd8059081d',
     'bold' => $fontDir . '/merriweather_bold_017c9138806047a950f748eaf92f7ff3',
   ),
+  'material icons' => array(
+    'normal' => $fontDir . '/material_icons_normal_e93e89bc460f574f0bc2a338085fa816',
+  ),
+  'nunito' => array(
+    'normal' => $fontDir . '/nunito_normal_46b9b3b48cc3ddbae60da82f1c1c5d29',
+    '600' => $fontDir . '/nunito_600_0f08625611c8a9cf8d1f0e5a4e3b8e39',
+    'bold' => $fontDir . '/nunito_bold_23f6d1b3589b1fb8a1a0052cb8778ab4',
+  ),
+  'fontawesome' => array(
+    'normal' => $fontDir . '/fontawesome_normal_a07c54af815ea54af1b5e5aa13cc5f8b',
+  ),
 ) ?>

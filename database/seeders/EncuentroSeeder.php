@@ -13,6 +13,6 @@ class EncuentroSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Encuentro::factory(10)->create();
+        \App\Models\Encuentro::factory(30)->create();
     }
 }

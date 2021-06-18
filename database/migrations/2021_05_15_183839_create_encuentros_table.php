@@ -17,10 +17,9 @@ class CreateEncuentrosTable extends Migration
             $table->id();
             $table->foreignId('equipo_local_id')->references('id')->on('equipos');
             $table->foreignId('equipo_visitante_id')->references('id')->on('equipos');
-            $table->foreignId('sede_id')->references('id')->on('sedes');
-            $table->longText('observaciones');
-            $table->datetime('fecha_hora');
-            $table->string('resultado');
+            $table->datetime('fecha_hora')->unique();
+            $table->integer('goles_local');
+            $table->integer('goles_visitante');
             $table->timestamps();
         });
     }

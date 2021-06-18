@@ -15,9 +15,10 @@ class CreateEquiposTable extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->datetime('fecha_creacion');
+            $table->string('nombre',100);
+            $table->date('fundacion');
             $table->mediumText('imagen');
+            $table->foreignId('sede_id')->references('id')->on('sedes');
             $table->timestamps();
         });
     }

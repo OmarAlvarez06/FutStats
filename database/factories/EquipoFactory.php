@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Equipo;
+use App\Models\Sede;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EquipoFactory extends Factory
@@ -21,6 +22,7 @@ class EquipoFactory extends Factory
      */
     public function definition()
     {
+        
         $tiempo = time();
         $url = 'https://loremflickr.com/400/400/animal';
         $url_aux = $this->faker->numberBetween(1,7);
@@ -54,8 +56,9 @@ class EquipoFactory extends Factory
 
         return [
             'nombre' => $this->faker->city(),
-            'fecha_creacion' => $this->faker->dateTimeBetween('-10 week', '+10 week'),
-            'imagen' => $route
+            'fundacion' => $this->faker->date(),
+            'imagen' => $route,
+            'sede_id' => $this->faker->numberBetween(1,Sede::count()),
         ];
     }
 

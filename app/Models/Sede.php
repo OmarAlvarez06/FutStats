@@ -10,6 +10,9 @@ class Sede extends Model
     use HasFactory;
 
     protected $fillable = ['nombre','ubicacion','imagen'];
-    public $timestamps = false;
 
+    public function equipo()
+    {
+        return $this->hasMany(Equipo::class);
+    }
 }
