@@ -3,8 +3,8 @@
 	<div class="menu">
 		<a class="link" href="/equipo/create">Registrar Equipo</a>
 		<a class="link" href="/equipo-search">Buscar Equipo</a>
-		<a class="link" href="/equipo">Mostrar Equipos</a>
 		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
+		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
 	</div>
 
 	<div class="container mx-auto px-4 sm:px-8 main">

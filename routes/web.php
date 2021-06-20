@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetalleEncuentroController;
 use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
@@ -40,7 +41,6 @@ Route::get ('/persona-search',[PersonaController::class,'search']);
 Route::get ('/equipo-search',[EquipoController::class,'search']);
 Route::get ('/sede-search',[SedeController::class,'search']);
 Route::get ('/encuentro-search-id',[EncuentroController::class,'search_id']);
-Route::get ('/encuentro-search-team',[EncuentroController::class,'search_team']);
 #endregion
 
 #region get routes
@@ -48,7 +48,6 @@ Route::get ('/persona-get',[PersonaController::class,'gets']);
 Route::get ('/equipo-get',[EquipoController::class,'gets']);
 Route::get ('/sede-get',[SedeController::class,'gets']);
 Route::get ('/encuentro-get-id',[EncuentroController::class,'gets_id']);
-Route::get ('/encuentro-get-team',[EncuentroController::class,'gets_team']);
 #endregion
 
 #region pdf routes
@@ -57,4 +56,15 @@ Route::get('/equipo-pdf',[EquipoController::class,'downloadPDF']);
 Route::get('/sede-pdf',[SedeController::class,'downloadPDF']);
 Route::get('/encuentro-pdf',[EncuentroController::class,'downloadPDF']);
 #endregion
+
+#region excel routes
+Route::get('/persona-excel',[PersonaController::class,'downloadExcel']);
+Route::get('/equipo-excel',[EquipoController::class,'downloadExcel']);
+Route::get('/sede-excel',[SedeController::class,'downloadExcel']);
+Route::get('/encuentro-excel',[EncuentroController::class,'downloadExcel']);
+#endregion
+
+
+Route::get('detalle-encuentro/create/{encuentro}', [DetalleEncuentroController::class,'create']);
+Route::get('detalle-encuentro/store', [DetalleEncuentroController::class,'store']);
 

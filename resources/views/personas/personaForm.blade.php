@@ -1,10 +1,10 @@
 <x-app-layout>
-	<h1 class="display-4 text-center">Registrar/Editar Persona</h1>
     <br>
 	<div class="menu">
 		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
 		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
 	</div>
 
 	@if(isset($persona))

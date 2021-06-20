@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SedesExport;
 use App\Models\Sede;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
@@ -97,13 +98,16 @@ class SedeController extends Controller
      */
     public function downloadPDF(){
 
-        $data = Sede::all();
-        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
-        view()->share('sedes',$data);
-        $pdf->loadView('pdfs.sedePDF', $data);
-        $pdf->setPaper('a4', 'landscape');
-        $name = time() . '_sedes.pdf';
-        return $pdf->download($name);
+        $sedes = Sede::all();
+        $pdf = app('dompdf.wrapper');
+        view()->share('sedes',$sedes);
+        $pdf->loadView('pdfs.pdfSede', $sedes);
+        return $pdf->download('sedes.pdf');
+    }
+
+    public function downloadExcel(){
+
+        return new SedesExport();
     }
 
      /**
@@ -118,7 +122,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Gets a created Equipo in storage.
+     * Gets a created Sede in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

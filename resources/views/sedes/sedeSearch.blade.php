@@ -4,6 +4,7 @@
         <a class="link" href="/sede/create">Registrar Sede</a>
 		<a class="link" href="/sede">Mostrar Sedes</a>
         <a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
+        <a class="link" href="/sede-excel">Descargar Excel Sedes</a>
 	</div>
 		
     <div class="main">
@@ -42,7 +43,6 @@
                 <br><br>
                 
             @endforeach
-
         @endif
 
 	</div>

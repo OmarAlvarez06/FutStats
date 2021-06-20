@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PersonasExport;
 use App\Models\Persona;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
@@ -209,13 +210,28 @@ class PersonaController extends Controller
      * 
      */
     public function downloadPDF(){
+        $people = Persona::get();
+        $valores = array();
 
-        $data = Persona::all();
-        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
-        view()->share('personas',$data);
-        $pdf->loadView('pdfs.personaPDF', $data);
-        $name = time() . '_personas.pdf';
-        return $pdf->download($name);
+        foreach ($people as $person){
+            
+            $value = [
+                'persona' => $person,
+                'equipo' => Equipo::find($person->equipo_id),
+            ];
+
+            array_push($valores,$value);
+
+        }
+        $pdf = app('dompdf.wrapper');
+        view()->share('valores',$valores);
+        $pdf->loadView('pdfs.pdfPersona', $valores);
+        return $pdf->download('personas.pdf');
+    }
+
+    public function downloadExcel(){
+
+        return new PersonasExport();
     }
 
     /**

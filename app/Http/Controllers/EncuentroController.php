@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EncuentrosExport;
+use App\Models\DetalleEncuentro;
 use App\Models\Equipo;
 use App\Models\Sede;
 use App\Models\Encuentro;
 use App\Models\Persona;
-use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade;
-use Barryvdh\DomPDF\PDF;
-use Faker\Factory as Faker;
-use DB;
-use App\Quotation;
 
 class EncuentroController extends Controller
 {
@@ -58,8 +54,7 @@ class EncuentroController extends Controller
     public function create()
     {
         $equipos = Equipo::all();
-        $sedes = Sede::all();
-        return view('encuentros.encuentroForm',compact('equipos','sedes'));
+        return view('encuentros.encuentroForm',compact('equipos'));
     }
 
     /**
@@ -70,47 +65,28 @@ class EncuentroController extends Controller
      */
     public function store(Request $request)
     {
-        $faker = Faker::create('en_US');
 
-        $equipo_local_id_request = $request->input('equipo_local');
-        $equipo_visitante_id_request = $request->input('equipo_visitante');
-        $sede_id_request = $request->input('sede');
-        $goles_local_request = $request->input('goles_local');
-        $goles_visitante_request = $request->input('goles_visitante');
-        $observaciones_request = $request->input('observaciones');
-        $fecha_hora_request = $request->input('fecha_hora');
+        $request->validate([
+            'equipo_local_id' => ['required'],
+            'equipo_visitante_id' => ['required','different:equipo_local_id'],
+            'fecha_hora' => ['required','unique:encuentros,fecha_hora'],
+            'goles_local' => ['required','min:0','max:100'],
+            'goles_visitante' => ['required','min:0','max:100'],
 
-        $equiposCount = count(Equipo::all());
-        $sedeCount = count(Sede::all());
+        ]);
 
-        $equipo_local_id = (empty($equipo_local_id_request)) ? $faker->numberBetween(1,$equiposCount) : $equipo_local_id_request;
-
-        $equipo_visitante_id = $equipo_local_id;
-        if(empty($equipo_visitante_id_request)){
-            while($equipo_visitante_id == $equipo_local_id)
-                $equipo_visitante_id = $faker->numberBetween(1,$equiposCount);
-        }else{
-            $equipo_visitante_id = $equipo_visitante_id_request;
-            while($equipo_visitante_id == $equipo_local_id)
-                $equipo_visitante_id = $faker->numberBetween(1,$equiposCount);
-        }
-        
-        $sede_id = (empty($sede_id_request)) ? $faker->numberBetween(1,$sedeCount) : $sede_id_request;
-        $goles_local = (empty($goles_local_request)) ? $faker->numberBetween(0,10) : $goles_local_request;
-        $goles_visitante = (empty($goles_visitante_request)) ? $faker->numberBetween(0,10) : $goles_visitante_request;
-        $observaciones = (empty($observaciones_request)) ? $faker->paragraph() : $observaciones_request;
-        $fecha_hora = (empty($fecha_hora_request)) ? $faker->dateTimeBetween('-1 week', '+5 week') : $fecha_hora_request;
-        
-        $resultado = $goles_local . ' - ' . $goles_visitante;
-
+        $equipo_local_id = $request->input('equipo_local_id');
+        $equipo_visitante_id = $request->input('equipo_visitante_id');
+        $goles_local = $request->input('goles_local');
+        $goles_visitante = $request->input('goles_visitante');
+        $fecha_hora = $request->input('fecha_hora');
 
         $encuentro = new Encuentro();
         $encuentro->equipo_local_id = $equipo_local_id; 
-        $encuentro->equipo_visitante_id = $equipo_visitante_id; 
-        $encuentro->sede_id = $sede_id; 
-        $encuentro->resultado = $resultado; 
-        $encuentro->fecha_hora = $fecha_hora; 
-        $encuentro->observaciones = $observaciones;         
+        $encuentro->equipo_visitante_id = $equipo_visitante_id;  
+        $encuentro->fecha_hora = $fecha_hora;
+        $encuentro->goles_local = $goles_local;
+        $encuentro->goles_visitante = $goles_visitante;        
 
         $encuentro->save();
 
@@ -128,24 +104,24 @@ class EncuentroController extends Controller
         $equipo_local = Equipo::find($encuentro->equipo_local_id);
         $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
         $sede = Sede::find($equipo_local->sede_id);
-        $matchs = PersonaEncuentro::where('encuentro_id',$encuentro->id)->get();
+        $matchs = DetalleEncuentro::where('encuentro_id',$encuentro->id)->get();
 
-        $persona_encuentros = array();
+        $detalle_encuentros = array();
 
-        foreach($matchs as $persona_encuentro){
+        foreach($matchs as $detalle_encuentro){
 
-            $persona = Persona::find($persona_encuentro->persona_id);
+            $persona = Persona::find($detalle_encuentro->persona_id);
 
             $dato = [
                 'persona' => $persona,
-                'persona_encuentro' => $persona_encuentro,
+                'detalle_encuentro' => $detalle_encuentro,
             ];
 
-            array_push($persona_encuentros,$dato);
+            array_push($detalle_encuentros,$dato);
 
         }
 
-        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','persona_encuentros'));
+        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','detalle_encuentros'));
     }
 
     /**
@@ -157,28 +133,34 @@ class EncuentroController extends Controller
 
         $matchs = Encuentro::all();
 
-        $data = array();
+        $encuentros = array();
 
         foreach($matchs as $encuentro){
 
             $equipo_local = Equipo::find($encuentro->equipo_local_id);
             $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
+            $sede = Sede::find($equipo_local->sede_id);
 
             $dato = [
                 'encuentro' => $encuentro,
                 'equipo_local' => $equipo_local,
                 'equipo_visitante' => $equipo_visitante,
+                'sede' => $sede,
             ];
 
-            array_push($data,$dato);
+            array_push($encuentros,$dato);
 
         }
-        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
-        ;
-        view()->share('encuentros',$data);
-        $pdf->loadView('pdfs.encuentroPDF', $data);
-        $name = time() . '_encuentros.pdf';
-        return $pdf->download($name);
+
+        $pdf = app('dompdf.wrapper');
+        view()->share('encuentros',$encuentros);
+        $pdf->loadView('pdfs.pdfEncuentro', $encuentros);
+        return $pdf->download('encuentros.pdf');
+    }
+
+    public function downloadExcel(){
+
+        return new EncuentrosExport();
     }
 
     /**
@@ -188,20 +170,12 @@ class EncuentroController extends Controller
      */
     public function search_id()
     {
-        return view('encuentros.encuentroSearchID');
+        $equipo_local = array();
+        $equipo_visitante = array();
+        $encuentro = array();
+        return view('encuentros.encuentroSearchID',compact('encuentro','equipo_local','equipo_visitante'));
     }
-
-
-    /**
-     * Display a view to find a Encuentro by team.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search_team()
-    {
-        return view('encuentros.encuentroSearchTeam');
-    }
-
+    
     /**
      * Gets a created Encuentro in storage by id.
      *
@@ -210,50 +184,14 @@ class EncuentroController extends Controller
      */
     public function gets_id(Request $request)
     {
-        $id_buscar = $request->input('id_buscar');
-        $coincidencia = Encuentro::find($id_buscar);
-        if(!empty($coincidencia)){
-            $equipo_local = Equipo::find($coincidencia->equipo_local_id);
-            $equipo_visitante = Equipo::find($coincidencia->equipo_visitante_id);
-            $sede = Sede::find($coincidencia->sede_id);
+        $id_buscar = $request->input('identifier');
+        $encuentro = Encuentro::find($id_buscar);
 
-            return view('encuentros.encuentroCoincidence',compact('coincidencia','equipo_local','equipo_visitante','sede'));
-        }else{
-            return view('encuentros.encuentroNoCoincidence');
-        }
+        $equipo_local =  (empty($encuentro)) ? array() : Equipo::find($encuentro->equipo_local_id);
+        $equipo_visitante = (empty($encuentro)) ?  array() : Equipo::find($encuentro->equipo_visitante_id);
         
-    }
 
-    /**
-     * Gets a created Encuentro in storage by team.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function gets_team(Request $request)
-    {
-        $id_buscar = $request->input('id_buscar');
-        $coincidencias = Encuentro::where('equipo_local_id', $id_buscar)->orWhere('equipo_visitante_id', $id_buscar)->get();
-
-        $encuentros = array();
-
-        foreach($coincidencias as $coincidencia){
-
-
-            $dato = [
-                
-                'encuentro' => $coincidencia,
-                'equipo_local' => Equipo::find($coincidencia->equipo_local_id),
-                'equipo_visitante' => Equipo::find($coincidencia->equipo_visitante_id),
-                'sede' => Sede::find($coincidencia->sede_id),
-
-            ];
-
-            array_push($encuentros,$dato);
-        }
-
-
-        return view('encuentros.encuentroCoincidences',compact('encuentros'));
+        return view('encuentros.encuentroSearchID',compact('encuentro','equipo_local','equipo_visitante'));
         
     }
 

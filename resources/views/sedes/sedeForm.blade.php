@@ -1,10 +1,10 @@
 <x-app-layout>
     <br>
-
     <div class="menu">
 		<a class="link" href="/sede">Mostrar Sedes</a>
 		<a class="link" href="/sede-search">Buscar Sedes</a>
 		<a class="link" href="/sede-pdf">Descargar PDF Sede</a>
+		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>
 	</div>
 
     <form action="{{ route('sede.store')}}" method="POST" enctype="multipart/form-data">

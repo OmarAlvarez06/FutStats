@@ -5,6 +5,7 @@
 		<a class="link" href="/persona-search">Buscar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
 		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
 		<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
 		<form action="{{ route('persona.destroy', $persona) }}" method="POST">
 			@csrf

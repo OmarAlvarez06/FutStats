@@ -59,13 +59,6 @@
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
-        <!-- UserName -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="username" value="{{ __('Nombre De Usuario') }}" />
-            <x-jet-input id="username" type="text" class="mt-1 block w-full" wire:model.defer="state.username" autocomplete="username" />
-            <x-jet-input-error for="username" class="mt-2" />
-        </div>
-
         <!-- Rol -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="rol" value="{{ __('Rol') }}" />

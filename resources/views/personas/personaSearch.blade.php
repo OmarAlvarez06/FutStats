@@ -4,6 +4,7 @@
         <a class="link" href="/persona/create">Registrar Persona</a>
 		<a class="link" href="/persona">Mostrar Personas</a>
         <a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+        
 	</div>
 		
 	<div class="main">
@@ -42,7 +43,6 @@
                 <br><br>
                 
             @endforeach
-
         @endif
 
 	</div>

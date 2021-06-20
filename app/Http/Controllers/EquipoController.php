@@ -8,7 +8,8 @@ use App\Models\Sede;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
-use Faker\Factory as Faker;
+use App\Exports\EquiposExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EquipoController extends Controller
 {
@@ -190,13 +191,29 @@ class EquipoController extends Controller
      * 
      */
     public function downloadPDF(){
+        $teams = Equipo::get();
+        $valores = array();
 
-        $equipos = Equipo::all();
-        $pdf = app('dompdf.wrapper')->setPaper('a4', 'landscape');
-        view()->share('equipos',$equipos);
-        $pdf->loadView('pdfs.equipoPDF', $equipos);
-        $name = time() . '_equipos.pdf';
-        return $pdf->download($name);
+        foreach ($teams as $team){
+            
+            $value = [
+                'equipo' => $team,
+                'sede' => Sede::find($team->sede_id),
+            ];
+
+            array_push($valores,$value);
+
+        }
+        $pdf = app('dompdf.wrapper');
+        view()->share('valores',$valores);
+        $pdf->loadView('pdfs.pdfEquipo', $valores);
+        return $pdf->download('equipos.pdf');
+
+    }
+
+    public function downloadExcel(){
+
+        return new EquiposExport();
     }
 
     /**

@@ -2,10 +2,9 @@
 	<br>
 	<div class="menu">
 		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
-		<a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
-        <a class="link" href="/encuentro-search-team">Buscar Encuentros Por Equipo</a>
 		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
+		<a class="link" href="/encuentro-excel">Descargar Excel Encuentros</a>
 	</div>
 
 	<div class="container mx-auto px-4 sm:px-8 main">

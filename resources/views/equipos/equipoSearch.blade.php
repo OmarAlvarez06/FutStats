@@ -4,6 +4,7 @@
         <a class="link" href="/equipo/create">Registrar Equipo</a>
 		<a class="link" href="/equipo">Mostrar Equipos</a>
         <a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
+        <a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
 	</div>
 		
 	<div class="main">
@@ -42,7 +43,6 @@
                 <br><br>
                 
             @endforeach
-
         @endif
 
 	</div>
