@@ -87,7 +87,7 @@ class SedeController extends Controller
      */
     public function show(Sede $sede)
     {
-        $equipos = $sede->equipo;
+        $equipos = $sede->equipos;
         return view('sedes.sedeShow', compact('sede','equipos'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ class Sede extends Model
 
     protected $fillable = ['nombre','ubicacion','imagen'];
 
-    public function equipo()
+    public function equipos()
     {
         return $this->hasMany(Equipo::class);
     }

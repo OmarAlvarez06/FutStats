@@ -34,7 +34,7 @@
                                 <img class="w-12 h-12 rounded-full"src="{{$equipo->imagen}}" alt="Foto Del Equipo"/>
                                 <div class="ml-4">
                                     <a class="font-bold text-black hover:text-red-500 whitespace-no-wrap" href="{{route('equipo.show',$equipo)}}">{{$equipo->nombre}}</p>
-                                    <p class="text-sm text-gray-700 mt-1">{{$equipo->fundacion}}</p>
+                                    <a class="text-sm text-gray-700 mt-1 hover:text-red-500 whitespace-no-wrap" href="{{route('sede.show',$equipo->sede)}}">{{$equipo->sede->nombre}}</a>
                                 </div>
                             </div>
                         </div>

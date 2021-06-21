@@ -35,7 +35,7 @@
 								
 								<div class="flex items-center py-6">
 									<div class="mr-4 flex-none rounded-xl border overflow-hidden">
-										<img class="object-cover" id="openedImage" src="{{ $sede->imagen ?? '' }}" alt="Imagen Subida">
+										<img class="object-cover" id="openedImage" src="{{ old('imagen') ?? $sede->imagen ?? '' }}" alt="Imagen Subida">
 									</div>
 									<label class="cursor-pointer ">
 										<span class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Subir Imagen</span>
@@ -46,12 +46,12 @@
 
 								<div class="w-full flex flex-col mb-3">
                                     <label for ="nombre" class="font-semibold text-gray-600 py-2">Nombre De La Sede<abbr title="required">*</abbr></label>
-                                    <input name="nombre" value="{{ $sede->nombre ?? '' }}" placeholder="Nombre De La Sede" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" id="nombre" min="5" max="100">
+                                    <input name="nombre" value="{{ old('nombre') ?? $sede->nombre ?? '' }}" placeholder="Nombre De La Sede" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" id="nombre" min="5" max="100">
                                     <p class="text-red text-xs hidden">Por Favor Rellene Este Campo</p>
 								</div>
                                 <div class="w-full flex flex-col mb-3">
                                     <label for="ubicacion" class="font-semibold text-gray-600 py-2">Ubicación<abbr title="required">*</abbr></label>
-                                    <input name="ubicacion" value="{{ $sede->ubicacion ?? '' }}" id="ubicacion" placeholder="Ubicación De La Sede" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text">
+                                    <input name="ubicacion" value="{{ old('ubicacion') ?? $sede->ubicacion ?? '' }}" id="ubicacion" placeholder="Ubicación De La Sede" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text">
                                     <p class="text-red text-xs hidden">Por Favor Rellene Este Campo</p>
                                 </div>
 

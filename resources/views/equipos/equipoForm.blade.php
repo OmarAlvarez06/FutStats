@@ -40,7 +40,7 @@
 							
 							<div class="flex items-center py-6">
 								<div class="mr-4 flex-none rounded-xl border overflow-hidden">
-									<img class="object-cover" id="openedImage" src="{{ $equipo->imagen ?? '' }}" alt="Logo Subido">
+									<img class="object-cover" id="openedImage" src="{{old('imagen') ?? $equipo->imagen ?? '' }}" alt="Logo Subido">
 								</div>
 								<label class="cursor-pointer ">
 									<span class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Subir Imagen</span>
@@ -52,12 +52,12 @@
 							<div class="md:flex flex-row md:space-x-4 w-full text-xs">
 								<div class="mb-3 space-y-2 w-full text-xs">
 									<label for ="nombre" class="font-semibold text-gray-600 py-2">Nombre Del Equipo<abbr title="required">*</abbr></label>
-									<input name="nombre" value="{{ $equipo->nombre ?? '' }}" placeholder="Nombre Del Equipo" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" id="nombre">
+									<input name="nombre" value="{{old('nombre') ?? $equipo->nombre ?? '' }}" placeholder="Nombre Del Equipo" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" id="nombre">
 									<p class="text-red text-xs hidden">Por Favor Rellene Este Campo</p>
 								</div>
 								<div class="mb-3 space-y-2 w-full text-xs">
 									<label for="fundacion" class="font-semibold text-gray-600 py-2">Fundación<abbr title="required">*</abbr></label>
-									<input name="fundacion" value="{{ $equipo->fundacion ?? '' }}" id="fundacion" placeholder="Fecha De La Fundación Del Equipo" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="date">
+									<input name="fundacion" value="{{old('fundacion') ?? $equipo->fundacion ?? '' }}" id="fundacion" placeholder="Fecha De La Fundación Del Equipo" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="date">
 									<p class="text-red text-xs hidden">Por Favor Rellene Este Campo</p>
 								</div>
 							</div>

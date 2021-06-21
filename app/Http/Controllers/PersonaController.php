@@ -27,20 +27,8 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $people = Persona::get();
-        $valores = array();
-
-        foreach ($people as $person){
-            
-            $value = [
-                'persona' => $person,
-                'equipo' => Equipo::find($person->equipo_id),
-            ];
-
-            array_push($valores,$value);
-
-        }
-        return view('personas.personaIndex', compact('valores'));
+        $personas = Persona::all();
+        return view('personas.personaIndex', compact('personas'));
     }
 
     /**
@@ -71,11 +59,11 @@ class PersonaController extends Controller
             'equipo_id' => ['required'],
         ]);
 
-         $nombre = $request->input('nombre');
-         $edad = $request->input('edad');
-         $sexo = $request->input('sexo');
-         $rol = $request->input('rol');
-         $equipo_id = $request->input('equipo_id');
+        $nombre = $request->input('nombre');
+        $edad = $request->input('edad');
+        $sexo = $request->input('sexo');
+        $rol = $request->input('rol');
+        $equipo_id = $request->input('equipo_id');
 
         $persona = new Persona();
         $persona->nombre = $nombre;
@@ -114,8 +102,7 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-        $equipo = Equipo::find($persona->equipo_id);
-        return view('personas.personaShow', compact('persona','equipo'));
+        return view('personas.personaShow', compact('persona'));
     }
 
     /**
@@ -210,22 +197,10 @@ class PersonaController extends Controller
      * 
      */
     public function downloadPDF(){
-        $people = Persona::get();
-        $valores = array();
-
-        foreach ($people as $person){
-            
-            $value = [
-                'persona' => $person,
-                'equipo' => Equipo::find($person->equipo_id),
-            ];
-
-            array_push($valores,$value);
-
-        }
+        $personas = Persona::all();
         $pdf = app('dompdf.wrapper');
-        view()->share('valores',$valores);
-        $pdf->loadView('pdfs.pdfPersona', $valores);
+        view()->share('personas',$personas);
+        $pdf->loadView('pdfs.pdfPersona', $personas);
         return $pdf->download('personas.pdf');
     }
 
@@ -242,7 +217,7 @@ class PersonaController extends Controller
     public function search()
     {
         $personas = array();
-        return view('personas.personaSearch');
+        return view('personas.personaSearch',compact('personas'));
     }
 
     /**

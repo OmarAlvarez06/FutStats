@@ -29,41 +29,41 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($valores as $valor)
+					@foreach ($equipos as $equipo)
 					<tr>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-							<p class="text-gray-900 whitespace-no-wrap">{{$valor['equipo']->id}}</p>
+							<p class="text-gray-900 whitespace-no-wrap">{{$equipo->id}}</p>
 						</td>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 							<div class="flex items-center">
 								<div class="flex-shrink-0 w-10 h-10">
-									<img class="w-full h-full rounded-full" src="{{public_path($valor['equipo']->imagen)}}" alt="Imagen Del Equipo" />
+									<img class="w-full h-full rounded-full" src="{{public_path($equipo->imagen)}}" alt="Imagen Del Equipo" />
 								</div>
 
 								<div class="ml-3">
-									<a href="{{route('equipo.show', $valor['equipo'])}}" class="text-black hover:text-red-500 whitespace-no-wrap">
-										{{$valor['equipo']->nombre}}
+									<a href="{{route('equipo.show', $equipo)}}" class="text-black hover:text-red-500 whitespace-no-wrap">
+										{{$equipo->nombre}}
 									</a>
 								</div>
 							</div>
 						</td>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-							<p class="text-gray-900 whitespace-no-wrap">{{$valor['equipo']->fundacion}}</p>
+							<p class="text-gray-900 whitespace-no-wrap">{{$equipo->fundacion}}</p>
 						</td>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-							<p class="text-gray-900 whitespace-no-wrap">{{$valor['equipo']->created_at}}</p>
+							<p class="text-gray-900 whitespace-no-wrap">{{$equipo->created_at}}</p>
 						</td>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 							<div class="flex items-center">
 								<div class="flex-shrink-0 w-10 h-10">
 									<img class="w-full h-full rounded-full"
-										src="{{public_path($valor['sede']->imagen)}}"
+										src="{{public_path($equipo->sede->imagen)}}"
 										alt="Imagen Del Equipo" />
 								</div>
 
 								<div class="ml-3">
-									<a href="{{route('sede.show', $valor['sede'])}}" class="text-black hover:text-red-500 whitespace-no-wrap">
-										{{$valor['sede']->nombre}}
+									<a href="{{route('sede.show', $equipo->sede)}}" class="text-black hover:text-red-500 whitespace-no-wrap">
+										{{$equipo->sede->nombre}}
 									</a>
 								</div>
 							</div>

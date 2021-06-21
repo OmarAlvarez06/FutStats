@@ -39,47 +39,47 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($valores as $valor)
+						@foreach ($personas as $persona)
 						<tr>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								<p class="text-gray-900 whitespace-no-wrap">{{$valor['persona']->id}}</p>
+								<p class="text-gray-900 whitespace-no-wrap">{{$persona->id}}</p>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 								<div class="flex items-center">
 									<div class="flex-shrink-0 w-10 h-10">
-										<img class="w-full h-full rounded-full" src="{{$valor['persona']->imagen}}" alt="Imagen De La Persona" />
+										<img class="w-full h-full rounded-full" src="{{$persona->imagen}}" alt="Imagen De La Persona" />
 									</div>
 
 									<div class="ml-3">
-										<a href="{{route('persona.show', $valor['persona'])}}" class="text-black hover:text-red-500 whitespace-no-wrap">
-											{{$valor['persona']->nombre}}
+										<a href="{{route('persona.show', $persona)}}" class="text-black hover:text-red-500 whitespace-no-wrap">
+											{{$persona->nombre}}
 										</a>
 									</div>
 								</div>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								<p class="text-gray-900 whitespace-no-wrap">{{$valor['persona']->edad}}</p>
+								<p class="text-gray-900 whitespace-no-wrap">{{$persona->edad}}</p>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								<p class="text-gray-900 whitespace-no-wrap">{{$valor['persona']->rol}}</p>
+								<p class="text-gray-900 whitespace-no-wrap">{{$persona->rol}}</p>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								<p class="text-gray-900 whitespace-no-wrap">{{$valor['persona']->sexo}}</p>
+								<p class="text-gray-900 whitespace-no-wrap">{{$persona->sexo}}</p>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								<p class="text-gray-900 whitespace-no-wrap">{{$valor['persona']->created_at}}</p>
+								<p class="text-gray-900 whitespace-no-wrap">{{$persona->created_at}}</p>
 							</td>
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 								<div class="flex items-center">
 									<div class="flex-shrink-0 w-10 h-10">
 										<img class="w-full h-full rounded-full"
-											src="{{$valor['equipo']->imagen}}"
+											src="{{$persona->equipo->imagen}}"
 											alt="Imagen Del Equipo" />
 									</div>
 
 									<div class="ml-3">
-										<a href="{{route('equipo.show', $valor['equipo'])}}" class="text-black hover:text-red-500 whitespace-no-wrap">
-											{{$valor['equipo']->nombre}}
+										<a href="{{route('equipo.show', $persona->equipo)}}" class="text-black hover:text-red-500 whitespace-no-wrap">
+											{{$persona->equipo->nombre}}
 										</a>
 									</div>
 								</div>

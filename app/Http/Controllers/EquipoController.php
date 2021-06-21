@@ -23,20 +23,8 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $teams = Equipo::get();
-        $valores = array();
-
-        foreach ($teams as $team){
-            
-            $value = [
-                'equipo' => $team,
-                'sede' => Sede::find($team->sede_id),
-            ];
-
-            array_push($valores,$value);
-
-        }
-        return view('equipos.equipoIndex', compact('valores'));
+        $equipos = Equipo::all();
+        return view('equipos.equipoIndex', compact('equipos'));
     }
 
     /**
@@ -103,9 +91,8 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        $personas = $equipo->persona;
-        $sede = Sede::find($equipo->sede_id);
-        return view('equipos.equipoShow', compact('equipo','personas','sede'));
+        $personas = $equipo->personas;
+        return view('equipos.equipoShow', compact('equipo','personas'));
     }
 
     /**
@@ -191,22 +178,10 @@ class EquipoController extends Controller
      * 
      */
     public function downloadPDF(){
-        $teams = Equipo::get();
-        $valores = array();
-
-        foreach ($teams as $team){
-            
-            $value = [
-                'equipo' => $team,
-                'sede' => Sede::find($team->sede_id),
-            ];
-
-            array_push($valores,$value);
-
-        }
+        $equipos = Equipo::all();
         $pdf = app('dompdf.wrapper');
-        view()->share('valores',$valores);
-        $pdf->loadView('pdfs.pdfEquipo', $valores);
+        view()->share('equipos',$equipos);
+        $pdf->loadView('pdfs.pdfEquipo', $equipos);
         return $pdf->download('equipos.pdf');
 
     }
@@ -236,7 +211,6 @@ class EquipoController extends Controller
     public function gets(Request $request)
     {
         $identifier = $request->input('identifier');
-
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $equipos = Equipo::where('nombre', 'regexp', $regex)->get();
         return view('equipos.equipoSearch',compact('equipos'));
