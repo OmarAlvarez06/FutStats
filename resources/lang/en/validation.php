@@ -35,7 +35,7 @@ return [
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
     'different' => 'Los campos :attribute y :other deben de tener distintos valores.',
-    'digits' => 'The :attribute must be :digits digits.',
+    'digits' => 'El campo :attribute debe de contener :digits dígitos.',
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',

@@ -31,6 +31,6 @@ class SedeSeeder extends Seeder
         Sede::create(['nombre' => 'Valle Imperial', 'ubicacion' => 'Antiguo Camino a Copalita, Marcelino García Barragán, 45053 Nuevo México, Jal.','imagen' => '/uploads/sedes/Valle_Imperial.jpg']);
         Sede::create(['nombre' => 'Ejidal', 'ubicacion' => 'Calle Piedrera 13, Las Juntitas, 45590 San Pedro Tlaquepaque, Jal.','imagen' => '/uploads/sedes/Ejidal.jpg']);
 
-        \App\Models\Sede::factory(10)->create();
+        \App\Models\Sede::factory(4)->create();
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\DetalleEncuentroController;
+use App\Http\Controllers\PersonaEncuentroController;
 use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
+use App\Models\PersonaEncuentro;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Inertia;
 
@@ -65,6 +66,6 @@ Route::get('/encuentro-excel',[EncuentroController::class,'downloadExcel']);
 #endregion
 
 
-Route::get('detalle-encuentro/create/{encuentro}', [DetalleEncuentroController::class,'create']);
-Route::get('detalle-encuentro/store', [DetalleEncuentroController::class,'store']);
+Route::post('persona-encuentro/create/{encuentro}', [PersonaEncuentroController::class,'create'])->name('persona-encuentro.create');
+Route::post('persona-encuentro/store/{encuentro}', [PersonaEncuentroController::class,'store'])->name('persona-encuentro.store');
 

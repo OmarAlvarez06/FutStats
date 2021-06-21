@@ -26,6 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'profile_photo_path' => $this->faker->imageUrl(),
             'username' => $this->faker->userName(),
             'rol' => 'Administrador',
             'email' => $this->faker->unique()->safeEmail,

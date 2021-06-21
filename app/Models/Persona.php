@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Equipo;
+use App\Models\Encuentro;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +14,9 @@ class Persona extends Model
 
     public function equipo(){
         return $this->belongsTo(Equipo::class);
+    }
+
+    public function encuentros(){
+        return $this->belongsToMany(Encuentro::class);
     }
 }

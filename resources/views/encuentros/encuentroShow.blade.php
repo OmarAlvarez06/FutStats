@@ -2,7 +2,7 @@
     <br>
     <div class="menu">
 		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
-		<a class="link" href="/detalle-encuentro/create/{{$encuentro->id}}">Registrar Detalle De Encuentro</a>
+		<a class="link" href="{{route('persona-encuentro.create',$encuentro->id)}}">Registrar Detalle De Encuentro</a>
         <a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
         <a class="link" href="/encuentro">Mostrar Encuentros</a>
@@ -90,32 +90,32 @@
 
 		<br><br>
 
-        @foreach ($detalle_encuentros as $detalle_encuentro)
+        @foreach ($encuentro->personas as $persona_encuentro)
 
             <div class="bg-white shadow-md  rounded-3xl p-4">
                 <div class="flex-none lg:flex">
                     <div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
-                        <img src="{{$detalle_encuentro['persona']->imagen}}" alt="Imagen De La persona"  class=" w-96 h-96 object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+                        <img src="{{$persona_encuentro->imagen}}" alt="Imagen De La persona"  class=" w-96 h-96 object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
                     </div>
                     <div class="flex-auto ml-3 justify-evenly py-2">
                         <div class="flex flex-wrap">
                             <div class="w-full flex-none text-xs text-blue-700 font-medium ">
-                                <span>{{$detalle_encuentro['persona']->id}}</span><span> - Persona</span>
+                                <span>{{$persona_encuentro->id}}</span><span> - Persona</span>
                             </div>
-                            <a class="flex-auto text-lg font-medium font-bold text-black hover:text-red-500 whitespace-no-wrap" href="{{route('persona.show',$detalle_encuentro['persona'])}}">{{$detalle_encuentro['persona']->nombre}}</a>
+                            <a class="flex-auto text-lg font-medium font-bold text-black hover:text-red-500 whitespace-no-wrap" href="{{route('persona.show',$persona_encuentro)}}">{{$persona_encuentro->nombre}}</a>
                         </div>
                         <p class="mt-3"></p>
                         <div class="flex flex-wrap ">
                             <div class="flex-1 items-center">
                                 <p><b>Tipo Observación: </b></p>
-                                <p>{{$detalle_encuentro['detalle_encuentro']->tipo_observacion}}</p>
+                                <p>{{$persona_encuentro->tipo_observacion}}</p>
                             </div>
                         </div>
                         <p class="mt-3"></p>
                         <div>
                             <div class="flex-1 items-center">
                                 <p><b>Obervacion: </b></p>
-                                <p>{{$detalle_encuentro['detalle_encuentro']->observacion}}</p>
+                                <p>{{$persona_encuentro->observacion}}</p>
                             </div>
                         </div>
                     </div>

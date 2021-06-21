@@ -20,6 +20,16 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="username" value="{{ __('Nombre De Usuario') }}" />
+                <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="telephone" value="{{ __('Teléfono') }}" />
+                <x-jet-input id="telephone" class="block mt-1 w-full" type="number" name="telephone" :value="old('telephone')" required/>
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="rol" value="{{ __('Rol') }}" />
                 <select name="rol">
 					<option value="Administrador">Administrador</option>

@@ -18,18 +18,25 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update($user, array $input)
     {
+        
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:1','max:255'],
+            'username' => ['required', 'string','min:5', 'max:30',Rule::unique('users')->ignore($user->id)],
             'rol' => ['required','in:Administrador,Usuario General'],
+            'telephone' => ['required','digits:10',Rule::unique('users')->ignore($user->id)],
+            'photo' => ['nullable','image','max:1024'],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
-                'photo' => ['nullable','image','max:1024'],
             ],
         ])->validateWithBag('updateProfileInformation');
+
+        if (isset($input['photo'])) {
+            $user->updateProfilePhoto($input['photo']);
+        }
 
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
@@ -37,10 +44,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         } else {
             $user->forceFill([
                 'name' => $input['name'],
+                'username' => $input['username'],
+                'telephone' => $input['telephone'],
                 'rol' => $input['rol'],
                 'email' => $input['email'],
             ])->save();
         }
+
+
     }
 
     /**
@@ -52,8 +63,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     protected function updateVerifiedUser($user, array $input)
     {
+        
         $user->forceFill([
             'name' => $input['name'],
+            'username' => $input['username'],
+            'telephone' => $input['telephone'],
             'rol' => $input['rol'],
             'email' => $input['email'],
             'email_verified_at' => null,
@@ -61,4 +75,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
         $user->sendEmailVerificationNotification();
     }
+
+
 }

@@ -8,6 +8,7 @@ use App\Models\Equipo;
 use App\Models\Sede;
 use App\Models\Encuentro;
 use App\Models\Persona;
+use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
 
 class EncuentroController extends Controller
@@ -104,24 +105,8 @@ class EncuentroController extends Controller
         $equipo_local = Equipo::find($encuentro->equipo_local_id);
         $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
         $sede = Sede::find($equipo_local->sede_id);
-        $matchs = DetalleEncuentro::where('encuentro_id',$encuentro->id)->get();
 
-        $detalle_encuentros = array();
-
-        foreach($matchs as $detalle_encuentro){
-
-            $persona = Persona::find($detalle_encuentro->persona_id);
-
-            $dato = [
-                'persona' => $persona,
-                'detalle_encuentro' => $detalle_encuentro,
-            ];
-
-            array_push($detalle_encuentros,$dato);
-
-        }
-
-        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','detalle_encuentros'));
+        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede'));
     }
 
     /**

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Persona;
+use App\Models\Equipo;
+use App\Models\Archivo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,9 @@ class Sede extends Model
     public function equipos()
     {
         return $this->hasMany(Equipo::class);
+    }
+
+    public function archivos(){
+        return $this->hasMany(Archivo::class);
     }
 }

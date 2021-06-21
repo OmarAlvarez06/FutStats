@@ -28,7 +28,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ '/storage/'.$this->user->profile_photo_path }}" alt="{{ $this->user->username }}" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -66,14 +66,26 @@
             <x-jet-input-error for="rol" class="mt-2" />
         </div>
 
+        <!-- UserName -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="username" value="{{ __('Nombre De Usuario') }}" />
+            <x-jet-input id="username" type="text" class="mt-1 block w-full" wire:model.defer="state.username" autocomplete="username" />
+            <x-jet-input-error for="username" class="mt-2" />
+        </div>
+
+         <!-- Telephone -->
+         <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="telephone" value="{{ __('Nombre De Usuario') }}" />
+            <x-jet-input id="telephone" type="number" class="mt-1 block w-full" wire:model.defer="state.telephone" autocomplete="telephone" />
+            <x-jet-input-error for="telephone" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Correo Electrónico') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
-
-        
 
     </x-slot>
 
