@@ -50,8 +50,8 @@ class EquipoFactory extends Factory
             break;
 
         }
-        $img = 'public/uploads/equipos/'.$tiempo.'.jpg';
-        $route = '/uploads/equipos/'.$tiempo.'.jpg';
+        $img = 'public/storage/equipos/'.$tiempo.'.jpg';
+        $route = '/storage/equipos/'.$tiempo.'.jpg';
         file_put_contents($img, file_get_contents($url));
 
         return [

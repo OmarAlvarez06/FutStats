@@ -61,15 +61,15 @@ class SedeController extends Controller
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/sedes/',$filename);
-            $route = '/uploads/sedes/' . $filename;
+            $file->move('storage/sedes/',$filename);
+            $route = '/storage/sedes/' . $filename;
             $sede->imagen = $route;
 
         }else{
             $tiempo = time();
             $url = 'https://loremflickr.com/400/400/paisaje';
-            $img = 'uploads/sedes/'.$tiempo.'.jpg';
-            $route = '/uploads/sedes/'.$tiempo.'.jpg';
+            $img = 'storage/sedes/'.$tiempo.'.jpg';
+            $route = '/storage/sedes/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
             $sede->imagen = $route;
         }
@@ -87,8 +87,8 @@ class SedeController extends Controller
      */
     public function show(Sede $sede)
     {
-        $equipos = $sede->equipos;
-        return view('sedes.sedeShow', compact('sede','equipos'));
+        
+        return view('sedes.sedeShow', compact('sede'));
     }
 
     /**

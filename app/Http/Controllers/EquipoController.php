@@ -66,15 +66,15 @@ class EquipoController extends Controller
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/equipos/',$filename);
-            $route = '/uploads/equipos/' . $filename;
+            $file->move('storage/equipos/',$filename);
+            $route = '/storage/equipos/' . $filename;
             $equipo->imagen = $route;
 
         }else{
             $tiempo = time();
             $url = 'https://loremflickr.com/400/400/animal';
-            $img = 'uploads/equipos/'.$tiempo.'.jpg';
-            $route = '/uploads/equipos/'.$tiempo.'.jpg';
+            $img = 'storage/equipos/'.$tiempo.'.jpg';
+            $route = '/storage/equipos/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
             $equipo->imagen = $route;
         }
@@ -138,8 +138,8 @@ class EquipoController extends Controller
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/equipos/',$filename);
-            $route = '/uploads/equipos/' . $filename;
+            $file->move('storage/equipos/',$filename);
+            $route = '/storage/equipos/' . $filename;
             $imagen = $route;
         }else{
             $imagen = $equipo->imagen;

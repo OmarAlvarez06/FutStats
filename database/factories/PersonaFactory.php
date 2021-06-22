@@ -59,8 +59,8 @@ class PersonaFactory extends Factory
 
         }
 
-        $img = 'public/uploads/personas/'.$tiempo.'.jpg';
-        $route = '/uploads/personas/'.$tiempo.'.jpg';
+        $img = 'public/storage/personas/'.$tiempo.'.jpg';
+        $route = '/storage/personas/'.$tiempo.'.jpg';
         file_put_contents($img, file_get_contents($url));
         
         $helperRol = $faker->numberBetween(1,3);

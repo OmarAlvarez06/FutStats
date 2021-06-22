@@ -22,7 +22,7 @@
 				<div class="bg-white shadow-md  rounded-3xl p-4">
 					<div class="flex-none lg:flex">
 						<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
-							<img src="{{$equipo->imagen}}" alt="Logo Del Equipo"  class=" w-96 h-96 object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+							<img src="{{$equipo->imagen}}" alt="Logo Del Equipo"  class=" w-96 h-96 object-fill lg:object-fill  lg:h-60 rounded-2xl">
 						</div>
 						<div class="flex-auto ml-3 justify-evenly py-2">
 							<div class="flex flex-wrap ">
@@ -52,7 +52,7 @@
 				<div class="bg-white shadow-md  rounded-3xl p-4">
 					<div class="flex-none lg:flex">
 						<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
-							<img src="{{$equipo->sede->imagen}}" alt="Foto De La Equipo->sede" class=" w-96 h-96  object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+							<img src="{{$equipo->sede->imagen}}" alt="Foto Del Equipo" class=" w-96 h-96  object-fill lg:object-fill  lg:h-60 rounded-2xl">
 						</div>
 						<div class="flex-auto ml-3 justify-evenly py-2">
 							<div class="flex flex-wrap ">

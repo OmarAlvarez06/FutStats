@@ -3,6 +3,7 @@
 use App\Http\Controllers\EncuentroPersonaController;
 use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
 use Illuminate\Support\Facades\Route;
@@ -67,5 +68,11 @@ Route::get('/encuentro-excel',[EncuentroController::class,'downloadExcel']);
 #region encuentro-personas routes
 Route::get('encuentro-persona/create/{encuentro}', [EncuentroPersonaController::class,'create']);
 Route::post('encuentro-persona/store/{encuentro}', [EncuentroPersonaController::class,'store'])->name('encuentro-persona.store');
+#endregion
+
+#region sede-archivo routes
+Route::get('sede-archivo/create/{sede}', [ArchivoController::class,'create']);
+Route::post('sede-archivo/store/{sede}', [ArchivoController::class,'store'])->name('sede-archivo.store');
+Route::get('sede-archivo/delete/{archivo}', [ArchivoController::class,'destroy']);
 #endregion
 

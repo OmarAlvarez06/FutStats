@@ -32,8 +32,8 @@ class SedeFactory extends Factory
                 $url = 'https://loremflickr.com/400/400/estadio';
             break;
         }
-        $img = 'public/uploads/sedes/'.$tiempo.'.jpg';
-        $route = '/uploads/sedes/'.$tiempo.'.jpg';
+        $img = 'public/storage/sedes/'.$tiempo.'.jpg';
+        $route = '/storage/sedes/'.$tiempo.'.jpg';
         file_put_contents($img, file_get_contents($url));
 
         return [

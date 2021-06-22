@@ -76,15 +76,15 @@ class PersonaController extends Controller
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/personas/',$filename);
-            $route = '/uploads/personas/' . $filename;
+            $file->move('storage/personas/',$filename);
+            $route = '/storage/personas/' . $filename;
             $persona->imagen = $route;
 
         }else{
             $tiempo = time();
             $url = 'https://loremflickr.com/400/400/people';
-            $img = 'uploads/personas/'.$tiempo.'.jpg';
-            $route = '/uploads/personas/'.$tiempo.'.jpg';
+            $img = 'storage/personas/'.$tiempo.'.jpg';
+            $route = '/storage/personas/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
             $persona->imagen = $route;
         }
@@ -155,8 +155,8 @@ class PersonaController extends Controller
             $file = $request->file('imagen');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/personas/',$filename);
-            $imagen = '/uploads/personas/' . $filename;
+            $file->move('storage/personas/',$filename);
+            $imagen = '/storage/personas/' . $filename;
         }else{
             $imagen = $persona->imagen;
         }
