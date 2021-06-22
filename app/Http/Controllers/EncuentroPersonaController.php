@@ -25,12 +25,14 @@ class EncuentroPersonaController extends Controller
 
         $personas_local = Persona::where('equipo_id',$equipo_local->id)->get();
         foreach ($personas_local as $persona_local){
-            array_push($personas,$persona_local);
+            if($persona_local->rol == 'Jugador')
+                array_push($personas,$persona_local);
         }
 
         $personas_visitante = Persona::where('equipo_id',$equipo_visitante->id)->get();
         foreach ($personas_visitante as $persona_visitante){
-            array_push($personas,$persona_visitante);
+            if($persona_visitante->rol == 'Jugador')
+                array_push($personas,$persona_visitante);
         }
         return view('encuentro_personas.encuentroPersonaForm',compact('encuentro','personas'));
     }
