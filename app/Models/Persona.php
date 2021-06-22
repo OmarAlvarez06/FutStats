@@ -17,6 +17,7 @@ class Persona extends Model
     }
 
     public function encuentros(){
-        return $this->belongsToMany(Encuentro::class);
+        return $this->belongsToMany(Encuentro::class)->withPivot(['tipo_observacion','observacion'])->withTimestamps();
+
     }
 }

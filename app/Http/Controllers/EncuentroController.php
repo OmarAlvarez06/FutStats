@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exports\EncuentrosExport;
-use App\Models\DetalleEncuentro;
+use App\Models\EncuentroPersona;
 use App\Models\Equipo;
 use App\Models\Sede;
 use App\Models\Encuentro;
 use App\Models\Persona;
-use App\Models\PersonaEncuentro;
 use Illuminate\Http\Request;
 
 class EncuentroController extends Controller
@@ -106,7 +105,19 @@ class EncuentroController extends Controller
         $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
         $sede = Sede::find($equipo_local->sede_id);
 
-        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede'));
+        $encuentro_personas = array();
+
+        foreach ($encuentro->personas as  $persona){
+            $detalle = EncuentroPersona::where('persona_id',$persona->id)->where('encuentro_id',$encuentro->id)->first();
+            $dato = [
+                'persona' => $persona,
+                'encuentro_persona' => $detalle,
+            ];
+
+            array_push($encuentro_personas,$dato);
+        }
+
+        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','encuentro_personas'));
     }
 
     /**

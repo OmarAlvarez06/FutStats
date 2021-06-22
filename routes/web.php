@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\PersonaEncuentroController;
+use App\Http\Controllers\EncuentroPersonaController;
 use App\Http\Controllers\EncuentroController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SedeController;
-use App\Models\PersonaEncuentro;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Inertia;
 
@@ -30,7 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function () {
 
 #endregion
 
-#region entities routes
+#region resources routes
 Route::resource('persona', PersonaController::class);
 Route::resource('equipo', EquipoController::class);
 Route::resource('sede', SedeController::class);
@@ -65,7 +64,8 @@ Route::get('/sede-excel',[SedeController::class,'downloadExcel']);
 Route::get('/encuentro-excel',[EncuentroController::class,'downloadExcel']);
 #endregion
 
-
-Route::post('persona-encuentro/create/{encuentro}', [PersonaEncuentroController::class,'create'])->name('persona-encuentro.create');
-Route::post('persona-encuentro/store/{encuentro}', [PersonaEncuentroController::class,'store'])->name('persona-encuentro.store');
+#region encuentro-personas routes
+Route::get('encuentro-persona/create/{encuentro}', [EncuentroPersonaController::class,'create']);
+Route::post('encuentro-persona/store/{encuentro}', [EncuentroPersonaController::class,'store'])->name('encuentro-persona.store');
+#endregion
 

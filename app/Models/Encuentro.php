@@ -12,6 +12,6 @@ class Encuentro extends Model
     protected $fillable = ['equipo_local_id','equipo_visitante_id','fecha_hora','goles_local','goles_visitante'];
    
     public function personas(){
-        return $this->belongsToMany(Persona::class);
+        return $this->belongsToMany(Persona::class)->withPivot(['tipo_observacion','observacion'])->withTimestamps();
     }
 }
