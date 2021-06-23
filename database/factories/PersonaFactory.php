@@ -24,45 +24,7 @@ class PersonaFactory extends Factory
     public function definition()
     {
         $faker = Faker::create('es_ES');
-        $tiempo = time();
 
-        $url = 'https://loremflickr.com/400/400/people';
-        $url_aux = $faker->numberBetween(1,9);
-        switch($url_aux){
-            case 1:
-                $url = 'https://loremflickr.com/400/400/people';
-            break;
-            case 2:
-                $url = 'https://loremflickr.com/400/400/gente';
-            break;
-            case 3:
-                $url = 'https://loremflickr.com/400/400/persona';
-            break;
-            case 4:
-                $url = 'https://loremflickr.com/400/400/teenager';
-            break;
-            case 5:
-                $url = 'https://loremflickr.com/400/400/man';
-            break;
-            case 6:
-                $url = 'https://loremflickr.com/400/400/hombre';
-            break;
-            case 7:
-                $url = 'https://loremflickr.com/400/400/woman';
-            break;
-            case 8:
-                $url = 'https://loremflickr.com/400/400/mujer';
-            break;
-            case 9:
-                $url = 'https://loremflickr.com/400/400/adolescente';
-            break;
-
-        }
-
-        $img = 'public/storage/personas/'.$tiempo.'.jpg';
-        $route = '/storage/personas/'.$tiempo.'.jpg';
-        file_put_contents($img, file_get_contents($url));
-        
         $helperRol = $faker->numberBetween(1,3);
         $rol = 'Jugador';
         switch($helperRol){
@@ -92,9 +54,42 @@ class PersonaFactory extends Factory
         }
 
         $genero = ($sex == 'M') ? 'male' : 'female';
+
+        $imagen_name = $this->faker->unique()->word();
+
+        $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?woman' : 'https://source.unsplash.com/500x500/?man';
+        $url_aux = $this->faker->numberBetween(1,7);
+        switch($url_aux){
+            case 1:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?woman' : 'https://source.unsplash.com/500x500/?man';
+            break;
+            case 2:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?mujer' : 'https://source.unsplash.com/500x500/?hombre';
+            break;
+            case 3:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?mulher' : 'https://source.unsplash.com/500x500/?homem';
+            break;
+            case 4:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?femme' : 'https://source.unsplash.com/500x500/?homme';
+            break;
+            case 5:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?ragazza' : 'https://source.unsplash.com/500x500/?uomo';
+            break;
+            case 6:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?muchacha' : 'https://source.unsplash.com/500x500/?muchacho';
+            break;
+            case 7:
+                $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?girl' : 'https://source.unsplash.com/500x500/?boy';
+            break;
+        }
+
+        $img = 'public/storage/personas/'.$imagen_name.'.jpg';
+        $route = '/storage/personas/'.$imagen_name.'.jpg';
+        file_put_contents($img, file_get_contents($url));
+    
         return [
             'nombre' => $faker->name($genero),
-            'edad' => $faker->randomNumber(2,true),
+            'edad' => $faker->numberBetween(18,50),
             'sexo' => $sex,
             'rol' => $rol,
             'imagen' => $route,

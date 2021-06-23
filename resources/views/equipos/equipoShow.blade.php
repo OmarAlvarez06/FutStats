@@ -16,6 +16,9 @@
 	</div>
 
 	<div class="main">
+		@if (isset($mensaje))
+			@include('layouts.mensaje',$mensaje)
+		@endif
 		<h1 class="display-4 text-center">Equipo</h1>
 		<div class="grid mt-8 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
 			<div class="flex flex-col">
@@ -84,7 +87,7 @@
 		<h2 class="text-center text-5xl">Personal</h2>
 		<br>
 
-        @foreach ($personas as $persona)
+        @foreach ($equipo->personas as $persona)
 
 			<div class="flex justify-center items-center">
 				<div class="flex flex-col bg-white shadow-lg border-t-8 border-green-700 rounded-tl-full overflow-hidden">

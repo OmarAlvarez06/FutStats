@@ -80,7 +80,8 @@ class EquipoController extends Controller
         }
 
         $equipo->save();
-        return redirect()->route('equipo.show',$equipo);
+        $mensaje = ['mensaje' => 'Equipo Registrado Correctamente'];
+        return view('equipos.equipoShow',compact('equipo','mensaje'));
     }
 
     /**
@@ -91,8 +92,7 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        $personas = $equipo->personas;
-        return view('equipos.equipoShow', compact('equipo','personas'));
+        return view('equipos.equipoShow', compact('equipo'));
     }
 
     /**
@@ -154,7 +154,14 @@ class EquipoController extends Controller
 
         Equipo::where('id', $equipo->id)->update($array);
 
-        return redirect()->route('equipo.show', $equipo);
+        $equipo->nombre = $nombre;
+        $equipo->fundacion = $fundacion;
+        $equipo->imagen = $imagen;
+        $equipo->sede_id = $sede_id;
+
+
+        $mensaje = ['mensaje' => 'Equipo Editado Correctamente'];
+        return view('equipos.equipoShow',compact('equipo','mensaje'));
     }
 
     /**
@@ -165,11 +172,14 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
+        $nombre = $equipo->nombre;
         $cadena = substr($equipo->imagen,1);
         if(file_exists($cadena))
             unlink($cadena);
         $equipo->delete();
-        return redirect()->route('equipo.index');    
+        $equipos = Equipo::all();
+        $mensaje = ['mensaje' => 'El Equipo ' . $nombre .' Ha Sid@ Eliminad@ Correctamente'];
+        return view('equipos.equipoIndex',compact('equipos','mensaje'));  
     }
 
     /**
@@ -213,7 +223,12 @@ class EquipoController extends Controller
         $identifier = $request->input('identifier');
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $equipos = Equipo::where('nombre', 'regexp', $regex)->get();
-        return view('equipos.equipoSearch',compact('equipos'));
+        if(count($equipos) < 1){
+            $mensaje = ['mensaje' => 'Equipo(s) No Encontrado(s)'];
+            return view('equipos.equipoSearch',compact('equipos','mensaje'));
+        }else{
+            return view('equipos.equipoSearch',compact('equipos'));
+        }
     }
 
 }

@@ -87,10 +87,15 @@ class EncuentroController extends Controller
         $encuentro->fecha_hora = $fecha_hora;
         $encuentro->goles_local = $goles_local;
         $encuentro->goles_visitante = $goles_visitante;        
-
         $encuentro->save();
 
-        return redirect()->route('encuentro.show',$encuentro);
+        $mensaje = ['mensaje' => 'Encuentro Registrado Correctamente'];
+        $equipo_local = Equipo::find($encuentro->equipo_local_id);
+        $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
+        $sede = Sede::find($equipo_local->sede_id);
+
+        $encuentro_personas = array();
+        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','encuentro_personas','mensaje'));
     }
 
     /**
@@ -185,9 +190,14 @@ class EncuentroController extends Controller
 
         $equipo_local =  (empty($encuentro)) ? array() : Equipo::find($encuentro->equipo_local_id);
         $equipo_visitante = (empty($encuentro)) ?  array() : Equipo::find($encuentro->equipo_visitante_id);
-        
+        if(!isset($encuentro)){
+            $mensaje = ['mensaje' => 'Encuentro No Encontrado'];
+            return view('encuentros.encuentroSearchID',compact('encuentro','equipo_local','equipo_visitante','mensaje'));
+        }else{
+            return view('encuentros.encuentroSearchID',compact('encuentro','equipo_local','equipo_visitante'));
+        }
 
-        return view('encuentros.encuentroSearchID',compact('encuentro','equipo_local','equipo_visitante'));
+        
         
     }
 

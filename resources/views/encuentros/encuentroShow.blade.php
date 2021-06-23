@@ -11,6 +11,10 @@
 	</div>
 
     <div class="main">
+
+		@if (isset($mensaje))
+			@include('layouts.mensaje',$mensaje)
+		@endif
 		<h1 class="display-4 text-center">Información Del Encuentro</h1>
 		<div class="grid mt-8 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
 			<div class="flex flex-col">

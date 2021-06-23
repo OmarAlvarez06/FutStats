@@ -14,8 +14,10 @@
 		</form>
 	</div>
 	<div class="main">
+		@if (isset($mensaje))
+			@include('layouts.mensaje',$mensaje)
+		@endif
 		<h1 class="display-4 text-center">Persona</h1>
-	
 		<div class="flex flex-col">
 			<div class="bg-white shadow-md  rounded-3xl p-4">
 				<div class="flex-none lg:flex">

@@ -7,6 +7,9 @@
 	</div>
 		
     <div class="main">
+        @if (isset($mensaje))
+			@include('layouts.mensaje',$mensaje)
+		@endif
         <h1 class="display-4 text-center">Buscar Encuentro(s) Por ID</h1>
         <br>
         <form action="/encuentro-get-id" method="GET" enctype="multipart/form-data">

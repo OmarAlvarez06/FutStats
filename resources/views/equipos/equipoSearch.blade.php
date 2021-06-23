@@ -8,6 +8,9 @@
 	</div>
 		
 	<div class="main">
+        @if (isset($mensaje))
+			@include('layouts.mensaje',$mensaje)
+		@endif
         <h1 class="display-4 text-center">Buscar Equipo(s)</h1>
         <br>
         <form action="/equipo-get" method="GET" enctype="multipart/form-data">
@@ -21,7 +24,7 @@
             </div>
         </form>
 
-        @if (!empty($equipos))
+        @if (count($equipos) >= 1)
             <br><br>
             <h2 class="text-center text-4xl">Equipo(s) Encontrado(s)</h2>
             <br><br>

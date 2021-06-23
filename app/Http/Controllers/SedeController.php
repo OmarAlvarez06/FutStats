@@ -76,7 +76,8 @@ class SedeController extends Controller
 
         $sede->save();
     
-        return redirect()->route('sede.show',$sede);
+        $mensaje = ['mensaje' => 'Sede Registrada Correctamente'];
+        return view('sedes.sedeShow',compact('sede','mensaje'));
     }
 
     /**
@@ -132,7 +133,12 @@ class SedeController extends Controller
         $identifier = $request->input('identifier');
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $sedes = Sede::where('nombre', 'regexp', $regex)->get();
-        return view('sedes.sedeSearch',compact('sedes'));
+        if(count($sedes) < 1){
+            $mensaje = ['mensaje' => 'Sede(s) No Encontrada(s)'];
+            return view('sedes.sedeSearch',compact('sedes','mensaje'));
+        }else{
+            return view('sedes.sedeSearch',compact('sedes'));
+        }
     }
 
 }

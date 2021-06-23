@@ -27,6 +27,8 @@
 			</div>
 		@endif
 
+		
+
 		<div class="flex flex-col">
 			<div class="bg-white shadow-md rounded-3xl p-5">
 				<div class="flex flex-col sm:flex-row items-center">

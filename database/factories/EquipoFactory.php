@@ -23,35 +23,34 @@ class EquipoFactory extends Factory
     public function definition()
     {
         
-        $tiempo = time();
-        $url = 'https://loremflickr.com/400/400/animal';
-        $url_aux = $this->faker->numberBetween(1,7);
+        $imagen_name = $this->faker->unique()->word();
+        $url = 'https://source.unsplash.com/500x500/?pet';
+        $url_aux = $this->faker->numberBetween(1,6);
         switch($url_aux){
             case 1:
                 $url = 'https://loremflickr.com/400/400/animales';
             break;
             case 2:
-                $url = 'https://loremflickr.com/400/400/animals';
+                $url = 'https://source.unsplash.com/500x500/?pet';
             break;
             case 3:
-                $url = 'https://loremflickr.com/400/400/pet';
+                $url = 'https://source.unsplash.com/500x500/?mascota';
             break;
             case 4:
-                $url = 'https://loremflickr.com/400/400/pets';
+                $url = 'https://source.unsplash.com/500x500/?animal';
             break;
             case 5:
-                $url = 'https://loremflickr.com/400/400/mascotas';
+                $url = 'https://source.unsplash.com/500x500/?animals';
             break;
             case 6:
-                $url = 'https://loremflickr.com/400/400/mascota';
+                $url = 'https://source.unsplash.com/500x500/?animales';
             break;
             case 7:
-                $url = 'https://loremflickr.com/400/400/animal';
+                $url = 'https://source.unsplash.com/500x500/?fish';
             break;
-
         }
-        $img = 'public/storage/equipos/'.$tiempo.'.jpg';
-        $route = '/storage/equipos/'.$tiempo.'.jpg';
+        $img = 'public/storage/equipos/'.$imagen_name.'.jpg';
+        $route = '/storage/equipos/'.$imagen_name.'.jpg';
         file_put_contents($img, file_get_contents($url));
 
         return [

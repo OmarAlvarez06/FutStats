@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
-use Faker\Factory as Faker;
 
 class PersonaController extends Controller
 {
@@ -90,7 +89,8 @@ class PersonaController extends Controller
         }
 
         $persona->save();
-        return redirect()->route('persona.show',$persona);
+        $mensaje = ['mensaje' => 'Persona Registrada Correctamente'];
+        return view('personas.personaShow',compact('persona','mensaje'));
 
     }
 
@@ -171,9 +171,17 @@ class PersonaController extends Controller
         ];
 
         Persona::where('id', $persona->id)->update($array);
-      
 
-        return redirect()->route('persona.show', $persona);
+        $persona->nombre = $nombre;
+        $persona->edad = $edad;
+        $persona->sexo = $sexo;
+        $persona->rol = $rol;
+        $persona->imagen = $imagen;
+        $persona->equipo_id = $equipo_id;
+        
+      
+        $mensaje = ['mensaje' => 'Persona Editada Correctamente'];
+        return view('personas.personaShow',compact('persona','mensaje'));
     }
 
     /**
@@ -184,11 +192,15 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
+        $nombre = $persona->nombre;
         $cadena = substr($persona->imagen,1);
         if(file_exists($cadena))
             unlink($cadena);
         $persona->delete();
-        return redirect()->route('persona.index');
+        
+        $personas = Persona::all();
+        $mensaje = ['mensaje' => $nombre .' Ha Sid@ Eliminad@ Correctamente'];
+        return view('personas.personaIndex',compact('personas','mensaje'));
     }
 
     /**
@@ -231,7 +243,12 @@ class PersonaController extends Controller
         $identifier = $request->input('identifier');
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $personas = Persona::where('nombre', 'regexp', $regex)->get();
-        return view('personas.personaSearch',compact('personas'));
+        if(count($personas) < 1){
+            $mensaje = ['mensaje' => 'Persona(s) No Encontrada(s)'];
+            return view('personas.personaSearch',compact('personas','mensaje'));
+        }else{
+            return view('personas.personaSearch',compact('personas'));
+        }
         
     }
 

@@ -21,19 +21,28 @@ class SedeFactory extends Factory
      */
     public function definition()
     {
-        $tiempo = time();
-        $url = 'https://loremflickr.com/400/400/stadium';
+        $imagen_name = $this->faker->unique()->word();
+        $url = 'https://source.unsplash.com/1600x900/?stadium';
         $url_aux = $this->faker->numberBetween(1,2);
         switch($url_aux){
             case 1:
-                $url = 'https://loremflickr.com/400/400/stadium';
+                $url = 'https://source.unsplash.com/1200x900/?stadium';
             break;
             case 2:
-                $url = 'https://loremflickr.com/400/400/estadio';
+                $url = 'https://source.unsplash.com/1200x900/?estadio';
+            break;
+            case 3:
+                $url = 'https://source.unsplash.com/1200x900/?field';
+            break;
+            case 4:
+                $url = 'https://source.unsplash.com/1200x900/?soccer';
+            break;
+            case 5:
+                $url = 'https://source.unsplash.com/1200x900/?futbol';
             break;
         }
-        $img = 'public/storage/sedes/'.$tiempo.'.jpg';
-        $route = '/storage/sedes/'.$tiempo.'.jpg';
+        $img = 'public/storage/sedes/'.$imagen_name.'.jpg';
+        $route = '/storage/sedes/'.$imagen_name.'.jpg';
         file_put_contents($img, file_get_contents($url));
 
         return [
