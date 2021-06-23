@@ -22,6 +22,7 @@ class CreatePersonasTable extends Migration
             $table->mediumText('imagen');
             $table->foreignId('equipo_id')->references('id')->on('equipos');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

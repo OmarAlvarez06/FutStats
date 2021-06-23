@@ -20,6 +20,7 @@ class CreateEquiposTable extends Migration
             $table->mediumText('imagen');
             $table->foreignId('sede_id')->references('id')->on('sedes');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -6,10 +6,13 @@ use App\Models\Equipo;
 use App\Models\Encuentro;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Persona extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $fillable = ['nombre','edad','sexo','rol','imagen','equipo_id'];
 
     public function equipo(){
