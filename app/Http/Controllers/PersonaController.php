@@ -18,7 +18,6 @@ class PersonaController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +25,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::all();
+        $personas = Persona::with('equipo')->get();
         return view('personas.personaIndex', compact('personas'));
     }
 

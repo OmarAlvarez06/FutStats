@@ -23,7 +23,7 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $equipos = Equipo::all();
+        $equipos = Equipo::with('sede')->get();
         return view('equipos.equipoIndex', compact('equipos'));
     }
 
