@@ -1,6 +1,6 @@
 ## **Proyecto FUTSTATS**
 
-<p align="center"><img src="https://lh3.googleusercontent.com/Z1MQC6q09OmwdTU03gPb0r35q5k6ILUs_DrVL893eKH4f7nLcoXGvCA4DWt99aqlnkE4hUnZYbL7YgEXdHL0=w798-h667"></p>
+<p align="center"><img src="https://github.com/OmarAlvarez06/FutStats/blob/main/public/images/logo_icon.png?raw=true"></p>
 
 ## **Descripción del objetivo del proyecto**
 
