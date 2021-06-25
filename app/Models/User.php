@@ -61,4 +61,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function setUsernameAttribute($value){
+        $this->attributes['username'] = mb_strtolower($value);
+    }
+
+    public function getNameAttribute($value){
+        return strtoupper($value);
+    }
+
+    public function setEmailAttribute($value){
+        $this->attributes['email'] = mb_strtolower($value);
+    }
 }
