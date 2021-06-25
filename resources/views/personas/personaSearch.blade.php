@@ -1,7 +1,9 @@
 <x-app-layout>
     <br>
 	<div class="menu">
-        <a class="link" href="/persona/create">Registrar Persona</a>
+        @can('admin')
+            <a class="link" href="/persona/create">Registrar Persona</a>
+        @endcan
 		<a class="link" href="/persona">Mostrar Personas</a>
         <a class="link" href="/persona-pdf">Descargar PDF Personas</a>
         

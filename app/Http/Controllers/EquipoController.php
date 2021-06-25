@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
 use App\Exports\EquiposExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Gate;
 
 class EquipoController extends Controller
 {
@@ -34,6 +35,8 @@ class EquipoController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin');
+
         $sedes = Sede::all();
         return view('equipos.equipoForm',compact('sedes'));
     }
@@ -46,6 +49,8 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin');
+
         $request->validate([
             'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
             'fundacion' => ['required'],
@@ -103,6 +108,8 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
+        Gate::authorize('admin');
+
         $sedes = Sede::all();
         return view('equipos.equipoForm', compact('equipo','sedes'));
     }
@@ -116,6 +123,8 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
+        Gate::authorize('admin');
+
         $request->validate([
             'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
             'fundacion' => ['required'],
@@ -172,6 +181,8 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
+        Gate::authorize('admin');
+
         $nombre = $equipo->nombre;
         $cadena = substr($equipo->imagen,1);
         if(file_exists($cadena))

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\Gate;
 
 class PersonaController extends Controller
 {
@@ -36,6 +37,8 @@ class PersonaController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin');
+
         $equipos = Equipo::all();
         return view('personas.personaForm',compact('equipos'));
     }
@@ -48,6 +51,7 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin');
 
         $request->validate([
             'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
@@ -112,6 +116,8 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
+        Gate::authorize('admin');
+
         $equipos = Equipo::all();
         return view('personas.personaForm', compact('persona','equipos'));
     }
@@ -125,6 +131,8 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
+        Gate::authorize('admin');
+
         $request->validate([
             'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100'],
             'edad' => ['required','integer','min:18','max:100'],
@@ -191,6 +199,8 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
+        Gate::authorize('admin');
+
         $nombre = $persona->nombre;
         $cadena = substr($persona->imagen,1);
         if(file_exists($cadena))

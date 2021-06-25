@@ -9,6 +9,8 @@ use App\Models\Sede;
 use App\Models\Encuentro;
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class EncuentroController extends Controller
 {
@@ -53,6 +55,8 @@ class EncuentroController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin');
+
         $equipos = Equipo::all();
         return view('encuentros.encuentroForm',compact('equipos'));
     }
@@ -65,7 +69,8 @@ class EncuentroController extends Controller
      */
     public function store(Request $request)
     {
-
+        Gate::authorize('admin');
+        
         $request->validate([
             'equipo_local_id' => ['required'],
             'equipo_visitante_id' => ['required','different:equipo_local_id'],

@@ -1,7 +1,9 @@
 <x-app-layout>
 	<br>
 	<div class="menu">
-		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
+		@can('admin')
+			<a class="link" href="/encuentro/create">Registrar Encuentro</a>
+		@endcan
 		<a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
 		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>

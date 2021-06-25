@@ -7,6 +7,8 @@ use App\Models\Encuentro;
 use App\Models\Equipo;
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class EncuentroPersonaController extends Controller
 {
@@ -20,6 +22,8 @@ class EncuentroPersonaController extends Controller
      */
     public function create($id)
     {   
+        Gate::authorize('admin');
+
         $encuentro = Encuentro::find($id);
         $personas = array();
         $equipo_local = Equipo::find($encuentro->equipo_local_id);
@@ -47,7 +51,8 @@ class EncuentroPersonaController extends Controller
      */
     public function store(Request $request, Encuentro $encuentro)
     {
-
+        Gate::authorize('admin');
+        
         $request->validate([
             'persona_id' => ['required'],
             'tipo_observacion' => ['required'],

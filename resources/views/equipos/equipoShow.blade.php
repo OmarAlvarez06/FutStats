@@ -2,17 +2,19 @@
    
 	<br>
 	<div class="menu">
-		<a class="link" href="/equipo/create">Registrar Equipo</a>
+		@can('admin')
+        	<a class="link" href="/equipo/create">Registrar Equipo</a>
+			<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar Equipo</a>
+			<form action="{{ route('equipo.destroy', $equipo) }}" method="POST">
+				@csrf
+				@method('DELETE')
+				<input type="submit" class="link" value="Eliminar" style="border:none;">
+			</form>
+        @endcan
 		<a class="link" href="/equipo">Mostrar Equipos</a>
 		<a class="link" href="/equipo-search">Buscar Equipo</a>
-		<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar Equipo</a>
 		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
-		<form action="{{ route('equipo.destroy', $equipo) }}" method="POST">
-			@csrf
-			@method('DELETE')
-			<input type="submit" class="link" value="Eliminar" style="border:none;">
-		</form>
 	</div>
 
 	<div class="main">

@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Archivo;
 use App\Models\Sede;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ArchivoController extends Controller
 {
-     public function __construct(){
+    public function __construct(){
         $this->middleware('auth');
     }
     /**
@@ -18,6 +19,8 @@ class ArchivoController extends Controller
      */
     public function create($id)
     {
+        Gate::authorize('admin');
+
         $sede = Sede::find($id);
         return view('archivos.archivoForm',compact('sede'));
     }
@@ -30,7 +33,8 @@ class ArchivoController extends Controller
      */
     public function store(Request $request,Sede $sede)
     {
-       
+        Gate::authorize('admin');
+
         $request->validate([
             'archivo' => ['required'],
         ]);
@@ -49,7 +53,6 @@ class ArchivoController extends Controller
         }
 
         return redirect()->route('sede.show',$sede);
-
     }
 
     /**
@@ -60,6 +63,8 @@ class ArchivoController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin');
+
         $archivo = Archivo::find($id);
         $sede = $archivo->sede;
         $cadena = substr($archivo->nombre_hash,1);

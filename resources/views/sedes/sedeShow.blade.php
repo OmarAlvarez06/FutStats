@@ -1,8 +1,10 @@
 <x-app-layout>
     <br>
 	<div class="menu">
-		<a class="link" href="/sede/create">Registrar Sede</a>
-		<a class="link" href="{{'/sede-archivo/create/'.$sede->id}}">Agregar Archivo</a>
+		@can('admin')
+			<a class="link" href="/sede/create">Registrar Sede</a>
+			<a class="link" href="{{'/sede-archivo/create/'.$sede->id}}">Agregar Archivo</a>
+		@endcan
 		<a class="link" href="/sede-search">Buscar Sedes</a>
 		<a class="link" href="/sede">Mostrar Sedes</a>
 		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>

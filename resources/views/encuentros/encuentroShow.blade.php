@@ -1,11 +1,12 @@
 <x-app-layout>
     <br>
     <div class="menu">
-		<a class="link" href="/encuentro/create">Registrar Encuentro</a>
-		<a class="link" href="{{'/encuentro-persona/create/'.$encuentro->id}}">Registrar Detalle De Encuentro</a>
+    	@can('admin')
+			<a class="link" href="/encuentro/create">Registrar Encuentro</a>
+			<a class="link" href="{{'/encuentro-persona/create/'.$encuentro->id}}">Registrar Detalle De Encuentro</a>
+		@endcan
         <a class="link" href="/encuentro">Mostrar Encuentros</a>
         <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
-        <a class="link" href="/encuentro">Mostrar Encuentros</a>
 		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
 		<a class="link" href="/encuentro-excel">Descargar Excel Encuentros</a>
 	</div>

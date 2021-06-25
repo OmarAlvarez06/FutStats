@@ -2,7 +2,9 @@
 	<br>
 	    
 	<div class="menu">
-		<a class="link" href="/sede/create">Registrar Sede</a>
+		@can('admin')
+			<a class="link" href="/sede/create">Registrar Sede</a>
+		@endcan
 		<a class="link" href="/sede-search">Buscar Sedes</a>
 		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
 		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>

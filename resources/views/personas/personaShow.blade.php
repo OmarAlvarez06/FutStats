@@ -1,19 +1,19 @@
 <x-app-layout>
 	<br>
 	<div class="menu">
-		<a class="link" href="/persona/create">Registrar Persona</a>
-		<a class="link" href="/persona-search">Buscar Persona</a>
-		<a class="link" href="/persona">Mostrar Personas</a>
-		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
-		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
-		@if(Auth::user()->rol == 'Usuario General')
+		@can('admin')
+			<a class="link" href="/persona/create">Registrar Persona</a>
 			<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
 			<form action="{{ route('persona.destroy', $persona) }}" method="POST">
 				@csrf
 				@method('DELETE')
 				<input type="submit" class="link" value="Eliminar" style="border:none;">
 			</form>
-		@endif
+		@endcan
+		<a class="link" href="/persona-search">Buscar Persona</a>
+		<a class="link" href="/persona">Mostrar Personas</a>
+		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
 	</div>
 	<div class="main">
 		@if (isset($mensaje))

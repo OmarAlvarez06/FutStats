@@ -1,7 +1,9 @@
 <x-app-layout>
     <br>
 	<div class="menu">
-		<a class="link" href="/equipo/create">Registrar Equipo</a>
+		@can('admin')
+			<a class="link" href="/equipo/create">Registrar Equipo</a>
+		@endcan
 		<a class="link" href="/equipo-search">Buscar Equipo</a>
 		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
 		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>

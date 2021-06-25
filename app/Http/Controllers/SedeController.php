@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\PDF;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Gate;
 
 class SedeController extends Controller
 {
@@ -33,6 +34,7 @@ class SedeController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin');
         return view('sedes.sedeForm');
     }
 
@@ -45,6 +47,8 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin');
+        
         $request->validate([
             'nombre' => ['required','string','regex:/^[[:alpha:]]+[[:space:]]*/','min:5','max:100','unique:sedes,nombre'],
             'ubicacion' => ['required','string','min:5','max:255'],
