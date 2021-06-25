@@ -6,7 +6,8 @@
             <h1 class="text-2xl font-semibold">{{Auth::user()->name}}</h1>
             <h1 class="text-2xl font-semibold">{{Auth::user()->username}}</h1>
             <h1 class="text-2xl font-semibold">{{Auth::user()->email}}</h1>
-            <h4 class="text-sm font-semibold"><b>Miembro Desde </b>{{Auth::user()->created_at}}</h4>
+            <h1 class="text-2xl font-semibold">{{Auth::user()->rol}}</h1>
+            <h4 class="text-sm font-semibold"><b>Miembro Desde </b>{{Auth::user()->created_at->format('d/m/Y')}}</h4>
         </div>
     </div>
 </x-app-layout>

@@ -6,12 +6,14 @@
 		<a class="link" href="/persona">Mostrar Personas</a>
 		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
 		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
-		<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
-		<form action="{{ route('persona.destroy', $persona) }}" method="POST">
-			@csrf
-			@method('DELETE')
-			<input type="submit" class="link" value="Eliminar" style="border:none;">
-		</form>
+		@if(Auth::user()->rol == 'Usuario General')
+			<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
+			<form action="{{ route('persona.destroy', $persona) }}" method="POST">
+				@csrf
+				@method('DELETE')
+				<input type="submit" class="link" value="Eliminar" style="border:none;">
+			</form>
+		@endif
 	</div>
 	<div class="main">
 		@if (isset($mensaje))
@@ -40,7 +42,7 @@
 							<br>
 							<div class="flex-1 items-center">
 								<p><b>Registrado: </b></p>
-								<p>{{$persona->created_at}}</p>
+								<p>{{$persona->created_at->format('d/m/Y')}}</p>
 							</div>
 						</div>
 						<p class="mt-3"></p>

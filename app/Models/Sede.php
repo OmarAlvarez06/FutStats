@@ -21,4 +21,8 @@ class Sede extends Model
     public function archivos(){
         return $this->hasMany(Archivo::class);
     }
+
+    public function getNombreAttribute($value){
+        return strtoupper($value);
+    }
 }

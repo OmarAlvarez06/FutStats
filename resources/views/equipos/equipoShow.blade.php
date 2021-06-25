@@ -43,7 +43,7 @@
 								<br>
 								<div class="flex-1 items-center">
 									<p><b>Registrado: </b></p>
-									<p>{{$equipo->created_at}}</p>
+									<p>{{$equipo->created_at->format('d/m/Y')}}</p>
 								</div>
 							</div>
 						</div>

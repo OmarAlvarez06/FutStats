@@ -23,4 +23,8 @@ class Persona extends Model
         return $this->belongsToMany(Encuentro::class)->withPivot(['tipo_observacion','observacion'])->withTimestamps();
 
     }
+
+    public function getNombreAttribute($value){
+        return strtoupper($value);
+    }
 }

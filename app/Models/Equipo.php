@@ -24,4 +24,8 @@ class Equipo extends Model
     {
         return $this->belongsTo(Sede::class);
     }
+
+    public function getNombreAttribute($value){
+        return strtoupper($value);
+    }
 }
