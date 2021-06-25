@@ -17,59 +17,63 @@ La idea principal de esta página web es desarrollar esta página para el uso de
     git clone https://github.com/OmarAlvarez06/FutStats.git
     git clone git@github.com:OmarAlvarez06/FutStats.git
     ```
-2. *Instalar las dependencias necesarias:*
+2. *Acceder a la carpeta clonada:*
+    ```properties
+    cd FutStats
+    ```
+3. *Instalar las dependencias necesarias:*
     ```properties
     composer install
     ```
-3. *Generar el archivo .env:*
+4. *Generar el archivo .env:*
     ```properties
     cp .env.example .env
     ```
-4. *Generar llave en el archivo .env:*
+5. *Generar llave en el archivo .env:*
     ```properties
     php artisan key:generate
     ```
-5. *Acceder a la carpeta storage/app:*
+6. *Acceder a la carpeta storage/app:*
     ```properties
     cd storage/app
      ```
-6. *Crear la carpeta public:*
+7. *Crear la carpeta public:*
     ```properties
     mkdir public
      ```
-7. *Acceder a la carpeta public:*
+8. *Acceder a la carpeta public:*
     ```properties
     cd public
      ```
-8. *Crear las carpetas necesarias para almacenar y obtener archivos subidos al servidor:*
+9. *Crear las carpetas necesarias para almacenar y obtener archivos subidos al servidor:*
     ```properties
     mkdir archivos && mkdir equipos && mkdir personas && mkdir sedes && mkdir profile-photos
      ```
-9. *Regresar a la carpeta principal:*
+10. *Regresar a la carpeta principal:*
     ```properties
     cd .. && cd .. && cd ..
      ```
-10. *Generar un enlace simbólico de storage/app/public con la carpeta public:*
+11. *Generar un enlace simbólico de storage/app/public con la carpeta public:*
     ```properties
     php artisan storage:link
     ```
-11. *Acceder a mysql:*
+12. *Acceder a mysql:*
     ```properties
     mysql -u usuario -p password
     ```
-12. *Dentro de mysql, crear la base de datos futstats:*
+13. *Dentro de mysql, crear la base de datos futstats:*
     ```properties
     CREATE DATABASE futstats;
     ```
-13. *Salir de mysql:*
+14. *Salir de mysql:*
     ```properties
     exit;
     ```
-14. *Generar las migraciones y correr todos los seeders (Este proceso suele tardar tiempo):*
+15. *Generar las migraciones y correr todos los seeders (Este proceso suele tardar tiempo):*
     ```properties
     php artisan migrate --seed
     ```
-15. Modificar el archivo .env a su gusto, pero específicamente en estas partes lo siguiente:
+16. Modificar el archivo .env a su gusto, pero específicamente en estas partes lo siguiente:
     ```properties
     De APP_URL=http://localhost
     A APP_URL=http://127.0.0.1
