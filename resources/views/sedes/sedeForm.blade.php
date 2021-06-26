@@ -1,13 +1,13 @@
 <x-app-layout>
     <br>
     <div class="menu">
-		<a class="link" href="/sede">Mostrar Sedes</a>
-		<a class="link" href="/sede-search">Buscar Sedes</a>
-		<a class="link" href="/sede-pdf">Descargar PDF Sede</a>
-		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>
+		<a class="link" href="{{route('sede.index')}}">Mostrar Sedes</a>
+		<a class="link" href="{{route('sede.search')}}">Buscar Sedes</a>
+		<a class="link" href="{{route('sede.pdf')}}">Descargar PDF Sedes</a>
+		<a class="link" href="{{route('sede.excel')}}">Descargar Excel Sedes</a>
 	</div>
 
-    <form action="{{ route('sede.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('sede.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="grid mt-8  gap-8 grid-cols-1 main">

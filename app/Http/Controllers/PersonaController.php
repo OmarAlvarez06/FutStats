@@ -38,7 +38,6 @@ class PersonaController extends Controller
     public function create()
     {
         Gate::authorize('admin');
-
         $equipos = Equipo::all();
         return view('personas.personaForm',compact('equipos'));
     }
@@ -84,7 +83,8 @@ class PersonaController extends Controller
 
         }else{
             $tiempo = time();
-            $url = 'https://loremflickr.com/400/400/people';
+            $genero = ($sexo == 'M') ? 'male' : 'female';
+            $url = ($genero == 'female')? 'https://source.unsplash.com/500x500/?woman' : 'https://source.unsplash.com/500x500/?man';
             $img = 'storage/personas/'.$tiempo.'.jpg';
             $route = '/storage/personas/'.$tiempo.'.jpg';
             file_put_contents($img, file_get_contents($url));
@@ -92,8 +92,7 @@ class PersonaController extends Controller
         }
 
         $persona->save();
-        $mensaje = ['mensaje' => 'Persona Registrada Correctamente'];
-        return view('personas.personaShow',compact('persona','mensaje'));
+        return redirect()->route('persona.show',$persona)->with(['mensaje' => 'Persona Registrada Correctamente']);
 
     }
 
@@ -117,7 +116,6 @@ class PersonaController extends Controller
     public function edit(Persona $persona)
     {
         Gate::authorize('admin');
-
         $equipos = Equipo::all();
         return view('personas.personaForm', compact('persona','equipos'));
     }
@@ -185,10 +183,7 @@ class PersonaController extends Controller
         $persona->rol = $rol;
         $persona->imagen = $imagen;
         $persona->equipo_id = $equipo_id;
-        
-      
-        $mensaje = ['mensaje' => 'Persona Editada Correctamente'];
-        return view('personas.personaShow',compact('persona','mensaje'));
+        return redirect()->route('persona.show',$persona)->with(['mensaje' => 'Persona Editada Correctamente']);
     }
 
     /**
@@ -206,10 +201,7 @@ class PersonaController extends Controller
         if(file_exists($cadena))
             unlink($cadena);
         $persona->delete();
-        
-        $personas = Persona::all();
-        $mensaje = ['mensaje' => $nombre .' Ha Sid@ Eliminad@ Correctamente'];
-        return view('personas.personaIndex',compact('personas','mensaje'));
+        return redirect()->route('persona.index')->with(['mensaje' => $nombre .' Ha Sid@ Eliminad@ Correctamente']);
     }
 
     /**
@@ -253,13 +245,25 @@ class PersonaController extends Controller
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $personas = Persona::where('nombre', 'regexp', $regex)->get();
         if(count($personas) < 1){
-            $mensaje = ['mensaje' => 'Persona(s) No Encontrada(s)'];
-            return view('personas.personaSearch',compact('personas','mensaje'));
+            return redirect()->route('persona.search')->with( $mensaje = ['mensaje' => 'Persona(s) No Encontrada(s)']);
         }else{
             return view('personas.personaSearch',compact('personas'));
         }
         
     }
 
+    public function jsonView(){
+        return view('personas.personaJSON');
+    }
+
+    public function jsonRol($role){
+        $personas = Persona::where('rol',$role)->get();
+        return response()->json($personas,200,[JSON_PRETTY_PRINT]);
+    }
+
+    public function jsonSexo($sex){
+        $personas = Persona::where('sexo',$sex)->get();
+        return response()->json($personas,200,[JSON_PRETTY_PRINT]);
+    }
     
 }

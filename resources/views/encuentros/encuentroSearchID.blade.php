@@ -2,19 +2,20 @@
     <br>
     <div class="menu">
         @can('admin')
-            <a class="link" href="/encuentro/create">Registrar Encuentro</a>
-        @endcan
-		<a class="link" href="/encuentro">Mostrar Encuentros</a>
-		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
+			<a class="link" href="{{route('encuentro.create')}}">Registrar Encuentro</a>
+		@endcan
+        <a class="link" href="{{route('encuentro.index')}}">Mostrar Encuentros</a>
+		<a class="link" href="{{route('encuentro.pdf')}}">Descargar PDF Encuentros</a>
+		<a class="link" href="{{route('encuentro.excel')}}">Descargar Excel Encuentros</a>
 	</div>
 		
     <div class="main">
         @if (isset($mensaje))
 			@include('layouts.mensaje',$mensaje)
 		@endif
-        <h1 class="display-4 text-center">Buscar Encuentro(s) Por ID</h1>
+        <h1 class="display-4 text-center">Buscar Encuentro(s)</h1>
         <br>
-        <form action="/encuentro-get-id" method="GET" enctype="multipart/form-data">
+        <form action="{{route('encuentro.gets')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="shadow flex">

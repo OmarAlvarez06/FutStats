@@ -2,19 +2,20 @@
     <br>
     <div class="menu">
     	@can('admin')
-			<a class="link" href="/encuentro/create">Registrar Encuentro</a>
-			<a class="link" href="{{'/encuentro-persona/create/'.$encuentro->id}}">Registrar Detalle De Encuentro</a>
+		<a class="link" href="{{route('encuentro.create')}}">Registrar Encuentro</a>
+			<a class="link" href="{{route('encuentro-persona.create',$encuentro->id)}}">Registrar Detalle De Encuentro</a>
 		@endcan
-        <a class="link" href="/encuentro">Mostrar Encuentros</a>
-        <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
-		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
-		<a class="link" href="/encuentro-excel">Descargar Excel Encuentros</a>
+		<a class="link" href="{{route('encuentro.index')}}">Mostrar Encuentros</a>
+        <a class="link" href="{{route('encuentro.search')}}">Buscar Encuentros</a>
+		<a class="link" href="{{route('encuentro.pdf')}}">Descargar PDF Encuentros</a>
+		<a class="link" href="{{route('encuentro.excel')}}">Descargar Excel Encuentros</a>
+		
 	</div>
 
     <div class="main">
 
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 		<h1 class="display-4 text-center">Información Del Encuentro</h1>
 		<div class="grid mt-8 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
@@ -121,7 +122,7 @@
                         <p class="mt-3"></p>
                         <div>
                             <div class="flex-1 items-center">
-                                <p><b>Obervacion: </b></p>
+                                <p><b>Observación: </b></p>
                                 <p>{{$encuentro_persona['encuentro_persona']->observacion}}</p>
                             </div>
                         </div>

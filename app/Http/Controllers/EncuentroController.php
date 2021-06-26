@@ -45,7 +45,7 @@ class EncuentroController extends Controller
 
         }
 
-        return view ('encuentros.encuentroIndex')->with('encuentros',$encuentros);
+        return view('encuentros.encuentroIndex')->with('encuentros',$encuentros);
     }
 
     /**
@@ -56,7 +56,6 @@ class EncuentroController extends Controller
     public function create()
     {
         Gate::authorize('admin');
-
         $equipos = Equipo::all();
         return view('encuentros.encuentroForm',compact('equipos'));
     }
@@ -93,14 +92,7 @@ class EncuentroController extends Controller
         $encuentro->goles_local = $goles_local;
         $encuentro->goles_visitante = $goles_visitante;        
         $encuentro->save();
-
-        $mensaje = ['mensaje' => 'Encuentro Registrado Correctamente'];
-        $equipo_local = Equipo::find($encuentro->equipo_local_id);
-        $equipo_visitante = Equipo::find($encuentro->equipo_visitante_id);
-        $sede = Sede::find($equipo_local->sede_id);
-
-        $encuentro_personas = array();
-        return view('encuentros.encuentroShow', compact('encuentro','equipo_local','equipo_visitante','sede','encuentro_personas','mensaje'));
+        return redirect()->route('encuentro.show',$encuentro)->with(['mensaje' => 'Encuentro Registrado Correctamente']);
     }
 
     /**
@@ -116,12 +108,13 @@ class EncuentroController extends Controller
         $sede = Sede::find($equipo_local->sede_id);
 
         $encuentro_personas = array();
+        $detalles = EncuentroPersona::where('encuentro_id',$encuentro->id)->get();
 
-        foreach ($encuentro->personas as  $persona){
-            $detalle = EncuentroPersona::where('persona_id',$persona->id)->where('encuentro_id',$encuentro->id)->first();
+        foreach ($detalles as  $detalle_encuentro){
+            
             $dato = [
-                'persona' => $persona,
-                'encuentro_persona' => $detalle,
+                'persona' => Persona::find($detalle_encuentro->persona_id),
+                'encuentro_persona' => $detalle_encuentro,
             ];
 
             array_push($encuentro_personas,$dato);
@@ -174,7 +167,7 @@ class EncuentroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search_id()
+    public function search()
     {
         $equipo_local = array();
         $equipo_visitante = array();
@@ -188,11 +181,10 @@ class EncuentroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function gets_id(Request $request)
+    public function gets(Request $request)
     {
         $id_buscar = $request->input('identifier');
         $encuentro = Encuentro::find($id_buscar);
-
         $equipo_local =  (empty($encuentro)) ? array() : Equipo::find($encuentro->equipo_local_id);
         $equipo_visitante = (empty($encuentro)) ?  array() : Equipo::find($encuentro->equipo_visitante_id);
         if(!isset($encuentro)){

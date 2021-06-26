@@ -1,10 +1,10 @@
 <x-app-layout>
 	<br>
 	<div class="menu">
-		<a class="link" href="/encuentro">Mostrar Encuentros</a>
-        <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
-		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
-		<a class="link" href="/encuentro-excel">Descargar Excel Encuentros</a>
+		<a class="link" href="{{route('encuentro.index')}}">Mostrar Encuentros</a>
+        <a class="link" href="{{route('encuentro.search')}}">Buscar Encuentros</a>
+		<a class="link" href="{{route('encuentro.pdf')}}">Descargar PDF Encuentros</a>
+		<a class="link" href="{{route('encuentro.excel')}}">Descargar Excel Encuentros</a>
 	</div>
 
 

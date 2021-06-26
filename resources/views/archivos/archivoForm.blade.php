@@ -2,12 +2,12 @@
 	<br>
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/sede/create">Registrar Sede</a>
+			<a class="link" href="{{route('sede.create')}}">Registrar Sede</a>
 		@endcan
-		<a class="link" href="/sede-search">Buscar Sedes</a>
-		<a class="link" href="/sede">Mostrar Sedes</a>
-		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
-		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>
+		<a class="link" href="{{route('sede.index')}}">Mostrar Sedes</a>
+		<a class="link" href="{{route('sede.search')}}">Buscar Sedes</a>
+		<a class="link" href="{{route('sede.pdf')}}">Descargar PDF Sedes</a>
+		<a class="link" href="{{route('sede.excel')}}">Descargar Excel Sedes</a>
 	</div>
 
 	<form action="{{route('sede-archivo.store',$sede)}}" method="POST" enctype="multipart/form-data">

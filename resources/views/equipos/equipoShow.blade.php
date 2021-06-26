@@ -3,7 +3,7 @@
 	<br>
 	<div class="menu">
 		@can('admin')
-        	<a class="link" href="/equipo/create">Registrar Equipo</a>
+        	<a class="link" href="{{route('equipo.create')}}">Registrar Equipo</a>
 			<a class="link" href="{{ route('equipo.edit', $equipo) }}">Editar Equipo</a>
 			<form action="{{ route('equipo.destroy', $equipo) }}" method="POST">
 				@csrf
@@ -11,15 +11,15 @@
 				<input type="submit" class="link" value="Eliminar" style="border:none;">
 			</form>
         @endcan
-		<a class="link" href="/equipo">Mostrar Equipos</a>
-		<a class="link" href="/equipo-search">Buscar Equipo</a>
-		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
-		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
+		<a class="link" href="{{route('equipo.index')}}">Mostrar Equipos</a>
+		<a class="link" href="{{route('equipo.search')}}">Buscar Equipo</a>
+		<a class="link" href="{{route('equipo.pdf')}}">Descargar PDF Equipos</a>
+		<a class="link" href="{{route('equipo.excel')}}">Descargar Excel Equipos</a>
 	</div>
 
 	<div class="main">
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 		<h1 class="display-4 text-center">Equipo</h1>
 		<div class="grid mt-8 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">

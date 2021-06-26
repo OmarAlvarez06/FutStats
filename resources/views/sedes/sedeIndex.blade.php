@@ -3,11 +3,11 @@
 	    
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/sede/create">Registrar Sede</a>
+			<a class="link" href="{{route('sede.create')}}">Registrar Sede</a>
 		@endcan
-		<a class="link" href="/sede-search">Buscar Sedes</a>
-		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
-		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>
+		<a class="link" href="{{route('sede.search')}}">Buscar Sedes</a>
+		<a class="link" href="{{route('sede.pdf')}}">Descargar PDF Sede</a>
+		<a class="link" href="{{route('sede.excel')}}">Descargar Excel Sedes</a>
 	</div>
 	
 	<div class="container mx-auto px-4 sm:px-8 main">

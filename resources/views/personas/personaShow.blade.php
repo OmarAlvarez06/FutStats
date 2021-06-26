@@ -2,7 +2,7 @@
 	<br>
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/persona/create">Registrar Persona</a>
+			<a class="link" href="{{route('persona.create')}}">Registrar Persona</a>
 			<a class="link" href="{{ route('persona.edit', $persona) }}">Editar Persona</a>
 			<form action="{{ route('persona.destroy', $persona) }}" method="POST">
 				@csrf
@@ -10,21 +10,22 @@
 				<input type="submit" class="link" value="Eliminar" style="border:none;">
 			</form>
 		@endcan
-		<a class="link" href="/persona-search">Buscar Persona</a>
-		<a class="link" href="/persona">Mostrar Personas</a>
-		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
-		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
+		<a class="link" href="{{route('persona.search')}}">Buscar Persona</a>
+		<a class="link" href="{{route('persona.index')}}">Mostrar Personas</a>
+		<a class="link" href="{{route('persona.pdf')}}">Descargar PDF Personas</a>
+		<a class="link" href="{{route('persona.excel')}}">Descargar Excel Personas</a>
+		<a class="link" href="{{route('persona.json-view')}}">Consultas JSON</a>
 	</div>
 	<div class="main">
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 		<h1 class="display-4 text-center">Persona</h1>
 		<div class="flex flex-col">
 			<div class="bg-white shadow-md  rounded-3xl p-4">
 				<div class="flex-none lg:flex">
 					<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
-						<img src="{{$persona->imagen}}" alt="Logo Del Persona->equipo"  class=" w-96 h-96 object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+						<img src="{{$persona->imagen}}" alt="Imagen De La Persona"  class=" w-auto h-auto object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
 					</div>
 					<div class="flex-auto ml-3 justify-evenly py-2">
 						<div class="flex flex-wrap ">
@@ -66,7 +67,7 @@
 			<div class="bg-white shadow-md  rounded-3xl p-4">
 				<div class="flex-none lg:flex">
 					<div class=" h-96 w-96 lg:h-60 lg:w-60   lg:mb-0 mb-3">
-						<img src="{{$persona->equipo->imagen}}" alt="Logo Del Equipo" class=" w-96 h-96  object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
+						<img src="{{$persona->equipo->imagen}}" alt="Logo Del Equipo" class=" w-auto h-auto  object-scale-down lg:object-cover  lg:h-60 rounded-2xl">
 					</div>
 					<div class="flex-auto ml-3 justify-evenly py-2">
 						<div class="flex flex-wrap ">

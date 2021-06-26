@@ -2,12 +2,12 @@
 	<br>
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/encuentro/create">Registrar Encuentro</a>
+			<a class="link" href="{{route('encuentro.create')}}">Registrar Encuentro</a>
 		@endcan
-		<a class="link" href="/encuentro">Mostrar Encuentros</a>
-        <a class="link" href="/encuentro-search-id">Buscar Encuentros Por ID</a>
-		<a class="link" href="/encuentro-pdf">Descargar PDF Encuentros</a>
-		<a class="link" href="/encuentro-excel">Descargar Excel Encuentros</a>
+		<a class="link" href="{{route('encuentro.index')}}">Mostrar Encuentros</a>
+        <a class="link" href="{{route('encuentro.search')}}">Buscar Encuentros</a>
+		<a class="link" href="{{route('encuentro.pdf')}}">Descargar PDF Encuentros</a>
+		<a class="link" href="{{route('encuentro.excel')}}">Descargar Excel Encuentros</a>
 	</div>
 
 	<form action="{{route('encuentro-persona.store',$encuentro)}}" method="POST" enctype="multipart/form-data">

@@ -2,20 +2,20 @@
     <br>
     <div class="menu">
         @can('admin')
-            <a class="link" href="/sede/create">Registrar Sede</a>
+            <a class="link" href="{{route('sede.create')}}">Registrar Sede</a>
 		@endcan
-        <a class="link" href="/sede">Mostrar Sedes</a>
-        <a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
-        <a class="link" href="/sede-excel">Descargar Excel Sedes</a>
+        <a class="link" href="{{route('sede.index')}}">Mostrar Sedes</a>
+		<a class="link" href="{{route('sede.pdf')}}">Descargar PDF Sedes</a>
+		<a class="link" href="{{route('sede.excel')}}">Descargar Excel Sedes</a>
 	</div>
 		
     <div class="main">
-        @if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+        @if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
         <h1 class="display-4 text-center">Buscar Sede(s)</h1>
         <br>
-        <form action="/sede-get" method="GET" enctype="multipart/form-data">
+        <form action="{{route('sede.gets')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="shadow flex">

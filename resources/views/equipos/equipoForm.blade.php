@@ -1,10 +1,10 @@
 <x-app-layout>
 	<br>
 	<div class="menu">
-		<a class="link" href="/equipo">Mostrar Equipos</a>
-		<a class="link" href="/equipo-search">Buscar Equipo</a>
-		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
-		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
+		<a class="link" href="{{route('equipo.index')}}">Mostrar Equipos</a>
+		<a class="link" href="{{route('equipo.search')}}">Buscar Equipos</a>
+		<a class="link" href="{{route('equipo.pdf')}}">Descargar PDF Equipos</a>
+		<a class="link" href="{{route('equipo.excel')}}">Descargar Excel Equipos</a>
 	</div>
 
 	@if(isset($equipo))

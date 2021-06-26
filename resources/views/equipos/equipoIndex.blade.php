@@ -2,16 +2,16 @@
     <br>
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/equipo/create">Registrar Equipo</a>
+			<a class="link" href="{{route('equipo.create')}}">Registrar Equipo</a>
 		@endcan
-		<a class="link" href="/equipo-search">Buscar Equipo</a>
-		<a class="link" href="/equipo-pdf">Descargar PDF Equipos</a>
-		<a class="link" href="/equipo-excel">Descargar Excel Equipos</a>
+		<a class="link" href="{{route('equipo.search')}}">Buscar Equipos</a>
+		<a class="link" href="{{route('equipo.pdf')}}">Descargar PDF Equipos</a>
+		<a class="link" href="{{route('equipo.excel')}}">Descargar Excel Equipos</a>
 	</div>
 
 	<div class="container mx-auto px-4 sm:px-8 main">
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 		<h1 class="display-4 text-center">Equipos</h1>
 		

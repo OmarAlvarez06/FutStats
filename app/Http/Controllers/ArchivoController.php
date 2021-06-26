@@ -20,7 +20,6 @@ class ArchivoController extends Controller
     public function create($id)
     {
         Gate::authorize('admin');
-
         $sede = Sede::find($id);
         return view('archivos.archivoForm',compact('sede'));
     }
@@ -50,9 +49,12 @@ class ArchivoController extends Controller
             $archivo->sede_id = $sede->id;
             $archivo->mime = $file->getClientMimeType();
             $archivo->save();
+            return redirect()->route('sede.show',$sede)->with(['mensaje' => 'Archivo Agregado Correctamente']);
+        }else{
+            return redirect()->route('sede.show',$sede)->with(['mensaje' => 'Archivo Inválido Para Subir']);
         }
 
-        return redirect()->route('sede.show',$sede);
+       
     }
 
     /**
@@ -66,12 +68,13 @@ class ArchivoController extends Controller
         Gate::authorize('admin');
 
         $archivo = Archivo::find($id);
+        $nombre = $archivo->nombre;
         $sede = $archivo->sede;
         $cadena = substr($archivo->nombre_hash,1);
         if(file_exists($cadena))
             unlink($cadena);
         $archivo->delete();
-        return redirect()->route('sede.show',$sede);
+        return redirect()->route('sede.show',$sede)->with(['mensaje' => $nombre . ' Eliminado Correctamente']);
     }
 
 

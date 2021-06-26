@@ -2,20 +2,22 @@
     <br>
 	<div class="menu">
         @can('admin')
-            <a class="link" href="/persona/create">Registrar Persona</a>
+            <a class="link" href="{{route('persona.create')}}">Registrar Persona</a>
         @endcan
-		<a class="link" href="/persona">Mostrar Personas</a>
-        <a class="link" href="/persona-pdf">Descargar PDF Personas</a>
+		<a class="link" href="{{route('persona.index')}}">Mostrar Personas</a>
+		<a class="link" href="{{route('persona.pdf')}}">Descargar PDF Personas</a>
+		<a class="link" href="{{route('persona.excel')}}">Descargar Excel Personas</a>
+		<a class="link" href="{{route('persona.json-view')}}">Consultas JSON</a>
         
 	</div>
 		
 	<div class="main">
-        @if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+        @if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
         <h1 class="display-4 text-center">Buscar Persona(s)</h1>
         <br>
-        <form action="/persona-get" method="GET" enctype="multipart/form-data">
+        <form action="{{route('persona.gets')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="shadow flex">

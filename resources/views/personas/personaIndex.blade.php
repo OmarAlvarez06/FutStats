@@ -1,17 +1,18 @@
 <x-app-layout>
 	<br>
     <div class="menu">
-    	@can('admin')
-    		<a class="link" href="/persona/create">Registrar Persona</a>
-    	@endcan
-		<a class="link" href="/persona-search">Buscar Persona</a>
-		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
-		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
+		@can('admin')
+			<a class="link" href="{{route('persona.create')}}">Registrar Persona</a>
+		@endcan
+		<a class="link" href="{{route('persona.search')}}">Buscar Personas</a>
+		<a class="link" href="{{route('persona.pdf')}}">Descargar PDF Personas</a>
+		<a class="link" href="{{route('persona.excel')}}">Descargar Excel Personas</a>
+		<a class="link" href="{{route('persona.json-view')}}">Consultas JSON</a>
 	</div>
 
 	<div class="container mx-auto px-4 sm:px-8 main">
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 
 		<h1 class="display-4 text-center">Personas</h1>
@@ -53,7 +54,7 @@
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 								<div class="flex items-center">
 									<div class="flex-shrink-0 w-10 h-10">
-										<img class="w-full h-full rounded-full" src="{{$persona->imagen}}" alt="Imagen De La Persona" />
+										<img class="w-full h-full rounded-full" src="{{$persona->imagen}}" alt="Imagen De La Persona">
 									</div>
 
 									<div class="ml-3">
@@ -80,7 +81,7 @@
 									<div class="flex-shrink-0 w-10 h-10">
 										<img class="w-full h-full rounded-full"
 											src="{{$persona->equipo->imagen}}"
-											alt="Imagen Del Equipo" />
+											alt="Logo Del Equipo">
 									</div>
 
 									<div class="ml-3">

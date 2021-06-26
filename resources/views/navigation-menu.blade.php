@@ -23,6 +23,9 @@
                     <x-jet-nav-link href="/encuentro" style="color:black;">
                         {{ __('Encuentros') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="/estadisticas" style="color:black;">
+                        {{ __('Estadísticas') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

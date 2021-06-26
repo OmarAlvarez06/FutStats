@@ -2,18 +2,18 @@
     <br>
 	<div class="menu">
 		@can('admin')
-			<a class="link" href="/sede/create">Registrar Sede</a>
-			<a class="link" href="{{'/sede-archivo/create/'.$sede->id}}">Agregar Archivo</a>
+			<a class="link" href="{{route('sede.create')}}">Registrar Sede</a>
+			<a class="link" href="{{route('sede-archivo.create',$sede->id)}}">Agregar Archivo</a>
 		@endcan
-		<a class="link" href="/sede-search">Buscar Sedes</a>
-		<a class="link" href="/sede">Mostrar Sedes</a>
-		<a class="link" href="/sede-pdf">Descargar PDF Sedes</a>
-		<a class="link" href="/sede-excel">Descargar Excel Sedes</a>
+		<a class="link" href="{{route('sede.index')}}">Mostrar Sedes</a>
+		<a class="link" href="{{route('sede.search')}}">Buscar Sedes</a>
+		<a class="link" href="{{route('sede.pdf')}}">Descargar PDF Sedes</a>
+		<a class="link" href="{{route('sede.excel')}}">Descargar Excel Sedes</a>
 	</div>
     
 	<div class="main">
-		@if (isset($mensaje))
-			@include('layouts.mensaje',$mensaje)
+		@if (Session::get('mensaje') != null)
+			@include('layouts.mensaje',['mensaje' => Session::get('mensaje')])
 		@endif
 		<h1 class="display-4 text-center">Sede</h1>
 		
@@ -108,7 +108,7 @@
 						<br>
 						<div class="block">
 							<img src="https://img.icons8.com/trash" class="inline w-10 h-10"> 
-							<a class="font-bold text-black hover:text-red-500 whitespace-no-wrap inline" href="{{'/sede-archivo/delete/'. $archivo->id}}"> Eliminar</a>
+							<a class="font-bold text-black hover:text-red-500 whitespace-no-wrap inline" href="{{route('sede-archivo.destroy',$archivo->id)}}"> Eliminar</a>
 						</div>
 						<br>
 						<div class="block">

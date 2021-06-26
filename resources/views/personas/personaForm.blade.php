@@ -1,10 +1,11 @@
 <x-app-layout>
     <br>
 	<div class="menu">
-		<a class="link" href="/persona-search">Buscar Persona</a>
-		<a class="link" href="/persona">Mostrar Personas</a>
-		<a class="link" href="/persona-pdf">Descargar PDF Personas</a>
-		<a class="link" href="/persona-excel">Descargar Excel Personas</a>
+        <a class="link" href="{{route('persona.index')}}">Mostrar Personas</a>
+		<a class="link" href="{{route('persona.search')}}">Buscar Personas</a>
+		<a class="link" href="{{route('persona.pdf')}}">Descargar PDF Personas</a>
+		<a class="link" href="{{route('persona.excel')}}">Descargar Excel Personas</a>
+
 	</div>
 
 	@if(isset($persona))
@@ -27,8 +28,6 @@
 			</div>
 		@endif
 
-		
-
 		<div class="flex flex-col">
 			<div class="bg-white shadow-md rounded-3xl p-5">
 				<div class="flex flex-col sm:flex-row items-center">
@@ -38,7 +37,7 @@
 				<div class="mt-5">
 					<div class="form">
 						<div class="md:space-y-2 mb-3">
-							<label class="text-xs font-semibold text-gray-600 py-2">Foto De La Persona<abbr class="hidden" title="required">*</abbr></label>
+							<label class="text-xs font-semibold text-gray-600 py-2">Imagen De La Persona<abbr class="hidden" title="required">*</abbr></label>
 							
 							<div class="flex items-center py-6">
 								<div class="mr-4 flex-none rounded-xl border overflow-hidden">

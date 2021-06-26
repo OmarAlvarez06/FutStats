@@ -36,7 +36,6 @@ class EquipoController extends Controller
     public function create()
     {
         Gate::authorize('admin');
-
         $sedes = Sede::all();
         return view('equipos.equipoForm',compact('sedes'));
     }
@@ -85,8 +84,7 @@ class EquipoController extends Controller
         }
 
         $equipo->save();
-        $mensaje = ['mensaje' => 'Equipo Registrado Correctamente'];
-        return view('equipos.equipoShow',compact('equipo','mensaje'));
+        return redirect()->route('equipo.show',$equipo)->with(['mensaje' => 'Equipo Registradp Correctamente']);
     }
 
     /**
@@ -109,7 +107,6 @@ class EquipoController extends Controller
     public function edit(Equipo $equipo)
     {
         Gate::authorize('admin');
-
         $sedes = Sede::all();
         return view('equipos.equipoForm', compact('equipo','sedes'));
     }
@@ -167,10 +164,7 @@ class EquipoController extends Controller
         $equipo->fundacion = $fundacion;
         $equipo->imagen = $imagen;
         $equipo->sede_id = $sede_id;
-
-
-        $mensaje = ['mensaje' => 'Equipo Editado Correctamente'];
-        return view('equipos.equipoShow',compact('equipo','mensaje'));
+        return redirect()->route('equipo.show',$equipo)->with(['mensaje' => 'Equipo Editado Correctamente']);
     }
 
     /**
@@ -188,9 +182,8 @@ class EquipoController extends Controller
         if(file_exists($cadena))
             unlink($cadena);
         $equipo->delete();
-        $equipos = Equipo::all();
-        $mensaje = ['mensaje' => 'El Equipo ' . $nombre .' Ha Sid@ Eliminad@ Correctamente'];
-        return view('equipos.equipoIndex',compact('equipos','mensaje'));  
+        return redirect()->route('equipo.index')->with(['mensaje' => $nombre .' Ha Sid@ Eliminad@ Correctamente']);
+        
     }
 
     /**
@@ -235,8 +228,7 @@ class EquipoController extends Controller
         $regex = '[a-zA-Z]*' . $identifier . '[a-zA-Z]*';
         $equipos = Equipo::where('nombre', 'regexp', $regex)->get();
         if(count($equipos) < 1){
-            $mensaje = ['mensaje' => 'Equipo(s) No Encontrado(s)'];
-            return view('equipos.equipoSearch',compact('equipos','mensaje'));
+            return redirect()->route('equipo.search')->with( $mensaje = ['mensaje' => 'Equipo(s) No Encontrado(s)']);
         }else{
             return view('equipos.equipoSearch',compact('equipos'));
         }
